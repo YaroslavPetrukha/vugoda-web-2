@@ -4,40 +4,25 @@ type IsometricCubePlaceholderProps = {
   ariaLabel?: string;
 };
 
+// mark.svg viewBox is 220.6 × 167.4 — landscape ratio ~1.318
+const MARK_RATIO = 167.4 / 220.6;
+
 const IsometricCubePlaceholder = ({
   size = 200,
   className = '',
   ariaLabel = 'Проєкт у стадії планування',
 }: IsometricCubePlaceholderProps) => {
-  const height = (size * 220) / 200;
+  const height = Math.round(size * MARK_RATIO);
   return (
-    <svg
-      viewBox="0 0 200 220"
+    <img
+      src="/vugoda-web-2/mark.svg"
+      alt={ariaLabel}
       width={size}
       height={height}
       className={className}
-      role="img"
-      aria-label={ariaLabel}
-    >
-      <g
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1"
-        strokeLinecap="butt"
-        strokeLinejoin="miter"
-      >
-        {/* top face */}
-        <polygon points="100,20 180,60 100,100 20,60" />
-        {/* left face */}
-        <polygon points="20,60 100,100 100,200 20,160" />
-        {/* right face */}
-        <polygon points="180,60 100,100 100,200 180,160" />
-        {/* internal edges */}
-        <line x1="100" y1="100" x2="100" y2="200" opacity="0.5" />
-        <line x1="20" y1="60" x2="20" y2="160" opacity="0.4" />
-        <line x1="180" y1="60" x2="180" y2="160" opacity="0.4" />
-      </g>
-    </svg>
+      style={{ width: `${size}px`, height: `${height}px` }}
+      draggable={false}
+    />
   );
 };
 
