@@ -40,10 +40,11 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* Focus-visible ring (a11y) */
+  /* Focus-visible ring (a11y) — двошаровий, працює на lime-кнопках теж */
   :focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
+    box-shadow: 0 0 0 4px var(--color-bg-deep);
   }
 
   :focus:not(:focus-visible) {
