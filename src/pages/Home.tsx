@@ -98,11 +98,19 @@ const Home = () => {
             className="w-full h-full object-cover opacity-50"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-bg-deep/40 via-bg-deep/55 to-bg-deep" />
-          <img
-            src="/vugoda-web-2/isometric-grid.svg"
-            alt=""
+          {/* Half-bleed isometric pattern, fades from middle to bottom */}
+          <div
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover opacity-[0.06] mix-blend-overlay pointer-events-none"
+            className="pointer-events-none absolute inset-0 opacity-[0.13]"
+            style={{
+              backgroundImage: "url('/vugoda-web-2/isometric-grid.svg')",
+              backgroundSize: '420px 319px',
+              backgroundRepeat: 'repeat',
+              maskImage:
+                'linear-gradient(to bottom, transparent 25%, black 70%)',
+              WebkitMaskImage:
+                'linear-gradient(to bottom, transparent 25%, black 70%)',
+            }}
           />
         </div>
 
@@ -163,7 +171,7 @@ const Home = () => {
       <section className="relative bg-bg-base py-20 md:py-24 px-6 lg:px-8 border-b border-bg-surface overflow-hidden">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-16 -right-16 w-[420px] h-[320px] opacity-[0.04]"
+          className="pointer-events-none absolute -bottom-16 -right-16 w-[420px] h-[320px] opacity-[0.07]"
           style={{
             backgroundImage: "url('/vugoda-web-2/mark.svg')",
             backgroundSize: 'contain',
@@ -226,10 +234,20 @@ const Home = () => {
 
       {/* SYSTEMIC DEVELOPMENT — 4 PRINCIPLES */}
       <section className="bg-bg-deep py-24 md:py-32 px-6 lg:px-8 relative overflow-hidden">
-        <img
-          src="/vugoda-web-2/isometric-grid.svg"
+        {/* Side-rail of isometric cubes on the right edge */}
+        <div
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover opacity-[0.06] mix-blend-overlay pointer-events-none"
+          className="pointer-events-none absolute right-0 top-0 bottom-0 w-[280px] opacity-[0.12]"
+          style={{
+            backgroundImage: "url('/vugoda-web-2/isometric-grid.svg')",
+            backgroundSize: '280px auto',
+            backgroundRepeat: 'repeat-y',
+            backgroundPosition: 'right top',
+            maskImage:
+              'linear-gradient(to left, black 55%, transparent 100%)',
+            WebkitMaskImage:
+              'linear-gradient(to left, black 55%, transparent 100%)',
+          }}
         />
         <div className="relative max-w-7xl mx-auto">
           <FadeIn>
@@ -317,9 +335,10 @@ const Home = () => {
 
       {/* AUDIENCES */}
       <section className="relative bg-bg-deep py-24 md:py-32 px-6 lg:px-8 overflow-hidden">
+        {/* Ambient full-bleed tile — anchor "classic" pattern in the rhythm */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-overlay"
+          className="pointer-events-none absolute inset-0 opacity-[0.10]"
           style={{
             backgroundImage: "url('/vugoda-web-2/isometric-grid.svg')",
             backgroundSize: '441px 335px',
@@ -368,7 +387,7 @@ const Home = () => {
       <section className="relative bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-bg-surface overflow-hidden">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-12 -left-12 w-[360px] h-[273px] opacity-[0.035]"
+          className="pointer-events-none absolute -top-12 -left-12 w-[360px] h-[273px] opacity-[0.06]"
           style={{
             backgroundImage: "url('/vugoda-web-2/mark.svg')",
             backgroundSize: 'contain',
@@ -444,18 +463,24 @@ const Home = () => {
 
       {/* CTA TO CONTACT */}
       <section className="relative bg-bg-deep py-24 md:py-32 px-6 lg:px-8 border-t border-bg-surface overflow-hidden">
+        {/* Asymmetric horizontal strip of cubes through the middle */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-overlay"
+          className="pointer-events-none absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[260px] opacity-[0.11]"
           style={{
             backgroundImage: "url('/vugoda-web-2/isometric-grid.svg')",
-            backgroundSize: '441px 335px',
-            backgroundRepeat: 'repeat',
+            backgroundSize: '320px 243px',
+            backgroundRepeat: 'repeat-x',
+            maskImage:
+              'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)',
+            WebkitMaskImage:
+              'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)',
           }}
         />
+        {/* Mark watermark in bottom-right as final brand sigil */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-20 -right-20 w-[480px] h-[365px] opacity-[0.08]"
+          className="pointer-events-none absolute -bottom-16 -right-16 w-[420px] h-[320px] opacity-[0.10]"
           style={{
             backgroundImage: "url('/vugoda-web-2/mark.svg')",
             backgroundSize: 'contain',
