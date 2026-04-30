@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  /* === BRAND PALETTE === */
+  --color-bg-base: #2F3640;        /* головний темний фон, body */
+  --color-bg-surface: #3D3B43;     /* антрацит — картки, поверхні, hover-стани */
+  --color-bg-deep: #020A0A;        /* глибокий чорний — header, hero overlay */
+  --color-accent: #C1F33D;         /* acid-lime, point-use: CTA, active, focus */
+  --color-text-primary: #F5F7FA;   /* основний текст */
+  --color-text-secondary: #A7AFBC; /* допоміжний сірий, lead, captions */
+  --color-text-muted: #A7AFBC;     /* alias на text-secondary */
+
+  /* Backwards-compat aliases (deprecated, не використовувати в новому коді) */
+  --color-bg-alt: #3D3B43;
+  --color-bg-dark: #020A0A;
+
+  /* === TYPOGRAPHY === */
+  --font-sans: "Montserrat", system-ui, sans-serif;
+
+  /* === RADII (брендбук виключає круглі форми) === */
+  --radius-none: 0;
+  --radius-sm: 2px;
+  --radius-md: 4px;       /* MAX для UI-елементів */
+
+  /* === SPACING === */
+  --space-section: 8rem;     /* py-32: hero, projects, values */
+  --space-section-sm: 4rem;  /* py-16: news strip, trust stripe */
+
+  /* === SHADOWS === */
+  --shadow-sm: 0 1px 2px 0 rgba(2, 10, 10, 0.4);
+  --shadow-md: 0 4px 12px -2px rgba(2, 10, 10, 0.5);
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg-base);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Focus-visible ring (a11y) */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-bg-deep);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
