@@ -40,9 +40,8 @@ const ProjectPipeline04 = () => {
       <section className="bg-bg-deep py-16 md:py-24 px-6 lg:px-8 border-b border-bg-surface">
         <div className="max-w-3xl mx-auto flex flex-col items-center justify-center text-center">
           <IsometricCubePlaceholder
-            size={260}
-            className="text-accent opacity-60 mb-8"
-            ariaLabel="Каркасний куб — placeholder проекту без назви"
+            className="w-[280px] md:w-[400px] lg:w-[480px] opacity-60 mb-10"
+            ariaLabel="Каркасний знак ВИГОДА — placeholder проекту без назви"
           />
           <p className="text-text-secondary text-sm uppercase tracking-widest">
             Назва — після узгодження з інвестором

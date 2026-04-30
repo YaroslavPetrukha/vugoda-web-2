@@ -61,8 +61,8 @@ const ProjectCard = ({
       {v === 'placeholder' && (
         <div className="absolute inset-0 flex items-center justify-center bg-bg-deep">
           <IsometricCubePlaceholder
-            size={180}
-            className="text-accent opacity-40"
+            size={288}
+            className="opacity-50"
             ariaLabel={`${project.name} — стадія планування`}
           />
         </div>

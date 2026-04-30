@@ -1,4 +1,7 @@
+import type { CSSProperties } from 'react';
+
 type IsometricCubePlaceholderProps = {
+  /** Fixed width in px. If omitted — width comes from `className` (Tailwind responsive). */
   size?: number;
   className?: string;
   ariaLabel?: string;
@@ -8,19 +11,20 @@ type IsometricCubePlaceholderProps = {
 const MARK_RATIO = 167.4 / 220.6;
 
 const IsometricCubePlaceholder = ({
-  size = 200,
+  size,
   className = '',
   ariaLabel = 'Проєкт у стадії планування',
 }: IsometricCubePlaceholderProps) => {
-  const height = Math.round(size * MARK_RATIO);
+  const inlineStyle: CSSProperties = size
+    ? { width: `${size}px`, height: `${Math.round(size * MARK_RATIO)}px` }
+    : { aspectRatio: '220.6 / 167.4' };
+
   return (
     <img
       src="/vugoda-web-2/mark.svg"
       alt={ariaLabel}
-      width={size}
-      height={height}
       className={className}
-      style={{ width: `${size}px`, height: `${height}px` }}
+      style={inlineStyle}
       draggable={false}
     />
   );

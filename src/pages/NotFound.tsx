@@ -6,8 +6,7 @@ const NotFound = () => (
   <section className="bg-bg-deep py-32 md:py-40 px-6 lg:px-8 min-h-[60vh] flex items-center">
     <div className="max-w-3xl mx-auto text-center flex flex-col items-center">
       <IsometricCubePlaceholder
-        size={160}
-        className="text-accent opacity-40 mb-10"
+        className="w-[200px] md:w-[240px] opacity-45 mb-10"
         ariaLabel="404 — сторінку не знайдено"
       />
       <p className="text-accent font-mono text-xs uppercase tracking-widest mb-6">
