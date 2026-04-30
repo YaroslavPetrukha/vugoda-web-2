@@ -160,8 +160,18 @@ const Home = () => {
       <TrustStripe />
 
       {/* WHO WE ARE */}
-      <section className="bg-bg-base py-20 md:py-24 px-6 lg:px-8 border-b border-bg-surface">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <section className="relative bg-bg-base py-20 md:py-24 px-6 lg:px-8 border-b border-bg-surface overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-16 -right-16 w-[420px] h-[320px] opacity-[0.04]"
+          style={{
+            backgroundImage: "url('/vugoda-web-2/mark.svg')",
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'bottom right',
+          }}
+        />
+        <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4">
             <FadeIn>
               <SectionHeading eyebrow="01" title="Хто ми" />
@@ -306,8 +316,17 @@ const Home = () => {
       </section>
 
       {/* AUDIENCES */}
-      <section className="bg-bg-deep py-24 md:py-32 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+      <section className="relative bg-bg-deep py-24 md:py-32 px-6 lg:px-8 overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-overlay"
+          style={{
+            backgroundImage: "url('/vugoda-web-2/isometric-grid.svg')",
+            backgroundSize: '441px 335px',
+            backgroundRepeat: 'repeat',
+          }}
+        />
+        <div className="relative z-10 max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading
               eyebrow="04"
@@ -346,8 +365,18 @@ const Home = () => {
       </section>
 
       {/* DOCUMENTS & FACTS */}
-      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-bg-surface">
-        <div className="max-w-5xl mx-auto">
+      <section className="relative bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-bg-surface overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-12 -left-12 w-[360px] h-[273px] opacity-[0.035]"
+          style={{
+            backgroundImage: "url('/vugoda-web-2/mark.svg')",
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'top left',
+          }}
+        />
+        <div className="relative z-10 max-w-5xl mx-auto">
           <FadeIn>
             <SectionHeading
               eyebrow="05"
@@ -414,8 +443,27 @@ const Home = () => {
       </section>
 
       {/* CTA TO CONTACT */}
-      <section className="bg-bg-deep py-24 md:py-32 px-6 lg:px-8 border-t border-bg-surface">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <section className="relative bg-bg-deep py-24 md:py-32 px-6 lg:px-8 border-t border-bg-surface overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-overlay"
+          style={{
+            backgroundImage: "url('/vugoda-web-2/isometric-grid.svg')",
+            backgroundSize: '441px 335px',
+            backgroundRepeat: 'repeat',
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-20 -right-20 w-[480px] h-[365px] opacity-[0.08]"
+          style={{
+            backgroundImage: "url('/vugoda-web-2/mark.svg')",
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'bottom right',
+          }}
+        />
+        <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <FadeIn>
             <SectionHeading
               eyebrow="06"
