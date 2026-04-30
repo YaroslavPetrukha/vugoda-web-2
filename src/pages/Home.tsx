@@ -101,7 +101,7 @@ const Home = () => {
           {/* Half-bleed isometric pattern, fades from middle to bottom */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 opacity-[0.13]"
+            className="pointer-events-none absolute inset-0 opacity-[0.05]"
             style={{
               backgroundImage: "url('/vugoda-web-2/isometric-grid.svg')",
               backgroundSize: '420px 319px',
@@ -171,7 +171,7 @@ const Home = () => {
       <section className="relative bg-bg-base py-20 md:py-24 px-6 lg:px-8 border-b border-bg-surface overflow-hidden">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-16 -right-16 w-[420px] h-[320px] opacity-[0.07]"
+          className="pointer-events-none absolute -bottom-16 -right-16 w-[420px] h-[320px] opacity-[0.04]"
           style={{
             backgroundImage: "url('/vugoda-web-2/mark.svg')",
             backgroundSize: 'contain',
@@ -237,7 +237,7 @@ const Home = () => {
         {/* Side-rail of isometric cubes on the right edge */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute right-0 top-0 bottom-0 w-[280px] opacity-[0.12]"
+          className="pointer-events-none absolute right-0 top-0 bottom-0 w-[280px] opacity-[0.05]"
           style={{
             backgroundImage: "url('/vugoda-web-2/isometric-grid.svg')",
             backgroundSize: '280px auto',
@@ -338,7 +338,7 @@ const Home = () => {
         {/* Ambient full-bleed tile — anchor "classic" pattern in the rhythm */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.10]"
+          className="pointer-events-none absolute inset-0 opacity-[0.05]"
           style={{
             backgroundImage: "url('/vugoda-web-2/isometric-grid.svg')",
             backgroundSize: '441px 335px',
@@ -387,7 +387,7 @@ const Home = () => {
       <section className="relative bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-bg-surface overflow-hidden">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-12 -left-12 w-[360px] h-[273px] opacity-[0.06]"
+          className="pointer-events-none absolute -top-12 -left-12 w-[360px] h-[273px] opacity-[0.035]"
           style={{
             backgroundImage: "url('/vugoda-web-2/mark.svg')",
             backgroundSize: 'contain',
@@ -466,7 +466,7 @@ const Home = () => {
         {/* Asymmetric horizontal strip of cubes through the middle */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[260px] opacity-[0.11]"
+          className="pointer-events-none absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[260px] opacity-[0.05]"
           style={{
             backgroundImage: "url('/vugoda-web-2/isometric-grid.svg')",
             backgroundSize: '320px 243px',
@@ -480,7 +480,7 @@ const Home = () => {
         {/* Mark watermark in bottom-right as final brand sigil */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-16 -right-16 w-[420px] h-[320px] opacity-[0.10]"
+          className="pointer-events-none absolute -bottom-16 -right-16 w-[420px] h-[320px] opacity-[0.05]"
           style={{
             backgroundImage: "url('/vugoda-web-2/mark.svg')",
             backgroundSize: 'contain',
