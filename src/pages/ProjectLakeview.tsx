@@ -116,7 +116,7 @@ const ProjectLakeview = () => {
                 key={p.label}
                 className="bg-bg-base p-6 md:p-8 grid grid-cols-1 md:grid-cols-3 gap-4"
               >
-                <dt className="text-[10px] uppercase tracking-widest text-text-secondary">
+                <dt className="text-[10px] font-medium uppercase tracking-widest text-text-secondary">
                   {p.label}
                 </dt>
                 <dd className="md:col-span-2 text-text-primary text-sm md:text-base leading-relaxed">
@@ -204,7 +204,7 @@ const ProjectLakeview = () => {
                   <h3 className="text-lg md:text-xl font-bold text-text-primary uppercase tracking-wider">
                     {g.label}
                   </h3>
-                  <span className="text-[10px] uppercase tracking-widest text-text-secondary">
+                  <span className="text-[10px] font-medium uppercase tracking-widest text-text-secondary">
                     3 кадри
                   </span>
                 </div>
@@ -264,7 +264,7 @@ const ProjectLakeview = () => {
               { label: 'Instagram', value: '@lakeviewlviv', href: LAKEVIEW_INSTAGRAM, external: true },
             ].map((c) => (
               <div key={c.label} className="bg-bg-base p-6 md:p-8">
-                <dt className="text-[10px] uppercase tracking-widest text-text-secondary mb-2">
+                <dt className="text-[10px] font-medium uppercase tracking-widest text-text-secondary mb-2">
                   {c.label}
                 </dt>
                 <dd className="text-text-primary text-base md:text-lg leading-relaxed">

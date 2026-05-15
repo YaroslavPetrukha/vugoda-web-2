@@ -21,7 +21,7 @@ const TrustStripe = ({ facts = DEFAULT_FACTS, className = '' }: TrustStripeProps
       <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-px bg-bg-surface">
         {facts.map((f) => (
           <div key={f.label} className="bg-bg-base p-4 md:p-6">
-            <div className="text-[11px] md:text-xs uppercase tracking-[0.14em] text-text-secondary mb-1.5">
+            <div className="text-[11px] md:text-xs font-medium uppercase tracking-[0.14em] text-text-secondary mb-1.5">
               {f.label}
             </div>
             <div className="text-lg md:text-xl font-bold text-text-primary tabular-nums tracking-tight whitespace-nowrap">

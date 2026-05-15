@@ -34,3 +34,6 @@ Thumbs.db
 # Source raw renders (working assets, not for repo)
 Рендера/
 
+
+# MCP config (contains tokens)
+.mcp.json

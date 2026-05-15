@@ -111,13 +111,13 @@ const Approach = () => {
                 </p>
                 <dl className="border-t border-bg-surface pt-6 grid grid-cols-1 gap-4 text-sm">
                   <div className="flex flex-col gap-1">
-                    <dt className="text-[10px] uppercase tracking-widest text-text-secondary">
+                    <dt className="text-[10px] font-medium uppercase tracking-widest text-text-secondary">
                       Документи
                     </dt>
                     <dd className="text-text-primary">{p.docs}</dd>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <dt className="text-[10px] uppercase tracking-widest text-text-secondary">
+                    <dt className="text-[10px] font-medium uppercase tracking-widest text-text-secondary">
                       Тривалість
                     </dt>
                     <dd className="text-text-primary">{p.duration}</dd>

@@ -73,7 +73,7 @@ const NavBar = () => {
 
         <button
           type="button"
-          className="lg:hidden text-text-primary p-2 -mr-2"
+          className="lg:hidden text-text-primary p-3 -mr-2"
           aria-label={open ? 'Закрити меню' : 'Відкрити меню'}
           aria-expanded={open}
           aria-controls="mobile-menu"

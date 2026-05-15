@@ -7,7 +7,7 @@ import ContactForm from '../components/ContactForm';
 
 const CORP_CONTACTS = [
   { label: 'Email', value: 'vygoda.sales@gmail.com', link: 'mailto:vygoda.sales@gmail.com' },
-  { label: 'Корпоративний телефон', value: 'Уточнюється' },
+  { label: 'Корпоративний телефон', value: '0969 900 390', link: 'tel:+380969900390' },
 ];
 
 const DIRECTIONS = [
@@ -81,7 +81,7 @@ const Contacts = () => {
           <dl className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-px bg-bg-surface border border-bg-surface">
             {CORP_CONTACTS.map((c) => (
               <div key={c.label} className="bg-bg-base p-6 md:p-8">
-                <dt className="text-[10px] uppercase tracking-widest text-text-secondary mb-2">
+                <dt className="text-[10px] font-medium uppercase tracking-widest text-text-secondary mb-2">
                   {c.label}
                 </dt>
                 <dd className="text-text-primary text-base md:text-lg leading-relaxed">
@@ -147,7 +147,7 @@ const Contacts = () => {
           <dl className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-px bg-bg-surface border border-bg-surface">
             {LAKEVIEW_CONTACTS.map((c) => (
               <div key={c.label} className="bg-bg-base p-6 md:p-8">
-                <dt className="text-[10px] uppercase tracking-widest text-text-secondary mb-2">
+                <dt className="text-[10px] font-medium uppercase tracking-widest text-text-secondary mb-2">
                   {c.label}
                 </dt>
                 <dd className="text-text-primary text-base md:text-lg leading-relaxed">

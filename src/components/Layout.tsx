@@ -17,9 +17,9 @@ const Layout = () => {
         className="fixed inset-0 pointer-events-none z-0 overflow-hidden"
         aria-hidden="true"
       >
-        <div className="absolute left-[10%] top-0 bottom-0 w-px bg-accent opacity-[0.07]" />
-        <div className="absolute left-1/2 top-0 bottom-0 w-px bg-accent opacity-[0.07] hidden md:block" />
-        <div className="absolute right-[10%] top-0 bottom-0 w-px bg-accent opacity-[0.07]" />
+        <div className="absolute left-[10%] top-0 bottom-0 w-px bg-accent opacity-[0.10]" />
+        <div className="absolute left-1/2 top-0 bottom-0 w-px bg-accent opacity-[0.10] hidden md:block" />
+        <div className="absolute right-[10%] top-0 bottom-0 w-px bg-accent opacity-[0.10]" />
       </div>
 
       <NavBar />

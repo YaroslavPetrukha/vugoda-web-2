@@ -135,7 +135,7 @@ const Home = () => {
             </span>
             <h1
               id="hero-heading"
-              className="text-[clamp(2.25rem,4.6vw,4rem)] leading-[1.08] tracking-tight font-bold text-text-primary mb-8"
+              className="text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.05] tracking-tight font-bold text-text-primary mb-8"
             >
               Системний девелопмент, у якому цінність є результатом точних рішень.
             </h1>
