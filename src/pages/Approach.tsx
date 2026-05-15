@@ -187,7 +187,7 @@ const Approach = () => {
             <SectionHeading
               eyebrow="05"
               title="Що далі"
-              description="Якщо ви інвестор або партнер — нижче короткі шляхи у відповідні розділи."
+              description="Якщо ви інвестор або партнер — нижче короткі шляхи у відповідні розділи."
             />
           </FadeIn>
           <div className="mt-12 flex flex-col sm:flex-row gap-4">

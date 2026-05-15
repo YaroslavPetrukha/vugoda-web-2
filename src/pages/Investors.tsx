@@ -189,7 +189,7 @@ const Investors = () => {
             <ContactForm
               source="investors"
               heading="Записатись на зустріч"
-              description="Розкажіть про формат і обсяг — підготуємо персональну презентацію."
+              description="Розкажіть про формат і обсяг — підготуємо персональну презентацію."
               fields={['investor-format', 'message']}
               submitLabel="Записатись на зустріч"
               successText="Прийнято. Менеджер звʼяжеться протягом робочого дня для узгодження часу."

@@ -232,7 +232,7 @@ const ProjectLakeview = () => {
             <SectionHeading
               eyebrow="06"
               title="Деталі і планування — на сайті ЖК"
-              description="Планування квартир по всіх секціях, паркомісця, актуальні ціни, бронювання — на власному сайті проекту."
+              description="Планування квартир по всіх секціях, паркомісця, актуальні ціни, бронювання — на власному сайті проекту."
             />
           </FadeIn>
           <div className="mt-12 flex flex-col sm:flex-row gap-4">
@@ -253,7 +253,7 @@ const ProjectLakeview = () => {
             <SectionHeading
               eyebrow="07"
               title="Контакти ЖК Lakeview"
-              description="Це окремі контакти проекту. Корпоративні контакти ВИГОДИ — у розділі /kontakty."
+              description="Це окремі контакти проекту. Корпоративні контакти ВИГОДИ — у розділі /kontakty."
             />
           </FadeIn>
           <dl className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-px bg-bg-surface border border-bg-surface">
