@@ -129,7 +129,7 @@ const Home = () => {
         </div>
 
         <div className="relative z-10 flex-1 flex flex-col justify-end max-w-7xl mx-auto w-full pt-24 md:pt-32 pb-20 md:pb-24">
-          <FadeIn className="max-w-3xl">
+          <FadeIn className="max-w-6xl">
             <span className="inline-block text-xs font-mono tracking-[0.18em] text-accent uppercase mb-4">
               // Львів · 2026
             </span>
