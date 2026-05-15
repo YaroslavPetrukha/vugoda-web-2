@@ -178,7 +178,7 @@ const Contacts = () => {
 
       {/* LEGAL CARD */}
       <section className="bg-bg-deep py-24 md:py-32 px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading eyebrow="04" title="Юридична картка" />
           </FadeIn>

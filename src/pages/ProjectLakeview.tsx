@@ -227,7 +227,7 @@ const ProjectLakeview = () => {
 
       {/* DETAILS — TO LAKEVIEW SITE */}
       <section className="bg-bg-deep py-24 md:py-32 px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading
               eyebrow="06"
@@ -248,7 +248,7 @@ const ProjectLakeview = () => {
 
       {/* LAKEVIEW CONTACTS */}
       <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-bg-surface">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading
               eyebrow="07"

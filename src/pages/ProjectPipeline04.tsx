@@ -69,7 +69,7 @@ const ProjectPipeline04 = () => {
 
       {/* WHY NO NAME */}
       <section className="bg-bg-deep py-24 md:py-32 px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading eyebrow="02" title="Чому без назви" />
           </FadeIn>
@@ -92,7 +92,7 @@ const ProjectPipeline04 = () => {
 
       {/* WHAT NEXT */}
       <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-bg-surface">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading eyebrow="03" title="Що далі" />
           </FadeIn>

@@ -382,7 +382,7 @@ const Home = () => {
             backgroundPosition: 'top left',
           }}
         />
-        <div className="relative z-10 max-w-5xl mx-auto">
+        <div className="relative z-10 max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading
               eyebrow="05"
