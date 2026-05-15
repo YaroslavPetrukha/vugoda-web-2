@@ -275,7 +275,7 @@ const Home = () => {
                       className="h-px flex-1 bg-bg-surface group-hover:bg-accent/30 transition-colors duration-500"
                     />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-text-primary">
+                  <h3 className="text-xl md:text-2xl font-bold text-text-primary leading-snug">
                     {p.title}
                   </h3>
                   <p className="text-text-secondary text-sm md:text-base leading-relaxed">
@@ -353,7 +353,7 @@ const Home = () => {
                              before:bg-accent before:scale-x-0 before:origin-left
                              hover:before:scale-x-100 before:transition-transform before:duration-500"
                 >
-                  <h3 className="text-2xl md:text-3xl font-bold text-text-primary group-hover:text-accent transition-colors duration-500 mb-4">
+                  <h3 className="text-2xl md:text-3xl font-bold text-text-primary leading-snug group-hover:text-accent transition-colors duration-500 mb-4">
                     {a.title}
                   </h3>
                   <p className="text-text-secondary leading-relaxed mb-8 flex-1">
@@ -401,7 +401,7 @@ const Home = () => {
                                  hover:before:scale-x-100 before:transition-transform before:duration-500`;
               const inner = (
                 <>
-                  <h3 className="text-xl md:text-2xl font-bold text-text-primary group-hover:text-accent transition-colors duration-500 mb-3">
+                  <h3 className="text-xl md:text-2xl font-bold text-text-primary leading-snug group-hover:text-accent transition-colors duration-500 mb-3">
                     {doc.title}
                   </h3>
                   <p className="text-text-secondary text-sm leading-relaxed mb-6 flex-1">

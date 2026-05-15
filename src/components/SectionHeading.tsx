@@ -20,7 +20,7 @@ const SectionHeading = ({
   const alignCls = align === 'center' ? 'text-center mx-auto' : 'text-left';
   const titleCls =
     Tag === 'h2'
-      ? 'text-3xl md:text-5xl leading-[1.1] tracking-tight font-bold text-text-primary'
+      ? 'text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight font-bold text-text-primary'
       : 'text-xl md:text-2xl leading-snug font-bold text-text-primary';
 
   return (
@@ -34,7 +34,7 @@ const SectionHeading = ({
       )}
       <Tag className={titleCls}>{title}</Tag>
       {description && (
-        <p className="mt-5 text-text-secondary text-base md:text-lg leading-relaxed">
+        <p className="mt-5 text-text-secondary text-base md:text-lg leading-relaxed hyphens-auto">
           {description}
         </p>
       )}

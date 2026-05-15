@@ -103,7 +103,7 @@ const Approach = () => {
                 <span className="text-accent font-mono text-sm tracking-widest mb-6 block">
                   //{p.num}
                 </span>
-                <h3 className="text-2xl md:text-3xl font-bold text-text-primary mb-4">
+                <h3 className="text-2xl md:text-3xl font-bold text-text-primary leading-snug mb-4">
                   {p.num}. {p.title}
                 </h3>
                 <p className="text-text-secondary leading-relaxed mb-8">
@@ -111,13 +111,13 @@ const Approach = () => {
                 </p>
                 <dl className="border-t border-bg-surface pt-6 grid grid-cols-1 gap-4 text-sm">
                   <div className="flex flex-col gap-1">
-                    <dt className="text-[10px] font-medium uppercase tracking-widest text-text-secondary">
+                    <dt className="text-[11px] font-medium uppercase tracking-widest text-text-secondary">
                       Документи
                     </dt>
                     <dd className="text-text-primary">{p.docs}</dd>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <dt className="text-[10px] font-medium uppercase tracking-widest text-text-secondary">
+                    <dt className="text-[11px] font-medium uppercase tracking-widest text-text-secondary">
                       Тривалість
                     </dt>
                     <dd className="text-text-primary">{p.duration}</dd>

@@ -26,7 +26,7 @@ const News = () => {
       {/* CATEGORIES */}
       <section className="bg-bg-deep border-b border-bg-surface py-8 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center gap-3 md:gap-4">
-          <span className="text-[10px] font-medium uppercase tracking-widest text-text-secondary mr-2">
+          <span className="text-[11px] font-medium uppercase tracking-widest text-text-secondary mr-2">
             Категорії
           </span>
           {CATEGORIES.map((c, i) => (

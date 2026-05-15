@@ -58,7 +58,7 @@ const PageHero = ({
           {title}
         </h1>
         {lead && (
-          <p className="text-lg leading-relaxed text-text-secondary max-w-2xl">
+          <p className="text-lg leading-relaxed text-text-secondary max-w-2xl hyphens-auto">
             {lead}
           </p>
         )}

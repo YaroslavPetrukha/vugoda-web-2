@@ -67,7 +67,7 @@ const ContactForm = ({
         <div className="w-12 h-12 mb-5 border border-accent flex items-center justify-center">
           <div className="w-2 h-2 bg-accent" />
         </div>
-        <h3 className="text-2xl md:text-3xl font-bold text-text-primary mb-3">
+        <h3 className="text-2xl md:text-3xl font-bold text-text-primary leading-snug mb-3">
           Прийнято.
         </h3>
         <p className="text-text-secondary leading-relaxed max-w-md">
@@ -85,7 +85,7 @@ const ContactForm = ({
     >
       <h3
         id={headingId}
-        className="text-2xl md:text-3xl font-bold text-text-primary mb-2"
+        className="text-2xl md:text-3xl font-bold text-text-primary leading-snug mb-2"
       >
         {heading}
       </h3>

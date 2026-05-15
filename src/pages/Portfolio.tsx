@@ -23,7 +23,7 @@ const Portfolio = () => {
       {/* Filter labels (informational, not interactive — прототип) */}
       <section className="bg-bg-deep border-b border-bg-surface py-8 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center gap-3 md:gap-4">
-          <span className="text-[10px] font-medium uppercase tracking-widest text-text-secondary mr-2">
+          <span className="text-[11px] font-medium uppercase tracking-widest text-text-secondary mr-2">
             Фільтр за стадією
           </span>
           {[
@@ -62,7 +62,7 @@ const Portfolio = () => {
           <FadeIn delay={0.05}>
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 text-sm">
               <div>
-                <div className="text-[10px] font-medium uppercase tracking-widest text-text-secondary mb-2">
+                <div className="text-[11px] font-medium uppercase tracking-widest text-text-secondary mb-2">
                   Параметри
                 </div>
                 <div className="text-text-primary leading-relaxed">
@@ -70,7 +70,7 @@ const Portfolio = () => {
                 </div>
               </div>
               <div>
-                <div className="text-[10px] font-medium uppercase tracking-widest text-text-secondary mb-2">
+                <div className="text-[11px] font-medium uppercase tracking-widest text-text-secondary mb-2">
                   Адреса
                 </div>
                 <div className="text-text-primary leading-relaxed">
@@ -78,7 +78,7 @@ const Portfolio = () => {
                 </div>
               </div>
               <div className="lg:col-span-2">
-                <div className="text-[10px] font-medium uppercase tracking-widest text-text-secondary mb-2">
+                <div className="text-[11px] font-medium uppercase tracking-widest text-text-secondary mb-2">
                   Опис
                 </div>
                 <div className="text-text-primary leading-relaxed">

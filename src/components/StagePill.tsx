@@ -19,7 +19,7 @@ const StagePill = ({ stage, label, className = '' }: StagePillProps) => {
   const text = label ?? STAGE_LABELS[stage];
   return (
     <span
-      className={`inline-flex items-center px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded-none border ${
+      className={`inline-flex items-center px-3 py-1 text-[11px] font-bold uppercase tracking-widest rounded-none border ${
         isActive
           ? 'bg-accent text-bg-deep border-accent'
           : 'bg-bg-surface text-text-primary border-text-secondary/30'

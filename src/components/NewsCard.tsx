@@ -20,7 +20,7 @@ const NewsCard = ({
 }: NewsCardProps) => {
   const Inner = (
     <article className="h-full">
-      <div className="flex flex-wrap items-center gap-3 text-[10px] font-medium uppercase tracking-widest text-text-secondary mb-4">
+      <div className="flex flex-wrap items-center gap-3 text-[11px] font-medium uppercase tracking-widest text-text-secondary mb-4">
         <time dateTime={date}>{dateLabel}</time>
         <span aria-hidden="true">·</span>
         <span className="text-accent">{category}</span>
@@ -31,7 +31,7 @@ const NewsCard = ({
       <p className="text-text-secondary text-sm md:text-base leading-relaxed mb-6">
         {lead}
       </p>
-      <span className="inline-flex items-center gap-2 text-sm font-medium text-text-primary uppercase tracking-wider">
+      <span className="inline-flex items-center gap-2 text-sm font-medium text-text-primary uppercase tracking-widest">
         Читати далі{' '}
         <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
       </span>

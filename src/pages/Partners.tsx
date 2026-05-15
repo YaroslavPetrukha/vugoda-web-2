@@ -70,7 +70,7 @@ const Partners = () => {
                 key={r.label}
                 className="bg-bg-base p-6 md:p-8 grid grid-cols-1 md:grid-cols-3 gap-4"
               >
-                <dt className="text-[10px] font-medium uppercase tracking-widest text-text-secondary">
+                <dt className="text-[11px] font-medium uppercase tracking-widest text-text-secondary">
                   {r.label}
                 </dt>
                 <dd className="md:col-span-2 text-text-primary text-sm md:text-base leading-relaxed">
