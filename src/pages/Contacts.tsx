@@ -7,7 +7,6 @@ import ContactForm from '../components/ContactForm';
 
 const CORP_CONTACTS = [
   { label: 'Email', value: 'vygoda.sales@gmail.com', link: 'mailto:vygoda.sales@gmail.com' },
-  { label: 'Юр.адреса', value: 'Уточнюється — надамо за запитом' },
   { label: 'Корпоративний телефон', value: 'Уточнюється' },
 ];
 
