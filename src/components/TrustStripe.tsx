@@ -6,10 +6,10 @@ type TrustStripeProps = {
 };
 
 const DEFAULT_FACTS: TrustFact[] = [
-  { label: 'ЄДРПОУ', value: '42016395' },
-  { label: 'Ліцензія', value: 'від 27.12.2019' },
+  { label: 'ЄДРПОУ', value: '44876801' },
   { label: 'Технологія', value: 'Монолітно-каркас' },
-  { label: 'У роботі', value: '4 проєкти' },
+  { label: 'У роботі', value: '1 проєкт' },
+  { label: 'Здача', value: '2027' },
 ];
 
 const TrustStripe = ({ facts = DEFAULT_FACTS, className = '' }: TrustStripeProps) => {

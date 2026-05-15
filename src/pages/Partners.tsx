@@ -14,11 +14,10 @@ type Requisite = {
 const REQUISITES: Requisite[] = [
   {
     label: 'Повна назва',
-    value:
-      'ТОВАРИСТВО З ОБМЕЖЕНОЮ ВІДПОВІДАЛЬНІСТЮ «БУДІВЕЛЬНА КОМПАНІЯ "ВИГОДА ГРУП"»',
+    value: 'ПРИВАТНЕ ПІДПРИЄМСТВО «ДІК "ВИГОДА +"»',
   },
-  { label: 'Скорочена назва', value: 'ТОВ «БК ВИГОДА ГРУП»' },
-  { label: 'ЄДРПОУ', value: '42016395' },
+  { label: 'Скорочена назва', value: 'ПП «ДІК "Вигода +"»' },
+  { label: 'ЄДРПОУ', value: '44876801' },
   { label: 'Email', value: 'vygoda.sales@gmail.com', link: 'mailto:vygoda.sales@gmail.com' },
   {
     label: 'Сфера діяльності',
@@ -28,15 +27,8 @@ const REQUISITES: Requisite[] = [
 ];
 
 const LICENSES = [
-  'Ліцензія на провадження господарської діяльності з будівництва — видана 27 грудня 2019 року, безстрокова.',
   'Дозвільна документація по конкретних обʼєктах — надається за запитом, відповідно до стадії проекту.',
   'Сертифікати якості матеріалів і висновки експертизи — у складі проектної документації обʼєктів.',
-];
-
-const FOR_BANKS = [
-  'Готові надати пакет документів для акредитації обʼєкта (юр.картка, фінзвітність, дозволи, проектна документація).',
-  'Контактна особа для юристів і кредитних офіцерів — на email vygoda.sales@gmail.com.',
-  'Працюємо з програмами державного субсидування іпотеки — статус акредитації по конкретних проектах надамо окремо.',
 ];
 
 const FOR_CONTRACTORS = [
@@ -120,24 +112,6 @@ const Partners = () => {
               </FadeIn>
             ))}
           </ul>
-        </div>
-      </section>
-
-      {/* FOR BANKS */}
-      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-bg-surface">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-5">
-            <FadeIn>
-              <SectionHeading eyebrow="03" title="Для банків" />
-            </FadeIn>
-          </div>
-          <div className="lg:col-span-7 space-y-5 text-text-secondary text-base md:text-lg leading-relaxed">
-            {FOR_BANKS.map((item, i) => (
-              <FadeIn key={i} delay={i * 0.05}>
-                <p className="border-l border-accent/40 pl-6">{item}</p>
-              </FadeIn>
-            ))}
-          </div>
         </div>
       </section>
 

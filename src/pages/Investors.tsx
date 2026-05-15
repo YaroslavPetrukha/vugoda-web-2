@@ -182,33 +182,6 @@ const Investors = () => {
         </div>
       </section>
 
-      {/* LEGAL */}
-      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-bg-surface">
-        <div className="max-w-5xl mx-auto">
-          <FadeIn>
-            <SectionHeading eyebrow="05" title="Юридичний контур" />
-          </FadeIn>
-          <div className="mt-12 space-y-4 text-text-secondary text-base md:text-lg leading-relaxed">
-            <p>ТОВ «БК ВИГОДА ГРУП», ЄДРПОУ 42016395.</p>
-            <p>Ліцензія на будівництво від 27.12.2019, безстрокова.</p>
-            <p>
-              Договірна модель — купівля-продаж майнових прав з правом
-              переуступки.
-            </p>
-            <p>
-              Корпоративна пошта для запитів інвесторів:{' '}
-              <a
-                href="mailto:vygoda.sales@gmail.com"
-                className="text-text-primary underline decoration-accent decoration-1 underline-offset-4 hover:text-accent transition-colors"
-              >
-                vygoda.sales@gmail.com
-              </a>
-              .
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* FORM */}
       <section id="zustrich" className="bg-bg-deep py-24 md:py-32 px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">

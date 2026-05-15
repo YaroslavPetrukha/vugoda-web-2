@@ -117,7 +117,7 @@ const NavBar = () => {
             </Button>
             <div className="mt-8 text-xs text-text-secondary/80 leading-relaxed">
               <div>vygoda.sales@gmail.com</div>
-              <div className="mt-1">ТОВ «БК ВИГОДА ГРУП» · ЄДРПОУ 42016395</div>
+              <div className="mt-1">ПП «ДІК "Вигода +"» · ЄДРПОУ 44876801</div>
             </div>
           </div>
         </div>

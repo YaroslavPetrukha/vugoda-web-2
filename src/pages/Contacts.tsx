@@ -37,8 +37,8 @@ const DIRECTIONS = [
 ];
 
 const LAKEVIEW_CONTACTS = [
-  { label: 'Телефон', value: '+38 066 990 03 90', link: 'tel:+380669900390' },
-  { label: 'Email', value: 'vygoda.plus@gmail.com', link: 'mailto:vygoda.plus@gmail.com' },
+  { label: 'Телефон', value: '0969900390', link: 'tel:+380969900390' },
+  { label: 'Email', value: 'vygoda.sales@gmail.com', link: 'mailto:vygoda.sales@gmail.com' },
   {
     label: 'Офіс продажу',
     value: 'вул. Володимира Великого, 4, 4-й поверх, каб. 406, Львів',
@@ -52,9 +52,8 @@ const LAKEVIEW_CONTACTS = [
 ];
 
 const LEGAL = [
-  'ТОВ «БК ВИГОДА ГРУП»',
-  'ЄДРПОУ 42016395',
-  'Ліцензія на будівництво від 27.12.2019, безстрокова',
+  'ПП «ДІК "Вигода +"»',
+  'ЄДРПОУ 44876801',
 ];
 
 const Contacts = () => {

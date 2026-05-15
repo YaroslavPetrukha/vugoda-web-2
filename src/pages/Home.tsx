@@ -53,7 +53,6 @@ const AUDIENCES = [
 ];
 
 const lakeview = projects.find((p) => p.slug === 'lakeview')!;
-const pipeline = projects.filter((p) => p.slug !== 'lakeview');
 
 const DOCUMENTS = [
   {
@@ -65,7 +64,7 @@ const DOCUMENTS = [
   },
   {
     title: 'Ліцензія ДАБІ',
-    body: 'Безстрокова, з 27 грудня 2019 року. Перевірити статус — у Держреєстрі за ЄДРПОУ 42016395.',
+    body: 'Перевірити статус — у Держреєстрі за ЄДРПОУ 44876801.',
     cta: 'Відкрити реєстр',
     href: 'https://e-construction.gov.ua/',
     external: true,
@@ -142,8 +141,7 @@ const Home = () => {
             </h1>
             <p className="text-text-secondary text-base md:text-lg mb-12 max-w-xl leading-relaxed">
               Будуємо у Львові й області. На сьогодні — один активний обʼєкт
-              (Lakeview, здача 2027) і чотири проекти у pre-construction. Кожне
-              рішення — задокументоване.
+              (Lakeview, здача 2027).
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button
@@ -216,16 +214,14 @@ const Home = () => {
           <div className="lg:col-span-8 lg:pl-8 space-y-6 leading-relaxed">
             <FadeIn delay={0.05}>
               <p className="text-xl md:text-2xl text-text-primary leading-snug font-medium">
-                ТОВ «БК ВИГОДА ГРУП» — забудовник і генеральний підрядник зі
+                ПП «ДІК "Вигода +"» — забудовник і генеральний підрядник зі
                 Львова.
               </p>
             </FadeIn>
             <FadeIn delay={0.1}>
               <p className="text-text-secondary text-base md:text-lg">
                 Працюємо з власними новими обʼєктами і приймаємо проекти на
-                відновлення будівництва від інших замовників. Ліцензія Державної
-                архітектурно-будівельної інспекції — безстрокова, з 27 грудня
-                2019 року.
+                відновлення будівництва від інших замовників.
               </p>
             </FadeIn>
           </div>
@@ -305,7 +301,7 @@ const Home = () => {
             <SectionHeading
               eyebrow="03"
               title="Поточний фокус"
-              description="Один обʼєкт у будівництві, чотири — у pre-construction."
+              description="Активний обʼєкт у будівництві — ЖК Lakeview."
             />
           </FadeIn>
 
@@ -314,15 +310,6 @@ const Home = () => {
             <FadeIn delay={0.05}>
               <ProjectCard project={lakeview} variant="featured" />
             </FadeIn>
-
-            {/* Pipeline: 2×2 grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {pipeline.map((p, i) => (
-                <FadeIn key={p.slug} delay={0.1 + i * 0.05}>
-                  <ProjectCard project={p} />
-                </FadeIn>
-              ))}
-            </div>
           </div>
 
           <FadeIn className="mt-px border-t border-bg-surface pt-8 md:pt-10 flex justify-end">
@@ -454,7 +441,7 @@ const Home = () => {
 
           <FadeIn className="mt-10">
             <p className="text-xs text-text-secondary text-center tracking-wide">
-              ТОВ «БК ВИГОДА ГРУП» · ЄДРПОУ 42016395 · Дані звіряються з державними
+              ПП «ДІК "Вигода +"» · ЄДРПОУ 44876801 · Дані звіряються з державними
               реєстрами за запитом.
             </p>
           </FadeIn>

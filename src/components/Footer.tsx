@@ -91,11 +91,9 @@ const Footer = () => {
 
         <div className="border-t border-bg-surface pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-text-secondary">
           <div className="flex flex-wrap gap-x-3 gap-y-1">
-            <span>© 2026 ТОВ «БК ВИГОДА ГРУП»</span>
+            <span>© 2026 ПП «ДІК "Вигода +"»</span>
             <span aria-hidden="true">·</span>
-            <span>ЄДРПОУ 42016395</span>
-            <span aria-hidden="true">·</span>
-            <span>Ліцензія від 27.12.2019</span>
+            <span>ЄДРПОУ 44876801</span>
           </div>
           <div className="text-text-secondary/80 max-w-md leading-relaxed">
             Інформація про обʼєкти має ознайомлювальний характер. Точні параметри,
