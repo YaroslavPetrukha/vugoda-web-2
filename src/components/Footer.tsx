@@ -22,8 +22,8 @@ const navColumns = [
 
 const Footer = () => {
   return (
-    <footer className="bg-bg-deep border-t border-bg-surface text-text-secondary">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+    <footer className="bg-bg-deep border-t border-bg-surface text-text-secondary px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
           <div className="col-span-2 md:col-span-1">
             <Logo size={40} />

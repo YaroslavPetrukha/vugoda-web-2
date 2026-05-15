@@ -84,7 +84,7 @@ const Home = () => {
       {/* HERO */}
       <section
         aria-labelledby="hero-heading"
-        className="relative min-h-[640px] md:min-h-[680px] lg:min-h-[720px] w-full overflow-hidden bg-bg-deep flex flex-col"
+        className="relative min-h-[640px] md:min-h-[680px] lg:min-h-[720px] w-full overflow-hidden bg-bg-deep flex flex-col px-6 lg:px-8"
       >
         <div className="absolute inset-0 z-0">
           <img
@@ -128,7 +128,7 @@ const Home = () => {
           </motion.span>
         </div>
 
-        <div className="relative z-10 flex-1 flex flex-col justify-end max-w-7xl mx-auto w-full px-6 lg:px-8 pt-24 md:pt-32 pb-20 md:pb-24">
+        <div className="relative z-10 flex-1 flex flex-col justify-end max-w-7xl mx-auto w-full pt-24 md:pt-32 pb-20 md:pb-24">
           <FadeIn className="max-w-3xl">
             <span className="inline-block text-xs font-mono tracking-[0.18em] text-accent uppercase mb-4">
               // Львів · 2026

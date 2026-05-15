@@ -39,8 +39,8 @@ const NavBar = () => {
   const close = () => setOpen(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-bg-deep border-b border-bg-surface">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between relative z-10">
+    <nav className="sticky top-0 z-50 bg-bg-deep border-b border-bg-surface px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto h-20 flex items-center justify-between relative z-10">
         <Link
           to="/"
           onClick={close}
