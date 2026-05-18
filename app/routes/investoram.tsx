@@ -1,3 +1,5 @@
+import type { MetaFunction } from 'react-router';
+import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import FadeIn from '../../src/components/FadeIn';
 import PageHero from '../../src/components/PageHero';
@@ -5,6 +7,30 @@ import SectionHeading from '../../src/components/SectionHeading';
 import Button from '../../src/components/Button';
 import StagePill from '../../src/components/StagePill';
 import ContactForm from '../../src/components/ContactForm';
+
+export const meta: MetaFunction = ({ location }) => {
+  const title = 'Інвестиції в нерухомість Львів — забудовник ВИГОДА';
+  const description =
+    'Формати співпраці, схема угоди, юридичний контур. Купівля майнових прав, дохідна нерухомість, партнерство.';
+  const image = siteUrl('/og/investors.png');
+  const url = siteUrl(location.pathname);
+  return [
+    { title },
+    { name: 'description', content: description },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:image', content: image },
+    { property: 'og:url', content: url },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:site_name', content: 'ВИГОДА' },
+    { property: 'og:locale', content: 'uk_UA' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: image },
+    { tagName: 'link', rel: 'canonical', href: url },
+  ];
+};
 
 const FORMATS = [
   {

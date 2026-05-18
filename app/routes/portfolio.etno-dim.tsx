@@ -1,3 +1,5 @@
+import type { MetaFunction } from 'react-router';
+import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight } from 'lucide-react';
 import FadeIn from '../../src/components/FadeIn';
 import PageHero from '../../src/components/PageHero';
@@ -19,6 +21,30 @@ import render5 from '../../src/assets/projects/etno-dim/render-5.webp?preset=gal
 import render6 from '../../src/assets/projects/etno-dim/render-6.webp?preset=gallery';
 import render7 from '../../src/assets/projects/etno-dim/render-7.webp?preset=gallery';
 import render8 from '../../src/assets/projects/etno-dim/render-8.webp?preset=gallery';
+
+export const meta: MetaFunction = ({ location }) => {
+  const title = 'ЖК Етно Дім — Судова, Львів';
+  const description =
+    'Дохідний концепт на вул. Судова. Стадія меморандуму про відновлення будівництва. Підпишіться на оновлення.';
+  const image = siteUrl('/og/etno-dim.png');
+  const url = siteUrl(location.pathname);
+  return [
+    { title },
+    { name: 'description', content: description },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:image', content: image },
+    { property: 'og:url', content: url },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:site_name', content: 'ВИГОДА' },
+    { property: 'og:locale', content: 'uk_UA' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: image },
+    { tagName: 'link', rel: 'canonical', href: url },
+  ];
+};
 
 const PARAMETERS = [
   { label: 'Розташування', value: 'вул. Судова, Львів' },

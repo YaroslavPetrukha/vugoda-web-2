@@ -1,3 +1,5 @@
+import type { MetaFunction } from 'react-router';
+import { siteUrl } from '../../src/lib/site-url';
 import { motion } from 'motion/react';
 import { Link } from 'react-router';
 import { ArrowRight, ArrowUpRight, Mail } from 'lucide-react';
@@ -12,6 +14,30 @@ import { projects } from '../../src/data/projects';
 
 // LCP-кандидат: ?preset=hero генерує AVIF/WebP srcset 480–1920w
 import aerialHero from '../../src/assets/projects/lakeview/aerial.jpg?preset=hero';
+
+export const meta: MetaFunction = ({ location }) => {
+  const title = 'Забудовник ВИГОДА — системний девелопмент у Львові';
+  const description =
+    'Будуємо у Львові й області з 2019. Активний обʼєкт — ЖК Lakeview, бізнес-клас, здача 2027. Документи і прозорі умови.';
+  const image = siteUrl('/og/home.png');
+  const url = siteUrl(location.pathname);
+  return [
+    { title },
+    { name: 'description', content: description },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:image', content: image },
+    { property: 'og:url', content: url },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:site_name', content: 'ВИГОДА' },
+    { property: 'og:locale', content: 'uk_UA' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: image },
+    { tagName: 'link', rel: 'canonical', href: url },
+  ];
+};
 
 const PRINCIPLES = [
   {

@@ -1,3 +1,5 @@
+import type { MetaFunction } from 'react-router';
+import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight } from 'lucide-react';
 import FadeIn from '../../src/components/FadeIn';
 import PageHero from '../../src/components/PageHero';
@@ -13,6 +15,30 @@ import maetokRender1 from '../../src/assets/projects/maetok/render-1.webp?preset
 
 // Рендери — ?preset=gallery → AVIF/WebP srcset 600/1200w
 import maetokRender2 from '../../src/assets/projects/maetok/render-2.webp?preset=gallery';
+
+export const meta: MetaFunction = ({ location }) => {
+  const title = 'ЖК Маєток Винниківський — новобудова у Винниках';
+  const description =
+    'Житловий проект у Винниках (агломерація Львова). Стадія прорахунку кошторисної документації.';
+  const image = siteUrl('/og/maetok.png');
+  const url = siteUrl(location.pathname);
+  return [
+    { title },
+    { name: 'description', content: description },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:image', content: image },
+    { property: 'og:url', content: url },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:site_name', content: 'ВИГОДА' },
+    { property: 'og:locale', content: 'uk_UA' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: image },
+    { tagName: 'link', rel: 'canonical', href: url },
+  ];
+};
 
 const PARAMETERS = [
   { label: 'Розташування', value: 'м. Винники, Львівська обл.' },

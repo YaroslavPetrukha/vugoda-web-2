@@ -1,4 +1,17 @@
+import type { MetaFunction } from 'react-router';
 import { ArrowRight } from 'lucide-react';
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'Сторінку не знайдено — ВИГОДА' },
+    {
+      name: 'description',
+      content:
+        'Така сторінка не існує. Поверніться на головну або перегляньте портфель.',
+    },
+    { name: 'robots', content: 'noindex, follow' },
+  ];
+};
 import Button from '../../src/components/Button';
 import IsometricCubePlaceholder from '../../src/components/IsometricCubePlaceholder';
 

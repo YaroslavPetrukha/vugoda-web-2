@@ -1,3 +1,5 @@
+import type { MetaFunction } from 'react-router';
+import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import FadeIn from '../../src/components/FadeIn';
 import PageHero from '../../src/components/PageHero';
@@ -99,12 +101,114 @@ const CONSTRUCTION_GROUPS = [
   },
 ];
 
+export const meta: MetaFunction = ({ location }) => {
+  const title = 'ЖК Lakeview Львів — бізнес-клас, здача 2027';
+  const description =
+    'Володимира Великого 2А, Франківський район. 4 секції, монолітно-каркас, від $1600/м². Розстрочка до 2027.';
+  const image = siteUrl('/og/lakeview.png');
+  const url = siteUrl(location.pathname);
+  return [
+    { title },
+    { name: 'description', content: description },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:image', content: image },
+    { property: 'og:url', content: url },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:site_name', content: 'ВИГОДА' },
+    { property: 'og:locale', content: 'uk_UA' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: image },
+    { tagName: 'link', rel: 'canonical', href: url },
+  ];
+};
+
+const LAKEVIEW_LD = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ApartmentComplex',
+  '@id': 'https://vyhoda.lviv.ua/portfolio/lakeview/#complex',
+  name: 'ЖК Lakeview',
+  alternateName: 'Lakeview',
+  description:
+    'Житловий комплекс бізнес-класу у Франківському районі Львова. 4 секції, монолітно-каркасна технологія, до 16 поверхів, 2 поверхи комерції, 2-рівневий підземний паркінг. Біля двох природних озер.',
+  url: 'https://vyhoda.lviv.ua/portfolio/lakeview',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'вул. Володимира Великого, 2А',
+    addressLocality: 'Львів',
+    addressRegion: 'Львівська область',
+    addressCountry: 'UA',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 49.821,
+    longitude: 24.0042,
+  },
+  numberOfRooms: '1-3',
+  floorSize: {
+    '@type': 'QuantitativeValue',
+    minValue: 44,
+    maxValue: 183,
+    unitCode: 'MTK',
+  },
+  amenityFeature: [
+    { '@type': 'LocationFeatureSpecification', name: 'Підземний паркінг 2 рівні' },
+    { '@type': 'LocationFeatureSpecification', name: 'Охорона і відеоспостереження' },
+    { '@type': 'LocationFeatureSpecification', name: 'Автономне опалення' },
+    { '@type': 'LocationFeatureSpecification', name: 'Комерція на 2 поверхах' },
+  ],
+  isAccessibleForFree: false,
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'USD',
+    price: 1600,
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      unitText: 'per square meter',
+    },
+  },
+  containedInPlace: {
+    '@type': 'Place',
+    name: 'Львів, Франківський район',
+  },
+});
+
+const LAKEVIEW_BREADCRUMB = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Головна', item: 'https://vyhoda.lviv.ua/' },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Портфоліо',
+      item: 'https://vyhoda.lviv.ua/portfolio',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'ЖК Lakeview',
+      item: 'https://vyhoda.lviv.ua/portfolio/lakeview',
+    },
+  ],
+});
+
 const LAKEVIEW_SITE = 'https://yaroslavpetrukha.github.io/Lakeview/';
 const LAKEVIEW_INSTAGRAM = 'https://www.instagram.com/lakeviewlviv/';
 
 const ProjectLakeview = () => {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: LAKEVIEW_LD }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: LAKEVIEW_BREADCRUMB }}
+      />
       <PageHero
         eyebrow="Активний обʼєкт"
         title="ЖК Lakeview"

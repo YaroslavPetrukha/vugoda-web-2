@@ -1,9 +1,35 @@
+import type { MetaFunction } from 'react-router';
+import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight } from 'lucide-react';
 import FadeIn from '../../src/components/FadeIn';
 import PageHero from '../../src/components/PageHero';
 import SectionHeading from '../../src/components/SectionHeading';
 import Button from '../../src/components/Button';
 import ContactForm from '../../src/components/ContactForm';
+
+export const meta: MetaFunction = ({ location }) => {
+  const title = 'Партнерам і банкам — реквізити ВИГОДА';
+  const description =
+    'ПП «ДІК "Вигода +"», ЄДРПОУ 44876801, ліцензія від 27.12.2019. Документи для due diligence — за запитом.';
+  const image = siteUrl('/og/partners.png');
+  const url = siteUrl(location.pathname);
+  return [
+    { title },
+    { name: 'description', content: description },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:image', content: image },
+    { property: 'og:url', content: url },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:site_name', content: 'ВИГОДА' },
+    { property: 'og:locale', content: 'uk_UA' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: image },
+    { tagName: 'link', rel: 'canonical', href: url },
+  ];
+};
 
 type Requisite = {
   label: string;
