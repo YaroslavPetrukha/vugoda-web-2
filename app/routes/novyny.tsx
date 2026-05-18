@@ -1,3 +1,5 @@
+import type { MetaFunction } from 'react-router';
+import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight } from 'lucide-react';
 import FadeIn from '../../src/components/FadeIn';
 import PageHero from '../../src/components/PageHero';
@@ -6,6 +8,30 @@ import Button from '../../src/components/Button';
 import NewsCard from '../../src/components/NewsCard';
 import ContactForm from '../../src/components/ContactForm';
 import { news } from '../../src/data/news';
+
+export const meta: MetaFunction = ({ location }) => {
+  const title = 'Новини і хід будівництва — ВИГОДА';
+  const description =
+    'Щомісячні фотозвіти з обʼєктів. Оновлення статусу pipeline-проектів. Анонси публічних подій.';
+  const image = siteUrl('/og/news.png');
+  const url = siteUrl(location.pathname);
+  return [
+    { title },
+    { name: 'robots', content: 'noindex, follow' },
+    { name: 'description', content: description },
+    { property: 'og:title', content: title },
+    { property: 'og:description', content: description },
+    { property: 'og:image', content: image },
+    { property: 'og:url', content: url },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:site_name', content: 'ВИГОДА' },
+    { property: 'og:locale', content: 'uk_UA' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: title },
+    { name: 'twitter:description', content: description },
+    { name: 'twitter:image', content: image },
+  ];
+};
 
 const CATEGORIES = ['Усі', 'Етапи проектів', 'Методологія', 'Прес-релізи'];
 
