@@ -1,0 +1,10 @@
+# Legacy GitHub Pages URLs → root-relative paths (301 permanent)
+# (on the off chance someone saved old links from vugoda-web-2.github.io)
+/vugoda-web-2/*  /:splat  301
+
+# Force HTTPS (CF Pages already handles this by default, but fallback does not hurt)
+http://vyhoda.lviv.ua/*  https://vyhoda.lviv.ua/:splat  301!
+http://www.vyhoda.lviv.ua/*  https://vyhoda.lviv.ua/:splat  301!
+
+# www → non-www (canonical: vyhoda.lviv.ua, no www)
+https://www.vyhoda.lviv.ua/*  https://vyhoda.lviv.ua/:splat  301!
