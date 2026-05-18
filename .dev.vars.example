@@ -1,0 +1,7 @@
+# Local dev environment for Cloudflare Pages Functions.
+# Copy to .dev.vars and fill with real values (NEVER commit .dev.vars — it is in .gitignore).
+# Usage: npx wrangler pages dev build/client --binding-source=.dev.vars
+
+TELEGRAM_BOT_TOKEN=your_bot_token_from_botfather
+TELEGRAM_CHAT_ID=your_chat_id_negative_for_groups
+TURNSTILE_SECRET_KEY=your_turnstile_secret_key
