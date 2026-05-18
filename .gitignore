@@ -37,3 +37,12 @@ Thumbs.db
 
 # MCP config (contains tokens)
 .mcp.json
+
+# Cloudflare Pages local dev secrets (NEVER commit)
+.dev.vars
+
+# Wrangler cache
+.wrangler/
+
+# Vitest cache
+node_modules/.vitest
