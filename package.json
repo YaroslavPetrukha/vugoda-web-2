@@ -4,10 +4,10 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build",
-    "preview": "vite preview",
-    "clean": "rm -rf dist",
+    "dev": "react-router dev --port 3000 --host 0.0.0.0",
+    "build": "react-router build",
+    "preview": "react-router-serve ./build/server/index.js",
+    "clean": "rm -rf build dist",
     "lint": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -15,19 +15,25 @@
     "og:generate": "node scripts/generate-og-cards.mjs",
     "build:verify": "node scripts/verify-build.mjs",
     "check:paths": "node scripts/check-no-legacy-paths.mjs",
-    "check:paths:enforce": "node scripts/check-no-legacy-paths.mjs --enforce"
+    "check:paths:enforce": "node scripts/check-no-legacy-paths.mjs --enforce",
+    "prebuild": "npm run check:paths:enforce"
   },
   "dependencies": {
+    "@fontsource/montserrat": "^5.2.8",
+    "@react-router/node": "^7.15.1",
     "@tailwindcss/vite": "^4.1.14",
     "@vitejs/plugin-react": "^5.0.4",
+    "isbot": "^5",
     "lucide-react": "^0.546.0",
     "motion": "^12.23.24",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.14.2",
+    "react-router": "^7.15.1",
+    "react-router-dom": "^7.15.1",
     "vite": "^6.2.0"
   },
   "devDependencies": {
+    "@react-router/dev": "^7.15.1",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -39,6 +45,7 @@
     "simple-git-hooks": "^2.13.1",
     "tailwindcss": "^4.1.14",
     "typescript": "~5.8.2",
+    "vite-imagetools": "^7.1.1",
     "vitest": "^4.1.6"
   },
   "simple-git-hooks": {

@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { ArrowUpRight } from 'lucide-react';
 import type { Project } from '../types';
 import StagePill from './StagePill';
 import IsometricCubePlaceholder from './IsometricCubePlaceholder';
+import Picture from './ui/Picture';
 
 type Variant = 'featured' | 'default' | 'placeholder';
 
@@ -46,10 +47,10 @@ const ProjectCard = ({
     <>
       {v !== 'placeholder' && project.cardImage && (
         <>
-          <img
-            src={`/vugoda-web-2${project.cardImage}`}
+          <Picture
+            source={project.cardImage}
             alt={project.name}
-            loading="lazy"
+            sizes="(min-width: 1024px) 640px, 100vw"
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
           />
           <div

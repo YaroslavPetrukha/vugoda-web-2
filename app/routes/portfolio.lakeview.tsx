@@ -1,11 +1,37 @@
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import FadeIn from '../components/FadeIn';
-import PageHero from '../components/PageHero';
-import SectionHeading from '../components/SectionHeading';
-import Button from '../components/Button';
-import StagePill from '../components/StagePill';
-import ContactForm from '../components/ContactForm';
-import ProjectGalleryStrip from '../components/ProjectGalleryStrip';
+import FadeIn from '../../src/components/FadeIn';
+import PageHero from '../../src/components/PageHero';
+import SectionHeading from '../../src/components/SectionHeading';
+import Button from '../../src/components/Button';
+import StagePill from '../../src/components/StagePill';
+import ContactForm from '../../src/components/ContactForm';
+import ProjectGalleryStrip from '../../src/components/ProjectGalleryStrip';
+import type { PictureSource } from '../../src/components/ui/Picture';
+
+// Hero — ?preset=hero → AVIF/WebP srcset 480/768/1280/1920w
+import lakeviewHero from '../../src/assets/projects/lakeview/hero.jpg?preset=hero';
+import lakeviewAerial from '../../src/assets/projects/lakeview/aerial.jpg?preset=hero';
+
+// Рендери — ?preset=gallery → AVIF/WebP srcset 600/1200w
+import lakeviewSemiAerial from '../../src/assets/projects/lakeview/semi-aerial.jpg?preset=gallery';
+import lakeviewCloseup from '../../src/assets/projects/lakeview/closeup.jpg?preset=gallery';
+import lakeviewEntrance from '../../src/assets/projects/lakeview/entrance.jpg?preset=gallery';
+import lakeviewLakeBridge from '../../src/assets/projects/lakeview/lake-bridge.jpg?preset=gallery';
+import lakeviewTerrace from '../../src/assets/projects/lakeview/terrace.jpg?preset=gallery';
+
+// Будівельні фото — ?preset=construction → AVIF/WebP srcset 400/800w, quality 70
+import decImg01 from '../../src/assets/construction/dec-01.jpg?preset=construction';
+import decImg02 from '../../src/assets/construction/dec-02.jpg?preset=construction';
+import decImg03 from '../../src/assets/construction/dec-03.jpg?preset=construction';
+import janImg01 from '../../src/assets/construction/jan-01.jpg?preset=construction';
+import janImg02 from '../../src/assets/construction/jan-02.jpg?preset=construction';
+import janImg03 from '../../src/assets/construction/jan-03.jpg?preset=construction';
+import febImg01 from '../../src/assets/construction/feb-01.jpg?preset=construction';
+import febImg02 from '../../src/assets/construction/feb-02.jpg?preset=construction';
+import febImg03 from '../../src/assets/construction/feb-03.jpg?preset=construction';
+import marImg01 from '../../src/assets/construction/mar-01.jpg?preset=construction';
+import marImg02 from '../../src/assets/construction/mar-02.jpg?preset=construction';
+import marImg03 from '../../src/assets/construction/mar-03.jpg?preset=construction';
 
 const PARAMETERS = [
   { label: 'Адреса', value: 'вул. Володимира Великого, 2А, Франківський район, Львів' },
@@ -30,45 +56,45 @@ const INFRA = [
 ];
 
 const RENDERS = [
-  { src: '/vugoda-web-2/projects/lakeview/aerial.jpg', alt: 'Lakeview — аерофотозйомка' },
-  { src: '/vugoda-web-2/projects/lakeview/semi-aerial.jpg', alt: 'Lakeview — оглядовий ракурс' },
-  { src: '/vugoda-web-2/projects/lakeview/closeup.jpg', alt: 'Lakeview — деталі фасаду' },
-  { src: '/vugoda-web-2/projects/lakeview/entrance.jpg', alt: 'Lakeview — вхідна група' },
-  { src: '/vugoda-web-2/projects/lakeview/lake-bridge.jpg', alt: 'Lakeview — озеро та міст' },
-  { src: '/vugoda-web-2/projects/lakeview/terrace.jpg', alt: 'Lakeview — терасна зона' },
+  { src: lakeviewAerial as unknown as PictureSource, alt: 'Lakeview — аерофотозйомка' },
+  { src: lakeviewSemiAerial as unknown as PictureSource, alt: 'Lakeview — оглядовий ракурс' },
+  { src: lakeviewCloseup as unknown as PictureSource, alt: 'Lakeview — деталі фасаду' },
+  { src: lakeviewEntrance as unknown as PictureSource, alt: 'Lakeview — вхідна група' },
+  { src: lakeviewLakeBridge as unknown as PictureSource, alt: 'Lakeview — озеро та міст' },
+  { src: lakeviewTerrace as unknown as PictureSource, alt: 'Lakeview — терасна зона' },
 ];
 
 const CONSTRUCTION_GROUPS = [
   {
     label: 'Грудень 2025',
     items: [
-      { src: '/vugoda-web-2/construction/dec-01.jpg', alt: 'Грудень 2025 — кадр 1' },
-      { src: '/vugoda-web-2/construction/dec-02.jpg', alt: 'Грудень 2025 — кадр 2' },
-      { src: '/vugoda-web-2/construction/dec-03.jpg', alt: 'Грудень 2025 — кадр 3' },
+      { src: decImg01 as unknown as PictureSource, alt: 'Грудень 2025 — кадр 1' },
+      { src: decImg02 as unknown as PictureSource, alt: 'Грудень 2025 — кадр 2' },
+      { src: decImg03 as unknown as PictureSource, alt: 'Грудень 2025 — кадр 3' },
     ],
   },
   {
     label: 'Січень 2026',
     items: [
-      { src: '/vugoda-web-2/construction/jan-01.jpg', alt: 'Січень 2026 — кадр 1' },
-      { src: '/vugoda-web-2/construction/jan-02.jpg', alt: 'Січень 2026 — кадр 2' },
-      { src: '/vugoda-web-2/construction/jan-03.jpg', alt: 'Січень 2026 — кадр 3' },
+      { src: janImg01 as unknown as PictureSource, alt: 'Січень 2026 — кадр 1' },
+      { src: janImg02 as unknown as PictureSource, alt: 'Січень 2026 — кадр 2' },
+      { src: janImg03 as unknown as PictureSource, alt: 'Січень 2026 — кадр 3' },
     ],
   },
   {
     label: 'Лютий 2026',
     items: [
-      { src: '/vugoda-web-2/construction/feb-01.jpg', alt: 'Лютий 2026 — кадр 1' },
-      { src: '/vugoda-web-2/construction/feb-02.jpg', alt: 'Лютий 2026 — кадр 2' },
-      { src: '/vugoda-web-2/construction/feb-03.jpg', alt: 'Лютий 2026 — кадр 3' },
+      { src: febImg01 as unknown as PictureSource, alt: 'Лютий 2026 — кадр 1' },
+      { src: febImg02 as unknown as PictureSource, alt: 'Лютий 2026 — кадр 2' },
+      { src: febImg03 as unknown as PictureSource, alt: 'Лютий 2026 — кадр 3' },
     ],
   },
   {
     label: 'Березень 2026',
     items: [
-      { src: '/vugoda-web-2/construction/mar-01.jpg', alt: 'Березень 2026 — кадр 1' },
-      { src: '/vugoda-web-2/construction/mar-02.jpg', alt: 'Березень 2026 — кадр 2' },
-      { src: '/vugoda-web-2/construction/mar-03.jpg', alt: 'Березень 2026 — кадр 3' },
+      { src: marImg01 as unknown as PictureSource, alt: 'Березень 2026 — кадр 1' },
+      { src: marImg02 as unknown as PictureSource, alt: 'Березень 2026 — кадр 2' },
+      { src: marImg03 as unknown as PictureSource, alt: 'Березень 2026 — кадр 3' },
     ],
   },
 ];
@@ -83,7 +109,7 @@ const ProjectLakeview = () => {
         eyebrow="Активний обʼєкт"
         title="ЖК Lakeview"
         lead="Житловий комплекс бізнес-класу на вул. Володимира Великого, 2А: автономне опалення, два природні озера поруч, 2 поверхи комерції та 2-рівневий підземний паркінг. Чотири секції, монолітно-каркасна технологія, плановий термін введення в експлуатацію — 2027 рік."
-        image="/vugoda-web-2/projects/lakeview/hero.jpg"
+        image={lakeviewHero as unknown as PictureSource}
         imageAlt=""
       >
         <Button as="a" href={LAKEVIEW_SITE} external variant="primary" size="lg">
@@ -232,7 +258,7 @@ const ProjectLakeview = () => {
             <SectionHeading
               eyebrow="06"
               title="Деталі і планування — на сайті ЖК"
-              description="Планування квартир по всіх секціях, паркомісця, актуальні ціни, бронювання — на власному сайті проекту."
+              description="Планування квартир по всіх секціях, паркомісця, актуальні ціни, бронювання — на власному сайті проекту."
             />
           </FadeIn>
           <div className="mt-12 flex flex-col sm:flex-row gap-4">
@@ -253,7 +279,7 @@ const ProjectLakeview = () => {
             <SectionHeading
               eyebrow="07"
               title="Контакти ЖК Lakeview"
-              description="Це окремі контакти проекту. Корпоративні контакти ВИГОДИ — у розділі /kontakty."
+              description="Це окремі контакти проекту. Корпоративні контакти ВИГОДИ — у розділі /kontakty."
             />
           </FadeIn>
           <dl className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-px bg-bg-surface border border-bg-surface">

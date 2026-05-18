@@ -1,12 +1,17 @@
 import { motion } from 'motion/react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { ArrowRight, ArrowUpRight, Mail } from 'lucide-react';
-import FadeIn from '../components/FadeIn';
-import Button from '../components/Button';
-import SectionHeading from '../components/SectionHeading';
-import TrustStripe from '../components/TrustStripe';
-import ProjectCard from '../components/ProjectCard';
-import { projects } from '../data/projects';
+import FadeIn from '../../src/components/FadeIn';
+import Button from '../../src/components/Button';
+import SectionHeading from '../../src/components/SectionHeading';
+import TrustStripe from '../../src/components/TrustStripe';
+import ProjectCard from '../../src/components/ProjectCard';
+import Picture from '../../src/components/ui/Picture';
+import type { PictureSource } from '../../src/components/ui/Picture';
+import { projects } from '../../src/data/projects';
+
+// LCP-кандидат: ?preset=hero генерує AVIF/WebP srcset 480–1920w
+import aerialHero from '../../src/assets/projects/lakeview/aerial.jpg?preset=hero';
 
 const PRINCIPLES = [
   {
@@ -87,13 +92,12 @@ const Home = () => {
         className="relative min-h-[640px] md:min-h-[680px] lg:min-h-[720px] w-full overflow-hidden bg-bg-deep flex flex-col px-6 lg:px-8"
       >
         <div className="absolute inset-0 z-0">
-          <img
-            src="/vugoda-web-2/projects/lakeview/aerial.jpg"
+          <Picture
+            source={aerialHero as unknown as PictureSource}
             alt=""
             aria-hidden="true"
-            loading="eager"
-            decoding="async"
-            fetchPriority="high"
+            priority
+            sizes="100vw"
             className="w-full h-full object-cover opacity-50"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-bg-deep/40 via-bg-deep/55 to-bg-deep" />
@@ -102,7 +106,7 @@ const Home = () => {
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 opacity-[0.05]"
             style={{
-              backgroundImage: "url('/vugoda-web-2/isometric-grid.svg')",
+              backgroundImage: "url('/isometric-grid.svg')",
               backgroundSize: '420px 319px',
               backgroundRepeat: 'repeat',
               maskImage:
@@ -137,10 +141,10 @@ const Home = () => {
               id="hero-heading"
               className="text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.05] tracking-tight font-bold text-text-primary mb-8"
             >
-              Системний девелопмент, у{' '}якому цінність є{' '}результатом точних рішень.
+              Системний девелопмент, у{' '}якому цінність є{' '}результатом точних рішень.
             </h1>
             <p className="text-text-secondary text-base md:text-lg mb-12 max-w-xl leading-relaxed">
-              Будуємо у Львові й області. На сьогодні — один активний обʼєкт
+              Будуємо у Львові й області. На сьогодні — один активний обʼєкт
               (Lakeview, здача 2027).
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -171,7 +175,7 @@ const Home = () => {
           aria-hidden="true"
           className="pointer-events-none absolute -bottom-16 -right-16 w-[420px] h-[320px] opacity-[0.04]"
           style={{
-            backgroundImage: "url('/vugoda-web-2/mark.svg')",
+            backgroundImage: "url('/mark.svg')",
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'bottom right',
@@ -235,7 +239,7 @@ const Home = () => {
           aria-hidden="true"
           className="pointer-events-none absolute right-0 top-0 bottom-0 w-[280px] opacity-[0.05]"
           style={{
-            backgroundImage: "url('/vugoda-web-2/isometric-grid.svg')",
+            backgroundImage: "url('/isometric-grid.svg')",
             backgroundSize: '280px auto',
             backgroundRepeat: 'repeat-y',
             backgroundPosition: 'right top',
@@ -250,7 +254,7 @@ const Home = () => {
             <SectionHeading
               eyebrow="02"
               title="Що означає системний девелопмент"
-              description={"Чотири фази, через які проходить кожен проект до запуску продажів. Без скорочень і обходів."}
+              description={"Чотири фази, через які проходить кожен проект до запуску продажів. Без скорочень і обходів."}
             />
           </FadeIn>
 
@@ -301,7 +305,7 @@ const Home = () => {
             <SectionHeading
               eyebrow="03"
               title="Поточний фокус"
-              description={"Активний обʼєкт у будівництві — ЖК Lakeview."}
+              description={"Активний обʼєкт у будівництві — ЖК Lakeview."}
             />
           </FadeIn>
 
@@ -322,12 +326,12 @@ const Home = () => {
 
       {/* AUDIENCES */}
       <section className="relative bg-bg-deep py-24 md:py-32 px-6 lg:px-8 overflow-hidden">
-        {/* Ambient full-bleed tile — anchor "classic" pattern in the rhythm */}
+        {/* Ambient full-bleed tile */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 opacity-[0.05]"
           style={{
-            backgroundImage: "url('/vugoda-web-2/isometric-grid.svg')",
+            backgroundImage: "url('/isometric-grid.svg')",
             backgroundSize: '441px 335px',
             backgroundRepeat: 'repeat',
           }}
@@ -337,7 +341,7 @@ const Home = () => {
             <SectionHeading
               eyebrow="04"
               title="Для кого ми працюємо"
-              description={"Сайт — фільтр довіри. Деталі для кожного сценарію — у спеціалізованих розділах."}
+              description={"Сайт — фільтр довіри. Деталі для кожного сценарію — у спеціалізованих розділах."}
             />
           </FadeIn>
 
@@ -376,7 +380,7 @@ const Home = () => {
           aria-hidden="true"
           className="pointer-events-none absolute -top-12 -left-12 w-[360px] h-[273px] opacity-[0.035]"
           style={{
-            backgroundImage: "url('/vugoda-web-2/mark.svg')",
+            backgroundImage: "url('/mark.svg')",
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'top left',
@@ -387,7 +391,7 @@ const Home = () => {
             <SectionHeading
               eyebrow="05"
               title="Документи та факти"
-              description={"Поточний портфель: 0 зданих · 1 у будівництві · 4 у pipeline. Документи — у відкритому доступі."}
+              description={"Поточний портфель: 0 зданих · 1 у будівництві · 4 у pipeline. Документи — у відкритому доступі."}
             />
           </FadeIn>
 
@@ -455,7 +459,7 @@ const Home = () => {
           aria-hidden="true"
           className="pointer-events-none absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[260px] opacity-[0.05]"
           style={{
-            backgroundImage: "url('/vugoda-web-2/isometric-grid.svg')",
+            backgroundImage: "url('/isometric-grid.svg')",
             backgroundSize: '320px 243px',
             backgroundRepeat: 'repeat-x',
             maskImage:
@@ -464,12 +468,12 @@ const Home = () => {
               'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)',
           }}
         />
-        {/* Mark watermark in bottom-right as final brand sigil */}
+        {/* Mark watermark */}
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -bottom-16 -right-16 w-[420px] h-[320px] opacity-[0.05]"
           style={{
-            backgroundImage: "url('/vugoda-web-2/mark.svg')",
+            backgroundImage: "url('/mark.svg')",
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'bottom right',
@@ -480,7 +484,7 @@ const Home = () => {
             <SectionHeading
               eyebrow="06"
               title="Залишилось питання"
-              description={"Залиште номер — зателефонуємо сьогодні. Без скриптів і тиску — відповідаємо на конкретні питання щодо документів, ціни, термінів."}
+              description={"Залиште номер — зателефонуємо сьогодні. Без скриптів і тиску — відповідаємо на конкретні питання щодо документів, ціни, термінів."}
             />
           </FadeIn>
           <FadeIn delay={0.1} className="md:justify-self-end w-full md:w-auto">

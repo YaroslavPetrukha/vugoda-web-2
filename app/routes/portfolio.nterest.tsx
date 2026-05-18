@@ -1,48 +1,60 @@
 import { ArrowRight } from 'lucide-react';
-import FadeIn from '../components/FadeIn';
-import PageHero from '../components/PageHero';
-import SectionHeading from '../components/SectionHeading';
-import Button from '../components/Button';
-import StagePill from '../components/StagePill';
-import ContactForm from '../components/ContactForm';
-import ProjectGalleryStrip from '../components/ProjectGalleryStrip';
+import FadeIn from '../../src/components/FadeIn';
+import PageHero from '../../src/components/PageHero';
+import SectionHeading from '../../src/components/SectionHeading';
+import Button from '../../src/components/Button';
+import StagePill from '../../src/components/StagePill';
+import ContactForm from '../../src/components/ContactForm';
+import ProjectGalleryStrip from '../../src/components/ProjectGalleryStrip';
+import type { PictureSource } from '../../src/components/ui/Picture';
+
+// Hero — ?preset=hero → AVIF/WebP srcset 480–1920w
+import nterestRender1 from '../../src/assets/projects/nterest/render-1.webp?preset=hero';
+
+// Рендери — ?preset=gallery → AVIF/WebP srcset 600/1200w
+import nterestRender2 from '../../src/assets/projects/nterest/render-2.webp?preset=gallery';
+import nterestRender3 from '../../src/assets/projects/nterest/render-3.webp?preset=gallery';
 
 const PARAMETERS = [
-  { label: 'Розташування', value: 'вул. Судова, Львів' },
-  { label: 'Стадія', value: 'Меморандум про відновлення будівництва' },
-  { label: 'Тип продукту', value: 'Уточнюється (можливо — дохідний дім)' },
-  { label: 'Площі і поверховість', value: 'Будуть оголошені після затвердження проекту' },
+  { label: 'Розташування', value: 'Львів (адреса буде оголошена)' },
+  { label: 'Стадія', value: 'Погодження дозвільної документації' },
+  { label: 'Тип продукту', value: 'Дохідний дім' },
+  {
+    label: 'Інвестиційний формат',
+    value: 'Орієнтований на інвестора, що шукає пасивний дохід',
+  },
   { label: 'Термін старту продажів', value: 'Буде оголошено' },
 ];
 
-const RENDERS = Array.from({ length: 8 }, (_, i) => ({
-  src: `/vugoda-web-2/projects/etno-dim/render-${i + 1}.webp`,
-  alt: `ЖК Етно Дім — рендер ${i + 1}`,
-}));
+const RENDERS = [
+  { src: nterestRender1 as unknown as PictureSource, alt: 'NTEREST — рендер 1' },
+  { src: nterestRender2 as unknown as PictureSource, alt: 'NTEREST — рендер 2' },
+  { src: nterestRender3 as unknown as PictureSource, alt: 'NTEREST — рендер 3' },
+];
 
-const ProjectEtnoDim = () => {
+const ProjectNterest = () => {
   return (
     <>
       <PageHero
         eyebrow="Pipeline"
-        title="ЖК Етно Дім"
-        lead="Львів, вул. Судова. Зафіксовані наміри з власником ділянки. Готуємо проектну і кошторисну документацію."
-        image="/vugoda-web-2/projects/etno-dim/render-1.webp"
+        title="Дохідний дім NTEREST"
+        lead="Концепт — дохідний дім. У роботі — погодження дозвільної документації. Старт продажів — після отримання дозволу."
+        image={nterestRender1 as unknown as PictureSource}
         imageAlt=""
       >
         <Button as="a" href="#pidpyska" variant="primary" size="lg">
           Повідомити про старт продажів <ArrowRight className="w-4 h-4" />
         </Button>
-        <Button as="router" href="/pidkhid" variant="ghost" size="lg">
-          Як ми працюємо
+        <Button as="router" href="/investoram" variant="ghost" size="lg">
+          Інвесторам
         </Button>
       </PageHero>
 
       <section className="bg-bg-deep border-b border-bg-surface py-6 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center gap-4 text-sm text-text-secondary">
-          <StagePill stage="memorandum" label="Меморандум про відновлення будівництва" />
+          <StagePill stage="permits" label="Дозвільна документація" />
           <span aria-hidden="true">·</span>
-          <span>вул. Судова, Львів</span>
+          <span>Львів</span>
         </div>
       </section>
 
@@ -56,8 +68,8 @@ const ProjectEtnoDim = () => {
           </div>
           <FadeIn delay={0.05} className="lg:col-span-7">
             <p className="text-text-secondary text-base md:text-lg leading-relaxed">
-              Меморандум про відновлення будівництва підписано. Це перша з
-              чотирьох фаз нашої методології — фіксація умов і обсягу робіт.
+              Погодження дозвільної документації. Третя фаза нашої методології —
+              на майданчик не виходимо без повного пакета дозволів.
             </p>
           </FadeIn>
         </div>
@@ -94,13 +106,13 @@ const ProjectEtnoDim = () => {
             <SectionHeading
               eyebrow="03"
               title="Візуалізація"
-              description="Робочі рендери. Фінальне рішення формується разом із проектною документацією."
+              description="Робочі рендери проекту."
             />
           </FadeIn>
           <FadeIn delay={0.05} className="mt-12">
             <ProjectGalleryStrip
               images={RENDERS}
-              ariaLabel="Рендери ЖК Етно Дім"
+              ariaLabel="Рендери NTEREST"
             />
           </FadeIn>
         </div>
@@ -113,10 +125,15 @@ const ProjectEtnoDim = () => {
             <SectionHeading eyebrow="04" title="Що далі" />
           </FadeIn>
           <p className="mt-8 text-text-secondary text-base md:text-lg leading-relaxed">
-            Наступний крок — кошторисна документація. Після — погодження
-            дозвільної документації. Старт продажів — після отримання дозволу
-            на будівельні роботи.
+            Після отримання дозволу на будівельні роботи — старт будівництва і
+            відкриття продажів. Інвесторам, що цікавляться форматом дохідної
+            нерухомості, — окремий розділ.
           </p>
+          <div className="mt-10">
+            <Button as="router" href="/investoram" variant="ghost" size="md">
+              Розділ для інвесторів <ArrowRight className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -128,9 +145,9 @@ const ProjectEtnoDim = () => {
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <ContactForm
-              source="project-etno-dim"
+              source="project-nterest"
               heading="Повідомити про старт продажів"
-              description="Залиште номер. Напишемо й зателефонуємо, коли проект вийде на стадію продажів."
+              description="Залиште номер. Зателефонуємо, коли проект вийде на стадію продажів."
               fields={['email']}
               submitLabel="Підписатись на оновлення"
               successText="Прийнято. Внесли вас у список — повідомимо першими."
@@ -143,4 +160,4 @@ const ProjectEtnoDim = () => {
   );
 };
 
-export default ProjectEtnoDim;
+export default ProjectNterest;

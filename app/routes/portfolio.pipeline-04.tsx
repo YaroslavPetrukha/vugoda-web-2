@@ -1,16 +1,16 @@
 import { ArrowRight } from 'lucide-react';
-import FadeIn from '../components/FadeIn';
-import PageHero from '../components/PageHero';
-import SectionHeading from '../components/SectionHeading';
-import Button from '../components/Button';
-import StagePill from '../components/StagePill';
-import ContactForm from '../components/ContactForm';
-import IsometricCubePlaceholder from '../components/IsometricCubePlaceholder';
+import FadeIn from '../../src/components/FadeIn';
+import PageHero from '../../src/components/PageHero';
+import SectionHeading from '../../src/components/SectionHeading';
+import Button from '../../src/components/Button';
+import StagePill from '../../src/components/StagePill';
+import ContactForm from '../../src/components/ContactForm';
+import IsometricCubePlaceholder from '../../src/components/IsometricCubePlaceholder';
 
 const NO_NAME_REASONS = [
-  'Назва і ідентичність проекту зʼявляються після рішення інвестора і затвердження концепту.',
+  'Назва і ідентичність проекту зʼявляються після рішення інвестора і затвердження концепту.',
   'До того моменту — не вигадуємо «тимчасові» назви для маркетингу.',
-  'На сайті лишається коректна стадія і чесний візуальний placeholder — каркасний куб з нашого брендбуку.',
+  'На сайті лишається коректна стадія і чесний візуальний placeholder — каркасний куб з нашого брендбуку.',
 ];
 
 const ProjectPipeline04 = () => {

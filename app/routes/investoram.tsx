@@ -1,10 +1,10 @@
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import FadeIn from '../components/FadeIn';
-import PageHero from '../components/PageHero';
-import SectionHeading from '../components/SectionHeading';
-import Button from '../components/Button';
-import StagePill from '../components/StagePill';
-import ContactForm from '../components/ContactForm';
+import FadeIn from '../../src/components/FadeIn';
+import PageHero from '../../src/components/PageHero';
+import SectionHeading from '../../src/components/SectionHeading';
+import Button from '../../src/components/Button';
+import StagePill from '../../src/components/StagePill';
+import ContactForm from '../../src/components/ContactForm';
 
 const FORMATS = [
   {
@@ -189,7 +189,7 @@ const Investors = () => {
             <ContactForm
               source="investors"
               heading="Записатись на зустріч"
-              description="Розкажіть про формат і обсяг — підготуємо персональну презентацію."
+              description="Розкажіть про формат і обсяг — підготуємо персональну презентацію."
               fields={['investor-format', 'message']}
               submitLabel="Записатись на зустріч"
               successText="Прийнято. Менеджер звʼяжеться протягом робочого дня для узгодження часу."

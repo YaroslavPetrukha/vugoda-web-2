@@ -21,7 +21,7 @@ const IsometricCubePlaceholder = ({
 
   return (
     <img
-      src="/vugoda-web-2/mark.svg"
+      src="/mark.svg"
       alt={ariaLabel}
       className={className}
       style={inlineStyle}

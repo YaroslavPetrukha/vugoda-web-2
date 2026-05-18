@@ -1,10 +1,12 @@
 import type { ReactNode } from 'react';
+import Picture from './ui/Picture';
+import type { PictureSource } from './ui/Picture';
 
 type PageHeroProps = {
   eyebrow?: string;
   title: ReactNode;
   lead?: ReactNode;
-  image?: string;
+  image?: PictureSource;
   imageAlt?: string;
   decorative?: boolean;
   align?: 'left' | 'center';
@@ -28,9 +30,11 @@ const PageHero = ({
     <section className="relative bg-bg-deep py-24 md:py-32 px-6 lg:px-8 border-b border-bg-surface overflow-hidden">
       {image && (
         <>
-          <img
-            src={image}
+          <Picture
+            source={image}
             alt={imageAlt}
+            priority
+            sizes="100vw"
             className="absolute inset-0 w-full h-full object-cover opacity-40"
           />
           <div
@@ -41,7 +45,7 @@ const PageHero = ({
       )}
       {decorative && (
         <img
-          src="/vugoda-web-2/isometric-grid.svg"
+          src="/isometric-grid.svg"
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover opacity-[0.08] mix-blend-overlay pointer-events-none"
         />

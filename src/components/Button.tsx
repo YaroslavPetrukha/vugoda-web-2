@@ -1,5 +1,5 @@
 import type { ReactNode, MouseEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 type Variant = 'primary' | 'secondary' | 'ghost' | 'link';
 type Size = 'sm' | 'md' | 'lg';

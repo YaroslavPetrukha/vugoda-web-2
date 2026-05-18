@@ -1,8 +1,8 @@
 import { ArrowRight } from 'lucide-react';
-import FadeIn from '../components/FadeIn';
-import PageHero from '../components/PageHero';
-import SectionHeading from '../components/SectionHeading';
-import Button from '../components/Button';
+import FadeIn from '../../src/components/FadeIn';
+import PageHero from '../../src/components/PageHero';
+import SectionHeading from '../../src/components/SectionHeading';
+import Button from '../../src/components/Button';
 
 const PHASES = [
   {
@@ -187,7 +187,7 @@ const Approach = () => {
             <SectionHeading
               eyebrow="05"
               title="Що далі"
-              description="Якщо ви інвестор або партнер — нижче короткі шляхи у відповідні розділи."
+              description="Якщо ви інвестор або партнер — нижче короткі шляхи у відповідні розділи."
             />
           </FadeIn>
           <div className="mt-12 flex flex-col sm:flex-row gap-4">

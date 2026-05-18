@@ -1,4 +1,11 @@
 import type { Project } from '../types';
+import type { PictureSource } from '../components/ui/Picture';
+
+// Карткові зображення — ?preset=card генерує AVIF/WebP srcset 320w + 640w
+import lakeviewCard from '../assets/projects/lakeview/aerial.jpg?preset=card';
+import etnoDimCard from '../assets/projects/etno-dim/render-1.webp?preset=card';
+import maetokCard from '../assets/projects/maetok/render-1.webp?preset=card';
+import nterestCard from '../assets/projects/nterest/render-1.webp?preset=card';
 
 export const projects: Project[] = [
   {
@@ -9,7 +16,7 @@ export const projects: Project[] = [
     location: 'вул. Володимира Великого, 2А, Львів',
     externalSite: 'https://yaroslavpetrukha.github.io/Lakeview/',
     rendersDir: '/projects/lakeview/',
-    cardImage: '/projects/lakeview/aerial.jpg',
+    cardImage: lakeviewCard as unknown as PictureSource,
     hasRenders: true,
   },
   {
@@ -19,7 +26,7 @@ export const projects: Project[] = [
     stageLabel: 'Меморандум',
     location: 'вул. Судова, Львів',
     rendersDir: '/projects/etno-dim/',
-    cardImage: '/projects/etno-dim/render-1.webp',
+    cardImage: etnoDimCard as unknown as PictureSource,
     hasRenders: true,
   },
   {
@@ -29,7 +36,7 @@ export const projects: Project[] = [
     stageLabel: 'Кошторисна документація',
     location: 'м. Винники, Львівська обл.',
     rendersDir: '/projects/maetok/',
-    cardImage: '/projects/maetok/render-1.webp',
+    cardImage: maetokCard as unknown as PictureSource,
     hasRenders: true,
   },
   {
@@ -39,7 +46,7 @@ export const projects: Project[] = [
     stageLabel: 'Дозвільна документація',
     location: 'Львів',
     rendersDir: '/projects/nterest/',
-    cardImage: '/projects/nterest/render-1.webp',
+    cardImage: nterestCard as unknown as PictureSource,
     hasRenders: true,
   },
   {
