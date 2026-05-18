@@ -8,7 +8,14 @@
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "og:generate": "node scripts/generate-og-cards.mjs",
+    "build:verify": "node scripts/verify-build.mjs",
+    "check:paths": "node scripts/check-no-legacy-paths.mjs",
+    "check:paths:enforce": "node scripts/check-no-legacy-paths.mjs --enforce"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.14",
@@ -21,9 +28,20 @@
     "vite": "^6.2.0"
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/node": "^22.14.0",
+    "@vitest/ui": "^4.1.6",
     "autoprefixer": "^10.4.21",
+    "jsdom": "^29.1.1",
+    "sharp": "^0.34.5",
+    "simple-git-hooks": "^2.13.1",
     "tailwindcss": "^4.1.14",
-    "typescript": "~5.8.2"
+    "typescript": "~5.8.2",
+    "vitest": "^4.1.6"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npm run lint && npm run test"
   }
 }
