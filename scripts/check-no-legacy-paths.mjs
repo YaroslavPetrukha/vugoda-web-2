@@ -1,12 +1,16 @@
 // Fails if any source file references the legacy '/vugoda-web-2/' base path.
-// Phase 0: documentation only — has explicit `--enforce` flag for Phase 1+ activation.
-// Phase 1: enable via prebuild hook in package.json.
+// Phase 1: enforced via prebuild hook in package.json.
+// Сканує: src/, app/ (нова директорія з route files)
 
 import { execSync } from 'node:child_process';
+import fs from 'node:fs';
 
 const ENFORCE = process.argv.includes('--enforce');
 const PATTERN = '/vugoda-web-2/';
-const DIRS = ['src', 'index.html'];
+
+// Збираємо директорії для перевірки (тільки ті, що існують)
+const CANDIDATES = ['src', 'app'];
+const DIRS = CANDIDATES.filter((d) => fs.existsSync(d));
 
 let result;
 try {
@@ -29,9 +33,9 @@ matches.slice(0, 20).forEach((line) => console.log(`  ${line}`));
 if (matches.length > 20) console.log(`  ...and ${matches.length - 20} more`);
 
 if (ENFORCE) {
-  console.error('[check:paths] FAIL: legacy paths must be eliminated in Phase 1');
+  console.error('[check:paths] FAIL: legacy paths must be eliminated before build');
   process.exit(1);
 }
 
-console.log('[check:paths] (non-enforcing mode — Phase 0 expects these to exist)');
+console.log('[check:paths] (non-enforcing mode)');
 process.exit(0);

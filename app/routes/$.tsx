@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react';
-import Button from '../components/Button';
-import IsometricCubePlaceholder from '../components/IsometricCubePlaceholder';
+import Button from '../../src/components/Button';
+import IsometricCubePlaceholder from '../../src/components/IsometricCubePlaceholder';
 
 const NotFound = () => (
   <section className="bg-bg-deep py-32 md:py-40 px-6 lg:px-8 min-h-[60vh] flex items-center">

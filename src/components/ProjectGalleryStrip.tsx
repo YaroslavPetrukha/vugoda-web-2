@@ -1,5 +1,8 @@
+import Picture from './ui/Picture';
+import type { PictureSource } from './ui/Picture';
+
 type ImgItem = {
-  src: string;
+  src: PictureSource;
   alt: string;
   caption?: string;
 };
@@ -30,13 +33,13 @@ const ProjectGalleryStrip = ({
     >
       {images.map((img, i) => (
         <li
-          key={`${img.src}-${i}`}
+          key={i}
           className={`flex-none ${itemSize} snap-start relative bg-bg-surface`}
         >
-          <img
-            src={img.src}
+          <Picture
+            source={img.src}
             alt={img.alt}
-            loading="lazy"
+            sizes="(min-width: 1024px) 480px, 80vw"
             className="absolute inset-0 w-full h-full object-cover rounded-none"
           />
           {img.caption && (

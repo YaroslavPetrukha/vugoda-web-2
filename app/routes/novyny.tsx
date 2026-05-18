@@ -1,11 +1,11 @@
 import { ArrowRight } from 'lucide-react';
-import FadeIn from '../components/FadeIn';
-import PageHero from '../components/PageHero';
-import SectionHeading from '../components/SectionHeading';
-import Button from '../components/Button';
-import NewsCard from '../components/NewsCard';
-import ContactForm from '../components/ContactForm';
-import { news } from '../data/news';
+import FadeIn from '../../src/components/FadeIn';
+import PageHero from '../../src/components/PageHero';
+import SectionHeading from '../../src/components/SectionHeading';
+import Button from '../../src/components/Button';
+import NewsCard from '../../src/components/NewsCard';
+import ContactForm from '../../src/components/ContactForm';
+import { news } from '../../src/data/news';
 
 const CATEGORIES = ['Усі', 'Етапи проектів', 'Методологія', 'Прес-релізи'];
 

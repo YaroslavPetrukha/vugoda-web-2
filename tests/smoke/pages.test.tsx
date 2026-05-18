@@ -4,22 +4,22 @@
 
 import { type ReactElement } from 'react';
 import { render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 import { describe, it, expect } from 'vitest';
 
-import Home from '@/src/pages/Home';
-import Approach from '@/src/pages/Approach';
-import Portfolio from '@/src/pages/Portfolio';
-import ProjectLakeview from '@/src/pages/ProjectLakeview';
-import ProjectEtnoDim from '@/src/pages/ProjectEtnoDim';
-import ProjectMaetok from '@/src/pages/ProjectMaetok';
-import ProjectNterest from '@/src/pages/ProjectNterest';
-import ProjectPipeline04 from '@/src/pages/ProjectPipeline04';
-import Investors from '@/src/pages/Investors';
-import Partners from '@/src/pages/Partners';
-import Contacts from '@/src/pages/Contacts';
-import News from '@/src/pages/News';
-import NotFound from '@/src/pages/NotFound';
+import Home from '@/app/routes/_index';
+import Approach from '@/app/routes/pidkhid';
+import Portfolio from '@/app/routes/portfolio._index';
+import ProjectLakeview from '@/app/routes/portfolio.lakeview';
+import ProjectEtnoDim from '@/app/routes/portfolio.etno-dim';
+import ProjectMaetok from '@/app/routes/portfolio.maetok';
+import ProjectNterest from '@/app/routes/portfolio.nterest';
+import ProjectPipeline04 from '@/app/routes/portfolio.pipeline-04';
+import Investors from '@/app/routes/investoram';
+import Partners from '@/app/routes/partneram';
+import Contacts from '@/app/routes/kontakty';
+import News from '@/app/routes/novyny';
+import NotFound from '@/app/routes/$';
 
 const wrap = (ui: ReactElement) =>
   render(<MemoryRouter>{ui}</MemoryRouter>);

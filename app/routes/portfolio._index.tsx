@@ -1,9 +1,9 @@
 import { ArrowRight } from 'lucide-react';
-import FadeIn from '../components/FadeIn';
-import PageHero from '../components/PageHero';
-import ProjectCard from '../components/ProjectCard';
-import Button from '../components/Button';
-import { projects } from '../data/projects';
+import FadeIn from '../../src/components/FadeIn';
+import PageHero from '../../src/components/PageHero';
+import ProjectCard from '../../src/components/ProjectCard';
+import Button from '../../src/components/Button';
+import { projects } from '../../src/data/projects';
 
 const lakeview = projects.find((p) => p.slug === 'lakeview')!;
 

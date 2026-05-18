@@ -1,9 +1,9 @@
 import { ArrowRight } from 'lucide-react';
-import FadeIn from '../components/FadeIn';
-import PageHero from '../components/PageHero';
-import SectionHeading from '../components/SectionHeading';
-import Button from '../components/Button';
-import ContactForm from '../components/ContactForm';
+import FadeIn from '../../src/components/FadeIn';
+import PageHero from '../../src/components/PageHero';
+import SectionHeading from '../../src/components/SectionHeading';
+import Button from '../../src/components/Button';
+import ContactForm from '../../src/components/ContactForm';
 
 const CORP_CONTACTS = [
   { label: 'Email', value: 'vygoda.sales@gmail.com', link: 'mailto:vygoda.sales@gmail.com' },
@@ -141,7 +141,7 @@ const Contacts = () => {
             <SectionHeading
               eyebrow="03"
               title="ЖК Lakeview — окремі контакти"
-              description="Це контакти проекту, не корпоративні. Бронювання, перегляди, ціни — за цими каналами."
+              description="Це контакти проекту, не корпоративні. Бронювання, перегляди, ціни — за цими каналами."
             />
           </FadeIn>
           <dl className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-px bg-bg-surface border border-bg-surface">
@@ -202,7 +202,7 @@ const Contacts = () => {
             <ContactForm
               source="contacts"
               heading="Написати нам"
-              description="Заповніть два поля. Тему і повідомлення — за бажанням."
+              description="Заповніть два поля. Тему і повідомлення — за бажанням."
               fields={['topic', 'message']}
               submitLabel="Надіслати"
               successText="Прийнято. Відповімо протягом робочого дня."

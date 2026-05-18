@@ -1,9 +1,9 @@
 import { ArrowRight } from 'lucide-react';
-import FadeIn from '../components/FadeIn';
-import PageHero from '../components/PageHero';
-import SectionHeading from '../components/SectionHeading';
-import Button from '../components/Button';
-import ContactForm from '../components/ContactForm';
+import FadeIn from '../../src/components/FadeIn';
+import PageHero from '../../src/components/PageHero';
+import SectionHeading from '../../src/components/SectionHeading';
+import Button from '../../src/components/Button';
+import ContactForm from '../../src/components/ContactForm';
 
 type Requisite = {
   label: string;
@@ -145,7 +145,7 @@ const Partners = () => {
             <ContactForm
               source="partners"
               heading="Запит документів"
-              description="Вкажіть тип організації і ціль — підготуємо релевантний пакет."
+              description="Вкажіть тип організації і ціль — підготуємо релевантний пакет."
               fields={['org-type', 'goal']}
               submitLabel="Надіслати запит"
               successText="Прийнято. Підготуємо пакет документів і відповімо протягом робочого дня."

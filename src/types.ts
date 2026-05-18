@@ -13,7 +13,7 @@ export type Project = {
   location: string;
   externalSite?: string;
   rendersDir?: string;
-  cardImage?: string;
+  cardImage?: import('./components/ui/Picture').PictureSource;
   hasRenders: boolean;
 };
 

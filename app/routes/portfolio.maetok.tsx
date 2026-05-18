@@ -1,52 +1,54 @@
 import { ArrowRight } from 'lucide-react';
-import FadeIn from '../components/FadeIn';
-import PageHero from '../components/PageHero';
-import SectionHeading from '../components/SectionHeading';
-import Button from '../components/Button';
-import StagePill from '../components/StagePill';
-import ContactForm from '../components/ContactForm';
-import ProjectGalleryStrip from '../components/ProjectGalleryStrip';
+import FadeIn from '../../src/components/FadeIn';
+import PageHero from '../../src/components/PageHero';
+import SectionHeading from '../../src/components/SectionHeading';
+import Button from '../../src/components/Button';
+import StagePill from '../../src/components/StagePill';
+import ContactForm from '../../src/components/ContactForm';
+import ProjectGalleryStrip from '../../src/components/ProjectGalleryStrip';
+import type { PictureSource } from '../../src/components/ui/Picture';
+
+// Hero — ?preset=hero → AVIF/WebP srcset 480–1920w
+import maetokRender1 from '../../src/assets/projects/maetok/render-1.webp?preset=hero';
+
+// Рендери — ?preset=gallery → AVIF/WebP srcset 600/1200w
+import maetokRender2 from '../../src/assets/projects/maetok/render-2.webp?preset=gallery';
 
 const PARAMETERS = [
-  { label: 'Розташування', value: 'Львів (адреса буде оголошена)' },
-  { label: 'Стадія', value: 'Погодження дозвільної документації' },
-  { label: 'Тип продукту', value: 'Дохідний дім' },
-  {
-    label: 'Інвестиційний формат',
-    value: 'Орієнтований на інвестора, що шукає пасивний дохід',
-  },
+  { label: 'Розташування', value: 'м. Винники, Львівська обл.' },
+  { label: 'Стадія', value: 'Кошторисна документація' },
+  { label: 'Площі і поверховість', value: 'Будуть оголошені після затвердження проекту' },
   { label: 'Термін старту продажів', value: 'Буде оголошено' },
 ];
 
 const RENDERS = [
-  { src: '/vugoda-web-2/projects/nterest/render-1.webp', alt: 'NTEREST — рендер 1' },
-  { src: '/vugoda-web-2/projects/nterest/render-2.webp', alt: 'NTEREST — рендер 2' },
-  { src: '/vugoda-web-2/projects/nterest/render-3.webp', alt: 'NTEREST — рендер 3' },
+  { src: maetokRender1 as unknown as PictureSource, alt: 'ЖК Маєток Винниківський — рендер 1' },
+  { src: maetokRender2 as unknown as PictureSource, alt: 'ЖК Маєток Винниківський — рендер 2' },
 ];
 
-const ProjectNterest = () => {
+const ProjectMaetok = () => {
   return (
     <>
       <PageHero
         eyebrow="Pipeline"
-        title="Дохідний дім NTEREST"
-        lead="Концепт — дохідний дім. У роботі — погодження дозвільної документації. Старт продажів — після отримання дозволу."
-        image="/vugoda-web-2/projects/nterest/render-1.webp"
+        title="ЖК Маєток Винниківський"
+        lead="м. Винники, Львівська область. Прораховуємо вартість матеріалів і робіт — до старту продажів, не після."
+        image={maetokRender1 as unknown as PictureSource}
         imageAlt=""
       >
         <Button as="a" href="#pidpyska" variant="primary" size="lg">
           Повідомити про старт продажів <ArrowRight className="w-4 h-4" />
         </Button>
-        <Button as="router" href="/investoram" variant="ghost" size="lg">
-          Інвесторам
+        <Button as="router" href="/pidkhid" variant="ghost" size="lg">
+          Як ми працюємо
         </Button>
       </PageHero>
 
       <section className="bg-bg-deep border-b border-bg-surface py-6 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center gap-4 text-sm text-text-secondary">
-          <StagePill stage="permits" label="Дозвільна документація" />
+          <StagePill stage="estimation" label="Кошторисна документація" />
           <span aria-hidden="true">·</span>
-          <span>Львів</span>
+          <span>м. Винники</span>
         </div>
       </section>
 
@@ -60,8 +62,8 @@ const ProjectNterest = () => {
           </div>
           <FadeIn delay={0.05} className="lg:col-span-7">
             <p className="text-text-secondary text-base md:text-lg leading-relaxed">
-              Погодження дозвільної документації. Третя фаза нашої методології —
-              на майданчик не виходимо без повного пакета дозволів.
+              Прорахунок кошторисної документації. Друга фаза нашої методології —
+              формування економіки проекту до публічного запуску.
             </p>
           </FadeIn>
         </div>
@@ -98,13 +100,13 @@ const ProjectNterest = () => {
             <SectionHeading
               eyebrow="03"
               title="Візуалізація"
-              description="Робочі рендери проекту."
+              description="Робочі рендери. Архітектурні параметри уточнюються."
             />
           </FadeIn>
           <FadeIn delay={0.05} className="mt-12">
             <ProjectGalleryStrip
               images={RENDERS}
-              ariaLabel="Рендери NTEREST"
+              ariaLabel="Рендери ЖК Маєток Винниківський"
             />
           </FadeIn>
         </div>
@@ -117,15 +119,10 @@ const ProjectNterest = () => {
             <SectionHeading eyebrow="04" title="Що далі" />
           </FadeIn>
           <p className="mt-8 text-text-secondary text-base md:text-lg leading-relaxed">
-            Після отримання дозволу на будівельні роботи — старт будівництва і
-            відкриття продажів. Інвесторам, що цікавляться форматом дохідної
-            нерухомості, — окремий розділ.
+            Після завершення кошторисної документації — погодження
+            містобудівних умов і дозвільна документація. Дати старту продажів
+            повідомимо окремо.
           </p>
-          <div className="mt-10">
-            <Button as="router" href="/investoram" variant="ghost" size="md">
-              Розділ для інвесторів <ArrowRight className="w-4 h-4" />
-            </Button>
-          </div>
         </div>
       </section>
 
@@ -137,7 +134,7 @@ const ProjectNterest = () => {
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <ContactForm
-              source="project-nterest"
+              source="project-maetok"
               heading="Повідомити про старт продажів"
               description="Залиште номер. Зателефонуємо, коли проект вийде на стадію продажів."
               fields={['email']}
@@ -152,4 +149,4 @@ const ProjectNterest = () => {
   );
 };
 
-export default ProjectNterest;
+export default ProjectMaetok;
