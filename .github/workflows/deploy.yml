@@ -1,8 +1,9 @@
+# DISABLED: GH Pages → workflow_dispatch only.
+# Cloudflare Pages is now primary deploy. Re-enable for disaster recovery.
+# Plan to delete this workflow entirely 14 days after CF migration: 2026-06-02.
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
