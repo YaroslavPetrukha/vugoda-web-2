@@ -7,7 +7,7 @@ const Logo = ({ size = 40, className = '' }: LogoProps) => {
   const height = size === 40 ? 40 : 56;
   return (
     <img
-      src="/logo-dark.svg"
+      src="/logo-black.svg"
       alt="Вигода — системний девелопмент"
       height={height}
       style={{ height: `${height}px`, width: 'auto' }}
