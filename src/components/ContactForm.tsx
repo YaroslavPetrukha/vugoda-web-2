@@ -468,7 +468,14 @@ const ContactForm = ({
           <span className="text-xs text-red-400 -mt-3">{errors.consent}</span>
         )}
 
-        {/* Cloudflare Turnstile widget */}
+        {/* Cloudflare Turnstile widget — Managed mode (default).
+            In Managed mode Cloudflare silently completes the challenge for
+            browsers it already trusts (good bot signals, prior cookies, etc.)
+            and fires onSuccess within ~100 ms of widget mount. This means the
+            submit button may appear enabled on first paint for most real users
+            — this is expected and correct behaviour, not a bug. The button
+            starts disabled (turnstileToken initialises as null) and becomes
+            enabled only after Cloudflare issues a token. */}
         <div className="flex flex-col gap-2">
           <Turnstile
             ref={turnstileRef}
