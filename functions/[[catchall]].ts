@@ -1,14 +1,17 @@
-// Cloudflare Pages Function: catch-all для unknown routes.
-// Returns HTTP 404 with prerendered 404 page content.
+// Cloudflare Pages Function: catch-all for unknown routes.
 //
-// CF Pages routing order:
-//   1. Static files (prerendered HTML, assets) — served directly, never reach here
-//   2. Functions in functions/                  — THIS file
-//   3. _redirects rules
+// CF Pages routing reality (confirmed empirically 2026-05-19):
+//   - Functions with [[rest]] / [[catchall]] parameters intercept requests
+//     BEFORE static asset resolution (prerendered HTML, files in public/).
+//   - This means a naive "intercept everything, return 404" breaks every
+//     prerendered HTML route. We must explicitly pass through known routes.
 //
-// Only truly unknown paths reach this function → we return HTTP 404.
+// Strategy: hardcoded whitelist of the 12 prerendered routes from
+// `app/routes.ts` + `/404`. Anything outside the whitelist is treated as
+// an unknown path and served as HTTP 404 with the prerendered 404 page
+// content (X-Robots-Tag: noindex).
 //
-// Minimal inline types — avoids requiring @cloudflare/workers-types dev dep.
+// When adding/removing a route: update KNOWN_PRERENDERED_ROUTES below.
 
 interface EventContext<E = Record<string, unknown>> {
   request: Request;
@@ -18,36 +21,63 @@ interface EventContext<E = Record<string, unknown>> {
 
 type PagesFunction = (context: EventContext) => Response | Promise<Response>;
 
-// Extensions that CF Pages serves as static assets automatically.
-// We pass these through in case the static file doesn't exist yet on cold deploy.
+// Routes that have a prerendered index.html in build/client/.
+// Keep in sync with app/routes.ts.
+const KNOWN_PRERENDERED_ROUTES = new Set<string>([
+  '/',
+  '/pidkhid',
+  '/portfolio',
+  '/portfolio/lakeview',
+  '/portfolio/etno-dim',
+  '/portfolio/maetok',
+  '/portfolio/nterest',
+  '/portfolio/pipeline-04',
+  '/investoram',
+  '/partneram',
+  '/kontakty',
+  '/novyny',
+  '/404',
+]);
+
+// Static asset extensions served as-is. Functions still intercept these,
+// so we must explicitly pass them through to CF Pages' static handler.
 const STATIC_EXT =
   /\.(jpg|jpeg|png|webp|avif|gif|svg|ico|woff2?|ttf|otf|eot|css|js|mjs|json|xml|txt|map|pdf|mp4|mp3|webm)$/i;
 
+function normalize(pathname: string): string {
+  if (pathname.length > 1 && pathname.endsWith('/')) {
+    return pathname.slice(0, -1);
+  }
+  return pathname;
+}
+
 export const onRequest: PagesFunction = async (context) => {
   const url = new URL(context.request.url);
-  const { pathname } = url;
+  const pathname = normalize(url.pathname);
 
-  // Pass through API routes — they have dedicated function handlers.
+  // Pass-through: API routes (handled by functions/api/*).
   if (pathname.startsWith('/api/')) {
     return context.next();
   }
 
-  // Pass through static asset requests — CF Pages handles them before this function,
-  // but if a request somehow leaks through (cold start edge case), let it propagate.
+  // Pass-through: static asset requests.
   if (STATIC_EXT.test(pathname)) {
     return context.next();
   }
 
-  // Fetch the prerendered 404 page content from the same origin.
-  const fourOhFourUrl = new URL('/404/index.html', url.origin);
+  // Pass-through: known prerendered HTML routes.
+  if (KNOWN_PRERENDERED_ROUTES.has(pathname)) {
+    return context.next();
+  }
 
+  // Unknown route: serve prerendered 404 page content with HTTP 404 status.
+  const fourOhFourUrl = new URL('/404/index.html', url.origin);
   let html: string;
   try {
     const res = await fetch(fourOhFourUrl.toString());
     if (!res.ok) throw new Error(`/404/index.html returned ${res.status}`);
     html = await res.text();
   } catch {
-    // Minimal inline fallback if the prerendered 404 page is unavailable.
     html =
       '<!doctype html><html lang="uk"><head><meta charset="utf-8">' +
       '<title>404 — ВИГОДА</title>' +
