@@ -22,7 +22,9 @@ interface EventContext<E = Record<string, unknown>> {
 type PagesFunction = (context: EventContext) => Response | Promise<Response>;
 
 // Routes that have a prerendered index.html in build/client/.
-// Keep in sync with app/routes.ts.
+// Keep in sync with app/routes.ts. `/404/index.html` is included so the
+// fetch() call inside the 404 branch can resolve via context.next() and
+// avoid recursing back into this Worker.
 const KNOWN_PRERENDERED_ROUTES = new Set<string>([
   '/',
   '/pidkhid',
@@ -37,12 +39,15 @@ const KNOWN_PRERENDERED_ROUTES = new Set<string>([
   '/kontakty',
   '/novyny',
   '/404',
+  '/404/index.html',
 ]);
 
 // Static asset extensions served as-is. Functions still intercept these,
 // so we must explicitly pass them through to CF Pages' static handler.
+// `html` is included to keep direct /<route>/index.html requests stable
+// and to protect against any internal sub-request loops to the 404 page.
 const STATIC_EXT =
-  /\.(jpg|jpeg|png|webp|avif|gif|svg|ico|woff2?|ttf|otf|eot|css|js|mjs|json|xml|txt|map|pdf|mp4|mp3|webm)$/i;
+  /\.(html|jpg|jpeg|png|webp|avif|gif|svg|ico|woff2?|ttf|otf|eot|css|js|mjs|json|xml|txt|map|pdf|mp4|mp3|webm)$/i;
 
 function normalize(pathname: string): string {
   if (pathname.length > 1 && pathname.endsWith('/')) {
