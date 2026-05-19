@@ -1,6 +1,6 @@
 // Cloudflare Pages Function: POST /api/contact
 // Telegram-only delivery (per spec §5.3 — Resend is out of scope)
-// 4-layer defense: Origin / Turnstile / Honeypot / Zod
+// 5-layer defense: Origin / Rate-limit / Turnstile / Honeypot / Zod
 
 import { ContactSchema, type ContactPayload } from '../../shared/contact-schema';
 
@@ -9,6 +9,9 @@ interface Env {
   TELEGRAM_BOT_TOKEN: string;
   TELEGRAM_CHAT_ID: string;
   TURNSTILE_SECRET_KEY: string;
+  // Optional: set a random 32-byte hex string in CF Pages env vars as Encrypted Secret.
+  // If absent, fallback salt is used (weaker pseudonymization — acceptable for MVP).
+  HASH_SALT?: string;
 }
 
 interface EventContext<E = Env> {
@@ -22,6 +25,18 @@ interface EventContext<E = Env> {
 
 type PagesFunction<E = Env> = (context: EventContext<E>) => Response | Promise<Response>;
 
+// ---------------------------------------------------------------------------
+// Security headers applied to EVERY response (P1-1).
+// public/_headers is NOT applied to Function responses on CF Pages.
+// ---------------------------------------------------------------------------
+const SECURITY_HEADERS: Record<string, string> = {
+  'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'DENY',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+};
+
 const ALLOWED_ORIGINS: Array<string | RegExp> = [
   'https://vyhoda.lviv.ua',
   'https://www.vyhoda.lviv.ua',
@@ -29,6 +44,36 @@ const ALLOWED_ORIGINS: Array<string | RegExp> = [
   /^https:\/\/[a-z0-9-]+\.vugoda-web-2\.pages\.dev$/,
   'https://vugoda-web-2.pages.dev',
 ];
+
+// ---------------------------------------------------------------------------
+// In-memory rate limiter: 5 req / 60s / IP hash (P0-1).
+//
+// CAVEAT: in-memory state is NOT shared across CF Worker instances and does
+// NOT persist across Worker restarts. This is acceptable for MVP: combined
+// with Turnstile it provides sufficient defense. For production scale replace
+// with Cloudflare KV or Durable Objects.
+// ---------------------------------------------------------------------------
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX = 5;
+const rateLimitMap = new Map<string, number[]>();
+
+function checkRateLimit(ipHash: string): boolean {
+  const now = Date.now();
+  const windowStart = now - RATE_LIMIT_WINDOW_MS;
+
+  // Cleanup stale entries for this key
+  const timestamps = (rateLimitMap.get(ipHash) ?? []).filter((t) => t > windowStart);
+
+  if (timestamps.length >= RATE_LIMIT_MAX) {
+    // Update cleaned list without adding new entry
+    rateLimitMap.set(ipHash, timestamps);
+    return false; // rate limited
+  }
+
+  timestamps.push(now);
+  rateLimitMap.set(ipHash, timestamps);
+  return true; // allowed
+}
 
 function isOriginAllowed(origin: string | null): boolean {
   if (!origin) return false;
@@ -47,6 +92,7 @@ function jsonResponse(
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'Cache-Control': 'no-store',
+      ...SECURITY_HEADERS,
       ...extraHeaders,
     },
   });
@@ -101,7 +147,6 @@ function sourceLabel(source: ContactPayload['source']): string {
       return 'Новини';
     case 'hero':
       return 'Головна';
-    case 'contacts':
     case 'kontakty':
       return 'Контакти';
     default:
@@ -109,6 +154,10 @@ function sourceLabel(source: ContactPayload['source']): string {
   }
 }
 
+// ---------------------------------------------------------------------------
+// Telegram sender with AbortController timeout (P1-3) and 1 retry on
+// 429/5xx with 2-second backoff (P1-4).
+// ---------------------------------------------------------------------------
 async function sendTelegram(
   payload: ContactPayload,
   env: Env,
@@ -154,25 +203,47 @@ async function sendTelegram(
   // Telegram message limit is 4096 characters
   const trimmed = text.length > 4000 ? text.slice(0, 3997) + '...' : text;
 
-  const r = await fetch(
-    `https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: env.TELEGRAM_CHAT_ID,
-        text: trimmed,
-        parse_mode: 'HTML',
-        disable_web_page_preview: true,
-      }),
-    },
-  );
+  const telegramUrl = `https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`;
+  const telegramBody = JSON.stringify({
+    chat_id: env.TELEGRAM_CHAT_ID,
+    text: trimmed,
+    parse_mode: 'HTML',
+    disable_web_page_preview: true,
+  });
 
-  return r.ok;
+  const doFetch = async (): Promise<Response> => {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10_000);
+    try {
+      return await fetch(telegramUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: telegramBody,
+        signal: controller.signal,
+      });
+    } finally {
+      clearTimeout(timeout);
+    }
+  };
+
+  const r = await doFetch();
+
+  if (r.ok) return true;
+
+  // Retry once on 429 or 5xx with 2s backoff (P1-4)
+  if (r.status === 429 || r.status >= 500) {
+    const body = await r.text().catch(() => '');
+    console.error('[telegram_retry]', { status: r.status, body });
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const r2 = await doFetch();
+    return r2.ok;
+  }
+
+  return false;
 }
 
-async function hashIp(ip: string): Promise<string> {
-  const data = new TextEncoder().encode(ip + 'vugoda-salt-2026');
+async function hashIp(ip: string, salt: string): Promise<string> {
+  const data = new TextEncoder().encode(ip + salt);
   const buf = await crypto.subtle.digest('SHA-256', data);
   return Array.from(new Uint8Array(buf))
     .map((b) => b.toString(16).padStart(2, '0'))
@@ -180,7 +251,9 @@ async function hashIp(ip: string): Promise<string> {
     .slice(0, 12);
 }
 
+// ---------------------------------------------------------------------------
 // Handle POST /api/contact
+// ---------------------------------------------------------------------------
 export const onRequestPost: PagesFunction = async ({ request, env }) => {
   // 1. Origin check
   const origin = request.headers.get('Origin');
@@ -191,7 +264,32 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
     );
   }
 
-  // 2. Parse JSON body
+  // 2. Body size limit — max 10 KB (P1-5)
+  const contentLength = request.headers.get('content-length');
+  if (contentLength && parseInt(contentLength, 10) > 10240) {
+    return jsonResponse(
+      { ok: false, error: 'validation', message: 'Payload too large' },
+      413,
+    );
+  }
+
+  // 3. IP hash (needed for rate limit before we parse body)
+  const ip = request.headers.get('CF-Connecting-IP') ?? 'unknown';
+  // ENV-driven salt for IP hash pseudonymization (P1-9).
+  // Set HASH_SALT in CF Pages env vars as Encrypted Secret (random 32-byte hex).
+  const salt = env.HASH_SALT ?? 'vugoda-fallback-salt';
+  const ipHash = await hashIp(ip, salt);
+
+  // 4. Rate limit: 5 req / 60s / IP (P0-1)
+  if (!checkRateLimit(ipHash)) {
+    return jsonResponse(
+      { ok: false, error: 'rate_limit', message: 'Забагато запитів. Спробуйте через хвилину.', retryAfter: 60 },
+      429,
+      { 'Retry-After': '60' },
+    );
+  }
+
+  // 5. Parse JSON body
   let raw: unknown;
   try {
     raw = await request.json();
@@ -202,7 +300,7 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
     );
   }
 
-  // 3. Honeypot check before Zod — if company field filled, bot detected (silent 200)
+  // 6. Honeypot check before Zod — if company field filled, bot detected (silent 200)
   const rawRecord = raw as Record<string, unknown> | null;
   const honeypotValue = rawRecord?.company;
   if (typeof honeypotValue === 'string' && honeypotValue.length > 0) {
@@ -211,7 +309,7 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
     return jsonResponse({ ok: true, requestId }, 200);
   }
 
-  // 4. Zod validation
+  // 7. Zod validation
   const parsed = ContactSchema.safeParse(raw);
   if (!parsed.success) {
     return jsonResponse(
@@ -226,10 +324,8 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
 
   const payload = parsed.data;
   const requestId = crypto.randomUUID();
-  const ip = request.headers.get('CF-Connecting-IP') ?? 'unknown';
-  const ipHash = await hashIp(ip);
 
-  // 5. Turnstile server-side verification (runs BEFORE Telegram)
+  // 8. Turnstile server-side verification (runs BEFORE Telegram)
   const turnstileOk = await verifyTurnstile(
     payload.turnstileToken,
     env.TURNSTILE_SECRET_KEY,
@@ -246,7 +342,7 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
     );
   }
 
-  // 6. Send to Telegram
+  // 9. Send to Telegram (with timeout + retry)
   try {
     const sent = await sendTelegram(payload, env, requestId, ipHash);
     if (!sent) {
@@ -276,10 +372,13 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
   }
 };
 
-// Reject all other HTTP methods
+// ---------------------------------------------------------------------------
+// Reject all other HTTP methods (P1-2: JSON response instead of text/plain)
+// ---------------------------------------------------------------------------
 export const onRequest: PagesFunction = async () => {
-  return new Response('Method Not Allowed', {
-    status: 405,
-    headers: { Allow: 'POST' },
-  });
+  return jsonResponse(
+    { ok: false, error: 'method_not_allowed', message: 'Only POST allowed' },
+    405,
+    { Allow: 'POST' },
+  );
 };

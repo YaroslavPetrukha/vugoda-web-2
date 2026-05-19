@@ -10,6 +10,7 @@ type CommonProps = {
   children: ReactNode;
   className?: string;
   'aria-label'?: string;
+  'aria-disabled'?: boolean;
 };
 
 type ButtonAsButton = CommonProps & {
@@ -108,6 +109,7 @@ const Button = (props: ButtonProps) => {
       onClick={props.onClick}
       className={cls}
       aria-label={props['aria-label']}
+      aria-disabled={props['aria-disabled']}
     >
       {children}
     </button>
