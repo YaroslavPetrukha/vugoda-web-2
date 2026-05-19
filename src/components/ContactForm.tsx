@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useId } from 'react';
 import type { FormEvent } from 'react';
 import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 import Button from './Button';
@@ -65,6 +65,9 @@ const ContactForm = ({
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [errors, setErrors] = useState<Partial<Record<string, string>>>({});
   const turnstileRef = useRef<TurnstileInstance>(null);
+  const submitLockRef = useRef(false);
+  // Stable id prefix — avoids hydration mismatch from useId on SSG
+  const uid = useId();
 
   // Countdown timer for rate-limited state
   useEffect(() => {
@@ -85,7 +88,9 @@ const ContactForm = ({
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (submitLockRef.current) return;
     if (state.kind === 'submitting' || state.kind === 'rate_limited') return;
+    submitLockRef.current = true;
     setErrors({});
 
     if (!turnstileToken) {
@@ -123,27 +128,39 @@ const ContactForm = ({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(parsed.data),
       });
-      const data = (await r.json()) as ContactResponse;
 
-      if (data.ok) {
+      let data: ContactResponse | null = null;
+      try {
+        data = (await r.json()) as ContactResponse;
+      } catch {
+        // JSON parse failed — treat as server error below
+      }
+
+      if (data && data.ok === true) {
         setState({ kind: 'success' });
         return;
       }
 
-      if (data.ok === false) {
-        // Rate limited
-        if (r.status === 429) {
-          setState({ kind: 'rate_limited', secondsLeft: data.retryAfter ?? 60 });
-          return;
-        }
+      if (r.status === 429 && data?.ok === false) {
+        setState({ kind: 'rate_limited', secondsLeft: data.retryAfter ?? 60 });
+        return;
+      }
 
+      if (data && data.ok === false) {
         // Turnstile token is single-use — reset widget on any failure
         turnstileRef.current?.reset();
         setTurnstileToken(null);
-
         setState({ kind: 'error', message: data.message });
         return;
       }
+
+      // Catch-all: malformed or unexpected response (no ok field, JSON parse failure, etc.)
+      turnstileRef.current?.reset();
+      setTurnstileToken(null);
+      setState({
+        kind: 'error',
+        message: 'Несподівана відповідь сервера. Зателефонуйте напряму: 0969 900 390',
+      });
     } catch {
       turnstileRef.current?.reset();
       setTurnstileToken(null);
@@ -152,6 +169,8 @@ const ContactForm = ({
         message:
           'Не вдалось підключитись до сервера. Спробуйте ще раз або зателефонуйте: 0969 900 390',
       });
+    } finally {
+      submitLockRef.current = false;
     }
   };
 
@@ -173,7 +192,7 @@ const ContactForm = ({
     );
   }
 
-  const headingId = `cf-${source}-heading`;
+  const headingId = `cf-${uid}-heading`;
   const isBusy = state.kind === 'submitting';
   const isRateLimited = state.kind === 'rate_limited';
   const secondsLeft = isRateLimited
@@ -478,6 +497,7 @@ const ContactForm = ({
             size="lg"
             className="self-start"
             disabled={isBusy || isRateLimited || !turnstileToken}
+            aria-disabled={isBusy || isRateLimited || !turnstileToken}
           >
             {isBusy
               ? 'Надсилаю...'

@@ -91,7 +91,17 @@ const NavBar = () => {
           aria-label="Головне меню"
           className="lg:hidden fixed inset-0 top-20 z-40 bg-bg-deep flex flex-col"
         >
-          <div className="flex flex-col p-6 gap-1 overflow-y-auto">
+          <div className="flex items-center justify-end px-6 pt-4 pb-2">
+            <button
+              type="button"
+              onClick={close}
+              aria-label="Закрити меню"
+              className="text-text-primary p-2 -mr-2 hover:text-accent transition-colors"
+            >
+              <X className="w-6 h-6" aria-hidden="true" />
+            </button>
+          </div>
+          <div className="flex flex-col p-6 pt-2 gap-1 overflow-y-auto">
             {navLinks.map((link) => (
               <NavLink
                 key={link.to}

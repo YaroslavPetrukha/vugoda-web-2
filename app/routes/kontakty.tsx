@@ -226,7 +226,7 @@ const Contacts = () => {
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <ContactForm
-              source="contacts"
+              source="kontakty"
               heading="Написати нам"
               description="Заповніть два поля. Тему і повідомлення — за бажанням."
               fields={['topic', 'message']}

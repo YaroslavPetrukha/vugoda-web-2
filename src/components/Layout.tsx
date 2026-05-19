@@ -11,7 +11,7 @@ const Layout = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen bg-bg-base text-text-primary font-sans flex flex-col">
+    <div className="min-h-screen bg-bg-base text-text-primary font-sans flex flex-col overflow-x-hidden">
       {/* Decorative vertical lines */}
       <div
         className="fixed inset-0 pointer-events-none z-0 overflow-hidden"

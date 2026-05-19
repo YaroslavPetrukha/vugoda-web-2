@@ -1,4 +1,5 @@
 import type { MetaFunction } from 'react-router';
+import { lazy, Suspense } from 'react';
 import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import FadeIn from '../../src/components/FadeIn';
@@ -6,8 +7,9 @@ import PageHero from '../../src/components/PageHero';
 import SectionHeading from '../../src/components/SectionHeading';
 import Button from '../../src/components/Button';
 import StagePill from '../../src/components/StagePill';
-import ContactForm from '../../src/components/ContactForm';
 import ProjectGalleryStrip from '../../src/components/ProjectGalleryStrip';
+
+const ContactForm = lazy(() => import('../../src/components/ContactForm'));
 import type { PictureSource } from '../../src/components/ui/Picture';
 
 // Hero — ?preset=hero → AVIF/WebP srcset 480/768/1280/1920w
@@ -422,15 +424,17 @@ const ProjectLakeview = () => {
       <section id="zapys" className="bg-bg-deep py-24 md:py-32 px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
-            <ContactForm
-              source="project-lakeview"
-              heading="Записатись на огляд"
-              description="Зателефонуємо сьогодні і узгодимо зручний час."
-              fields={['email', 'message']}
-              submitLabel="Записатись"
-              successText="Прийнято. Менеджер Lakeview зателефонує протягом робочого дня."
-              disclaimer="Натискаючи «Записатись», ви погоджуєтесь на обробку персональних даних."
-            />
+            <Suspense fallback={<div className="bg-bg-surface p-8 md:p-10 min-h-[400px]" />}>
+              <ContactForm
+                source="project-lakeview"
+                heading="Записатись на огляд"
+                description="Зателефонуємо сьогодні і узгодимо зручний час."
+                fields={['email', 'message']}
+                submitLabel="Записатись"
+                successText="Прийнято. Менеджер Lakeview зателефонує протягом робочого дня."
+                disclaimer="Натискаючи «Записатись», ви погоджуєтесь на обробку персональних даних."
+              />
+            </Suspense>
           </FadeIn>
 
           <FadeIn delay={0.1} className="mt-10">
