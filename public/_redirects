@@ -9,7 +9,6 @@ http://www.vyhoda.lviv.ua/*  https://vyhoda.lviv.ua/:splat  301!
 # www → non-www (canonical: vyhoda.lviv.ua, no www)
 https://www.vyhoda.lviv.ua/*  https://vyhoda.lviv.ua/:splat  301!
 
-# SPA 404 fallback — unknown routes return the prerendered 404 page with HTTP 404 status.
-# CF Pages static assets (prerendered routes) are matched BEFORE _redirects rules,
-# so all known routes continue to serve correctly.
-/*  /404/index.html  404
+# NOTE: SPA 404 fallback is handled by functions/[[catchall]].ts (CF Pages Function).
+# That function intercepts unknown routes and returns HTTP 404 with /404/index.html content.
+# The _redirects /* rule was removed because CF Pages ignored it in favour of /index.html.
