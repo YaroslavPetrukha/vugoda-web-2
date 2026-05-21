@@ -1,17 +1,22 @@
 // Cloudflare Pages Function: catch-all for unknown routes.
 //
-// CF Pages routing reality (confirmed empirically 2026-05-19):
+// CF Pages routing reality (confirmed empirically 2026-05-19..21):
 //   - Functions with [[rest]] / [[catchall]] parameters intercept requests
 //     BEFORE static asset resolution (prerendered HTML, files in public/).
-//   - This means a naive "intercept everything, return 404" breaks every
-//     prerendered HTML route. We must explicitly pass through known routes.
+//   - CF Pages serves __spa-fallback.html / /index.html for any path that
+//     reaches static resolution unmatched — including unknown /api/* paths.
+//     So passing /api/foo through context.next() yields HTTP 200 with home
+//     page HTML. Bad for SEO (Google indexes /api/foo as duplicate /),
+//     bad for clients (clients expect JSON 404 from API).
 //
-// Strategy: hardcoded whitelist of the 12 prerendered routes from
-// `app/routes.ts` + `/404`. Anything outside the whitelist is treated as
-// an unknown path and served as HTTP 404 with the prerendered 404 page
-// content (X-Robots-Tag: noindex).
+// Strategy: explicit whitelists for:
+//   1. Prerendered HTML routes (from app/routes.ts) → context.next()
+//   2. Real API endpoints (functions/api/*.ts) → context.next()
+//   3. Static asset extensions → context.next()
+// Everything else → HTTP 404. Unknown /api/* paths get JSON 404. Unknown
+// HTML paths get the prerendered 404 page with HTTP 404 status.
 //
-// When adding/removing a route: update KNOWN_PRERENDERED_ROUTES below.
+// When adding a route or API endpoint: update the relevant whitelist below.
 
 interface EventContext<E = Record<string, unknown>> {
   request: Request;
@@ -42,12 +47,19 @@ const KNOWN_PRERENDERED_ROUTES = new Set<string>([
   '/404/index.html',
 ]);
 
+// Real API endpoints — Pages Functions in functions/api/.
+// Keep in sync with functions/api/*.ts file list.
+const KNOWN_API_ENDPOINTS = new Set<string>([
+  '/api/contact',
+]);
+
 // Static asset extensions served as-is. Functions still intercept these,
 // so we must explicitly pass them through to CF Pages' static handler.
-// `html` is included to keep direct /<route>/index.html requests stable
-// and to protect against any internal sub-request loops to the 404 page.
+// `html` intentionally NOT included — /foo.html requests are unknown and
+// should 404 (not fall through to __spa-fallback.html). /404/index.html
+// is covered by KNOWN_PRERENDERED_ROUTES whitelist instead.
 const STATIC_EXT =
-  /\.(html|jpg|jpeg|png|webp|avif|gif|svg|ico|woff2?|ttf|otf|eot|css|js|mjs|json|xml|txt|map|pdf|mp4|mp3|webm)$/i;
+  /\.(jpg|jpeg|png|webp|avif|gif|svg|ico|woff2?|ttf|otf|eot|css|js|mjs|json|xml|txt|map|pdf|mp4|mp3|webm)$/i;
 
 function normalize(pathname: string): string {
   if (pathname.length > 1 && pathname.endsWith('/')) {
@@ -56,13 +68,27 @@ function normalize(pathname: string): string {
   return pathname;
 }
 
+function jsonNotFound(): Response {
+  return new Response(JSON.stringify({ error: 'Not found' }), {
+    status: 404,
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'X-Robots-Tag': 'noindex',
+      'Cache-Control': 'public, max-age=0, must-revalidate',
+    },
+  });
+}
+
 export const onRequest: PagesFunction = async (context) => {
   const url = new URL(context.request.url);
   const pathname = normalize(url.pathname);
 
-  // Pass-through: API routes (handled by functions/api/*).
+  // API namespace: pass-through ONLY for known endpoints. Unknown /api/* → 404 JSON.
   if (pathname.startsWith('/api/')) {
-    return context.next();
+    if (KNOWN_API_ENDPOINTS.has(pathname)) {
+      return context.next();
+    }
+    return jsonNotFound();
   }
 
   // Pass-through: static asset requests.
@@ -75,7 +101,7 @@ export const onRequest: PagesFunction = async (context) => {
     return context.next();
   }
 
-  // Unknown route: serve prerendered 404 page content with HTTP 404 status.
+  // Unknown HTML route: serve prerendered 404 page content with HTTP 404 status.
   const fourOhFourUrl = new URL('/404/index.html', url.origin);
   let html: string;
   try {
