@@ -21,6 +21,7 @@ const PRERENDERED_ROUTES = [
   '/partneram',
   '/kontakty',
   '/novyny',
+  '/diakuyu',
 ];
 
 // Routes that are in sitemap (excludes noindex routes)
@@ -37,7 +38,7 @@ const SITEMAP_ROUTES = [
   '/kontakty',
 ];
 
-const NOINDEX_ROUTES = ['/portfolio/pipeline-04', '/novyny'];
+const NOINDEX_ROUTES = ['/portfolio/pipeline-04', '/novyny', '/diakuyu'];
 
 function fail(msg) {
   console.error(`[verify-build] FAIL: ${msg}`);

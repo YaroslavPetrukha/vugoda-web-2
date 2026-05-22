@@ -14,6 +14,7 @@ export default [
     route('partneram', 'routes/partneram.tsx'),
     route('kontakty', 'routes/kontakty.tsx'),
     route('novyny', 'routes/novyny.tsx'),
+    route('diakuyu', 'routes/diakuyu.tsx'),
     route('*', 'routes/$.tsx'),
   ]),
 ] satisfies RouteConfig;
