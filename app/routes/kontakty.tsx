@@ -2,7 +2,7 @@ import type { MetaFunction } from 'react-router';
 import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight } from 'lucide-react';
 import FadeIn from '../../src/components/FadeIn';
-import PageHero from '../../src/components/PageHero';
+import ContactsHero from '../../src/components/ContactsHero';
 import SectionHeading from '../../src/components/SectionHeading';
 import Button from '../../src/components/Button';
 import ContactForm from '../../src/components/ContactForm';
@@ -84,19 +84,18 @@ const LEGAL = [
 const Contacts = () => {
   return (
     <>
-      <PageHero
-        eyebrow="Розділ 06"
-        title="Контакти"
-        lead="Корпоративні контакти і окремі канали ЖК Lakeview. Якщо не знаєте, куди писати — заповніть форму нижче."
-        decorative
+      <ContactsHero
+        eyebrow="Розділ 06 · контакти"
+        title="Зв'язатись напряму"
+        lead="Корпоративні канали забудовника. Email, телефон і офіс продажу — без посередників. Якщо не знаєте, куди писати — заповніть форму нижче."
       >
         <Button as="a" href="#napysaty" variant="primary" size="lg">
           Написати нам <ArrowRight className="w-4 h-4" />
         </Button>
         <Button as="router" href="/partneram" variant="ghost" size="lg">
-          Реквізити
+          Юр. реквізити
         </Button>
-      </PageHero>
+      </ContactsHero>
 
       {/* CORPORATE */}
       <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-b border-bg-surface">

@@ -2,7 +2,7 @@ import type { MetaFunction } from 'react-router';
 import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight } from 'lucide-react';
 import FadeIn from '../../src/components/FadeIn';
-import PageHero from '../../src/components/PageHero';
+import NewsHero from '../../src/components/NewsHero';
 import SectionHeading from '../../src/components/SectionHeading';
 import Button from '../../src/components/Button';
 import NewsCard from '../../src/components/NewsCard';
@@ -38,16 +38,16 @@ const CATEGORIES = ['Усі', 'Етапи проектів', 'Методолог
 const News = () => {
   return (
     <>
-      <PageHero
-        eyebrow="Розділ 07"
-        title="Новини"
-        lead="Що відбувається на майданчиках, які рішення ухвалюємо, що публікуємо офіційно. Без рекламних формулювань."
-        decorative
+      <NewsHero
+        eyebrow="Розділ 07 · хроніка"
+        title="Хід будівництва без редактури"
+        lead="Що відбувається на майданчиках, які рішення ухвалюємо, що публікуємо офіційно. Без рекламних формулювань — тільки етапи, документи, дати."
+        items={news}
       >
         <Button as="a" href="#pidpyska" variant="primary" size="lg">
           Підписатись на оновлення <ArrowRight className="w-4 h-4" />
         </Button>
-      </PageHero>
+      </NewsHero>
 
       {/* CATEGORIES */}
       <section className="bg-bg-deep border-b border-bg-surface py-8 px-6 lg:px-8">

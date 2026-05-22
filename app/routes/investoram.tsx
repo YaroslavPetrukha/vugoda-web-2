@@ -2,7 +2,7 @@ import type { MetaFunction } from 'react-router';
 import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import FadeIn from '../../src/components/FadeIn';
-import PageHero from '../../src/components/PageHero';
+import InvestorHero from '../../src/components/InvestorHero';
 import SectionHeading from '../../src/components/SectionHeading';
 import Button from '../../src/components/Button';
 import StagePill from '../../src/components/StagePill';
@@ -51,7 +51,7 @@ const STEPS = [
   'Заявка на сайті або дзвінок.',
   'Брифінг: формат, обсяг, очікування інвестора.',
   'Презентація проекту і фінансової моделі.',
-  'Перевірка юр.документів забудовника (ЄДРПОУ, ліцензія, дозволи).',
+  'Перевірка юр.документів забудовника (ЄДРПОУ, статутні документи, дозволи).',
   'Узгодження умов угоди.',
   'Підписання договору купівлі-продажу майнових прав.',
   'Оплата за графіком.',
@@ -98,19 +98,18 @@ const OPPORTUNITIES = [
 const Investors = () => {
   return (
     <>
-      <PageHero
-        eyebrow="Розділ 04"
-        title="Інвесторам"
-        lead="Формати співпраці, схема угоди, юридичний контур. Кожна співпраця — індивідуально, з документами на руках."
-        decorative
+      <InvestorHero
+        eyebrow="Розділ 04 · інвестиції"
+        title="Прямі інвестиції в забудову Львова"
+        lead="П'ять проектів у роботі, від $1600/м². Прямий договір з ПП «ДІК Вигода+» — без посередницьких ланцюжків."
       >
         <Button as="a" href="#zustrich" variant="primary" size="lg">
           Записатись на зустріч <ArrowRight className="w-4 h-4" />
         </Button>
-        <Button as="router" href="/pidkhid" variant="ghost" size="lg">
-          Як ми працюємо
+        <Button as="router" href="/portfolio" variant="ghost" size="lg">
+          Деталі портфеля
         </Button>
-      </PageHero>
+      </InvestorHero>
 
       {/* FORMATS */}
       <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-b border-bg-surface">
