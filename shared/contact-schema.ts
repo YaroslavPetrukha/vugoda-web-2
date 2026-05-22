@@ -24,19 +24,19 @@ const PHONE_REGEX = /^[+\d][\d\s()+-]{7,20}$/;
 export const ContactSchema = z.object({
   name: z
     .string()
-    .min(2, "Ім'я має містити мінімум 2 символи")
+    .min(2, 'Імʼя — мінімум 2 символи')
     .max(100, "Ім'я задовге")
     .trim(),
   phone: z
     .string()
-    .regex(PHONE_REGEX, 'Невірний формат телефону')
+    .regex(PHONE_REGEX, 'Має починатись з +380 і містити мінімум 9 цифр')
     .refine((v) => (v.match(/\d/g) ?? []).length >= 9, {
-      message: 'Телефон має містити мінімум 9 цифр',
+      message: 'Має починатись з +380 і містити мінімум 9 цифр',
     })
     .trim(),
   email: z
     .string()
-    .email('Невірний email')
+    .email('Перевірте формат — приклад: name@domain.com')
     .optional()
     .or(z.literal('')),
   message: z.string().max(2000, 'Повідомлення задовге').optional().or(z.literal('')),
@@ -48,7 +48,7 @@ export const ContactSchema = z.object({
   // Zod v4: 'error' string is the unified message for missing/invalid values (P1-8)
   source: z.enum(FORM_SOURCES, { error: "source поле обов'язкове або має невірне значення" }),
   consent: z.literal(true, {
-    error: "Згода на обробку ПД обов'язкова",
+    error: 'Підтвердіть згоду на обробку персональних даних',
   }),
   // Zod v4: 'error' string covers missing/invalid; .min(1) covers empty string (P1-8)
   turnstileToken: z

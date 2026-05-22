@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useId } from 'react';
 import type { FormEvent } from 'react';
+import { IMaskInput } from 'react-imask';
 import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 import Button from './Button';
 import {
@@ -64,8 +65,10 @@ const ContactForm = ({
   const [state, setState] = useState<FormState>({ kind: 'idle' });
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [errors, setErrors] = useState<Partial<Record<string, string>>>({});
+  const [messageLen, setMessageLen] = useState(0);
   const turnstileRef = useRef<TurnstileInstance>(null);
   const submitLockRef = useRef(false);
+  const formRef = useRef<HTMLFormElement>(null);
   // Stable id prefix — avoids hydration mismatch from useId on SSG
   const uid = useId();
 
@@ -85,6 +88,23 @@ const ContactForm = ({
     }, 1000);
     return () => clearTimeout(t);
   }, [state]);
+
+  // Per-field Zod validation (used on blur and onChange-after-error)
+  const validateField = (fieldName: string, value: unknown) => {
+    const fieldSchema = ContactSchema.pick({ [fieldName]: true } as Parameters<
+      typeof ContactSchema.pick
+    >[0]);
+    const result = fieldSchema.safeParse({ [fieldName]: value });
+    setErrors((prev) => {
+      const next = { ...prev };
+      if (result.success) {
+        delete next[fieldName];
+      } else {
+        next[fieldName] = result.error.issues[0]?.message ?? 'Помилка';
+      }
+      return next;
+    });
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -117,6 +137,10 @@ const ContactForm = ({
         if (!fieldErrors[field]) fieldErrors[field] = issue.message;
       });
       setErrors(fieldErrors);
+      // Focus first invalid field for accessibility
+      requestAnimationFrame(() => {
+        formRef.current?.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
+      });
       return;
     }
 
@@ -199,6 +223,16 @@ const ContactForm = ({
     ? (state as { kind: 'rate_limited'; secondsLeft: number }).secondsLeft
     : 0;
 
+  // Submit button copy — 4 states
+  const submitButtonLabel = isBusy
+    ? 'Надсилаю...'
+    : isRateLimited
+      ? `Спробуйте через ${secondsLeft}s`
+      : !turnstileToken
+        ? 'Перевірка безпеки...'
+        : submitLabel;
+  const isSubmitDisabled = isBusy || isRateLimited || !turnstileToken;
+
   return (
     <div className={`bg-bg-surface border border-bg-surface p-8 md:p-10 ${className}`}>
       <h3
@@ -213,6 +247,7 @@ const ContactForm = ({
         </p>
       )}
       <form
+        ref={formRef}
         className="flex flex-col gap-7"
         onSubmit={handleSubmit}
         aria-labelledby={headingId}
@@ -242,14 +277,23 @@ const ContactForm = ({
               required
               aria-required="true"
               aria-invalid={!!errors.name}
+              aria-describedby={errors.name ? `${uid}-name-err` : undefined}
               autoComplete="name"
               placeholder="Як до вас звертатися"
+              maxLength={100}
+              enterKeyHint="next"
               className={`bg-transparent border-b pb-3 text-text-primary placeholder:text-text-secondary/60 focus:outline-none focus:border-accent rounded-none ${
                 errors.name ? 'border-red-500' : 'border-bg-surface'
               }`}
+              onBlur={(e) => validateField(e.target.name, e.target.value)}
+              onChange={(e) => {
+                if (errors[e.target.name]) validateField(e.target.name, e.target.value);
+              }}
             />
             {errors.name && (
-              <span className="text-xs text-red-400">{errors.name}</span>
+              <span id={`${uid}-name-err`} role="alert" className="text-xs text-red-400">
+                {errors.name}
+              </span>
             )}
           </label>
           <label className="flex flex-col gap-2">
@@ -259,20 +303,32 @@ const ContactForm = ({
                 *
               </span>
             </span>
-            <input
+            <IMaskInput
+              mask="+{38\0} (00) 000-00-00"
+              lazy={true}
+              unmask={false}
               type="tel"
               name="phone"
               required
               aria-required="true"
               aria-invalid={!!errors.phone}
+              aria-describedby={errors.phone ? `${uid}-phone-err` : undefined}
               autoComplete="tel"
+              inputMode="tel"
+              enterKeyHint="next"
               placeholder="+380 ..."
               className={`bg-transparent border-b pb-3 text-text-primary placeholder:text-text-secondary/60 focus:outline-none focus:border-accent rounded-none ${
                 errors.phone ? 'border-red-500' : 'border-bg-surface'
               }`}
+              onBlur={(e) => validateField('phone', (e.target as HTMLInputElement).value)}
+              onChange={(e) => {
+                if (errors.phone) validateField('phone', (e.target as HTMLInputElement).value);
+              }}
             />
             {errors.phone && (
-              <span className="text-xs text-red-400">{errors.phone}</span>
+              <span id={`${uid}-phone-err`} role="alert" className="text-xs text-red-400">
+                {errors.phone}
+              </span>
             )}
           </label>
         </div>
@@ -286,14 +342,24 @@ const ContactForm = ({
               type="email"
               name="email"
               aria-invalid={!!errors.email}
+              aria-describedby={errors.email ? `${uid}-email-err` : undefined}
               autoComplete="email"
+              inputMode="email"
+              enterKeyHint="next"
+              maxLength={320}
               placeholder="you@example.com"
               className={`bg-transparent border-b pb-3 text-text-primary placeholder:text-text-secondary/60 focus:outline-none focus:border-accent rounded-none ${
                 errors.email ? 'border-red-500' : 'border-bg-surface'
               }`}
+              onBlur={(e) => validateField(e.target.name, e.target.value)}
+              onChange={(e) => {
+                if (errors[e.target.name]) validateField(e.target.name, e.target.value);
+              }}
             />
             {errors.email && (
-              <span className="text-xs text-red-400">{errors.email}</span>
+              <span id={`${uid}-email-err`} role="alert" className="text-xs text-red-400">
+                {errors.email}
+              </span>
             )}
           </label>
         )}
@@ -307,9 +373,16 @@ const ContactForm = ({
               name="topic"
               defaultValue=""
               aria-invalid={!!errors.topic}
+              aria-describedby={errors.topic ? `${uid}-topic-err` : undefined}
+              autoComplete="off"
+              enterKeyHint="next"
               className={`bg-transparent border-b pb-3 text-text-primary focus:outline-none focus:border-accent rounded-none ${
                 errors.topic ? 'border-red-500' : 'border-bg-surface'
               }`}
+              onBlur={(e) => validateField(e.target.name, e.target.value)}
+              onChange={(e) => {
+                if (errors[e.target.name]) validateField(e.target.name, e.target.value);
+              }}
             >
               <option value="" className="bg-bg-deep">
                 Оберіть тему
@@ -331,7 +404,9 @@ const ContactForm = ({
               </option>
             </select>
             {errors.topic && (
-              <span className="text-xs text-red-400">{errors.topic}</span>
+              <span id={`${uid}-topic-err`} role="alert" className="text-xs text-red-400">
+                {errors.topic}
+              </span>
             )}
           </label>
         )}
@@ -345,9 +420,16 @@ const ContactForm = ({
               name="investor_format"
               defaultValue=""
               aria-invalid={!!errors.investor_format}
+              aria-describedby={errors.investor_format ? `${uid}-investor-format-err` : undefined}
+              autoComplete="off"
+              enterKeyHint="next"
               className={`bg-transparent border-b pb-3 text-text-primary focus:outline-none focus:border-accent rounded-none ${
                 errors.investor_format ? 'border-red-500' : 'border-bg-surface'
               }`}
+              onBlur={(e) => validateField(e.target.name, e.target.value)}
+              onChange={(e) => {
+                if (errors[e.target.name]) validateField(e.target.name, e.target.value);
+              }}
             >
               <option value="" className="bg-bg-deep">
                 Оберіть формат
@@ -363,7 +445,13 @@ const ContactForm = ({
               </option>
             </select>
             {errors.investor_format && (
-              <span className="text-xs text-red-400">{errors.investor_format}</span>
+              <span
+                id={`${uid}-investor-format-err`}
+                role="alert"
+                className="text-xs text-red-400"
+              >
+                {errors.investor_format}
+              </span>
             )}
           </label>
         )}
@@ -377,9 +465,16 @@ const ContactForm = ({
               name="org_type"
               defaultValue=""
               aria-invalid={!!errors.org_type}
+              aria-describedby={errors.org_type ? `${uid}-org-type-err` : undefined}
+              autoComplete="off"
+              enterKeyHint="next"
               className={`bg-transparent border-b pb-3 text-text-primary focus:outline-none focus:border-accent rounded-none ${
                 errors.org_type ? 'border-red-500' : 'border-bg-surface'
               }`}
+              onBlur={(e) => validateField(e.target.name, e.target.value)}
+              onChange={(e) => {
+                if (errors[e.target.name]) validateField(e.target.name, e.target.value);
+              }}
             >
               <option value="" className="bg-bg-deep">
                 Оберіть тип
@@ -401,7 +496,9 @@ const ContactForm = ({
               </option>
             </select>
             {errors.org_type && (
-              <span className="text-xs text-red-400">{errors.org_type}</span>
+              <span id={`${uid}-org-type-err`} role="alert" className="text-xs text-red-400">
+                {errors.org_type}
+              </span>
             )}
           </label>
         )}
@@ -415,13 +512,23 @@ const ContactForm = ({
               type="text"
               name="goal"
               aria-invalid={!!errors.goal}
+              aria-describedby={errors.goal ? `${uid}-goal-err` : undefined}
+              autoComplete="off"
+              enterKeyHint="next"
+              maxLength={500}
               placeholder="Коротко — що саме потрібно"
               className={`bg-transparent border-b pb-3 text-text-primary placeholder:text-text-secondary/60 focus:outline-none focus:border-accent rounded-none ${
                 errors.goal ? 'border-red-500' : 'border-bg-surface'
               }`}
+              onBlur={(e) => validateField(e.target.name, e.target.value)}
+              onChange={(e) => {
+                if (errors[e.target.name]) validateField(e.target.name, e.target.value);
+              }}
             />
             {errors.goal && (
-              <span className="text-xs text-red-400">{errors.goal}</span>
+              <span id={`${uid}-goal-err`} role="alert" className="text-xs text-red-400">
+                {errors.goal}
+              </span>
             )}
           </label>
         )}
@@ -435,38 +542,63 @@ const ContactForm = ({
               name="message"
               rows={4}
               aria-invalid={!!errors.message}
+              aria-describedby={errors.message ? `${uid}-message-err` : undefined}
+              enterKeyHint="done"
+              maxLength={2000}
               placeholder="Опишіть запит"
               className={`bg-transparent border-b pb-3 text-text-primary placeholder:text-text-secondary/60 focus:outline-none focus:border-accent rounded-none resize-none ${
                 errors.message ? 'border-red-500' : 'border-bg-surface'
               }`}
+              onChange={(e) => {
+                setMessageLen(e.target.value.length);
+                if (errors[e.target.name]) validateField(e.target.name, e.target.value);
+              }}
+              onBlur={(e) => validateField(e.target.name, e.target.value)}
             />
+            {messageLen > 1600 && (
+              <span aria-live="polite" className="text-xs text-text-secondary/60 mt-1">
+                {messageLen} / 2000
+              </span>
+            )}
             {errors.message && (
-              <span className="text-xs text-red-400">{errors.message}</span>
+              <span id={`${uid}-message-err`} role="alert" className="text-xs text-red-400">
+                {errors.message}
+              </span>
             )}
           </label>
         )}
 
         {/* Consent checkbox — visible, unchecked by default, required (GDPR) */}
-        <label className="flex items-start gap-3 cursor-pointer">
-          <input
-            type="checkbox"
-            name="consent"
-            required
-            aria-required="true"
-            aria-invalid={!!errors.consent}
-            className="mt-1 w-4 h-4 accent-accent flex-none cursor-pointer"
-          />
-          <span className="text-xs text-text-secondary/80 leading-relaxed">
-            Я погоджуюсь на обробку моїх персональних даних відповідно до законодавства
-            України.{' '}
-            <span className="text-accent" aria-hidden="true">
-              *
+        <div className="flex flex-col gap-2">
+          <label className="flex items-start gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              name="consent"
+              required
+              aria-required="true"
+              aria-invalid={!!errors.consent}
+              aria-describedby={errors.consent ? `${uid}-consent-err` : undefined}
+              enterKeyHint="done"
+              className="mt-1 w-4 h-4 accent-accent flex-none cursor-pointer"
+              onBlur={(e) => validateField('consent', e.target.checked)}
+              onChange={(e) => {
+                if (errors.consent) validateField('consent', e.target.checked);
+              }}
+            />
+            <span className="text-xs text-text-secondary/80 leading-relaxed">
+              Я погоджуюсь на обробку моїх персональних даних відповідно до законодавства
+              України.{' '}
+              <span className="text-accent" aria-hidden="true">
+                *
+              </span>
             </span>
-          </span>
-        </label>
-        {errors.consent && (
-          <span className="text-xs text-red-400 -mt-3">{errors.consent}</span>
-        )}
+          </label>
+          {errors.consent && (
+            <span id={`${uid}-consent-err`} role="alert" className="text-xs text-red-400 ml-7">
+              {errors.consent}
+            </span>
+          )}
+        </div>
 
         {/* Cloudflare Turnstile widget — Managed mode (default).
             In Managed mode Cloudflare silently completes the challenge for
@@ -503,14 +635,10 @@ const ContactForm = ({
             variant="primary"
             size="lg"
             className="self-start"
-            disabled={isBusy || isRateLimited || !turnstileToken}
-            aria-disabled={isBusy || isRateLimited || !turnstileToken}
+            disabled={isSubmitDisabled}
+            aria-disabled={isSubmitDisabled}
           >
-            {isBusy
-              ? 'Надсилаю...'
-              : isRateLimited
-                ? `Спробуйте через ${secondsLeft}s`
-                : submitLabel}
+            {submitButtonLabel}
           </Button>
           <p className="text-xs text-text-secondary/80 max-w-xl leading-relaxed">
             {disclaimer}
