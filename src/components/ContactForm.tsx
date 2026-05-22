@@ -260,41 +260,52 @@ const ContactForm = ({
   const isSubmitDisabled = isBusy || isRateLimited || !turnstileToken || !formToken;
 
   return (
-    <div className={`bg-bg-surface border border-bg-surface p-8 md:p-10 ${className}`}>
-      <h3
-        id={headingId}
-        className="text-2xl md:text-3xl font-bold text-text-primary leading-snug mb-2"
-      >
-        {heading}
-      </h3>
-      {description && (
-        <p className="text-text-secondary mb-6 text-sm md:text-base leading-relaxed">
-          {description}
-        </p>
-      )}
+    <div
+      className={`relative bg-bg-surface border-l-2 border-accent p-8 md:p-10 overflow-hidden ${className}`}
+    >
+      {/* Subtle isometric grid texture — brand pattern at ~4% opacity */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.04]"
+        style={{
+          backgroundImage: 'url("/isometric-grid.svg")',
+          backgroundRepeat: 'repeat',
+          backgroundSize: '220px auto',
+        }}
+        aria-hidden="true"
+      />
 
-      {/* Alternative CTAs — always visible, removes form-friction for users who prefer direct channels */}
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-3 mb-8 pb-6 border-b border-bg-base/60">
-        <span className="text-xs uppercase tracking-widest text-text-secondary">
-          Або напряму:
-        </span>
-        <a
-          href="tel:+380969900390"
-          className="inline-flex items-center gap-2 text-sm text-text-primary hover:text-accent transition-colors font-medium"
+      <div className="relative">
+        <h3
+          id={headingId}
+          className="text-2xl md:text-3xl font-bold text-text-primary leading-snug mb-2"
         >
-          <Phone className="w-4 h-4" aria-hidden="true" />
-          0969 900 390
-        </a>
-        <a
-          href="https://t.me/vygoda_sales"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-sm text-text-primary hover:text-accent transition-colors font-medium"
-        >
-          <Send className="w-4 h-4" aria-hidden="true" />
-          Telegram
-        </a>
-      </div>
+          {heading}
+        </h3>
+        {description && (
+          <p className="text-text-secondary mb-6 text-sm md:text-base leading-relaxed">
+            {description}
+          </p>
+        )}
+
+        {/* Alternative CTAs — always visible, no label (confident, direct) */}
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-8 pb-6 border-b border-bg-base/60">
+          <a
+            href="tel:+380969900390"
+            className="inline-flex items-center gap-2 text-sm text-text-primary hover:text-accent transition-colors font-medium"
+          >
+            <Phone className="w-4 h-4" aria-hidden="true" />
+            0969 900 390
+          </a>
+          <a
+            href="https://t.me/vygoda_sales"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-sm text-text-primary hover:text-accent transition-colors font-medium"
+          >
+            <Send className="w-4 h-4" aria-hidden="true" />
+            Telegram
+          </a>
+        </div>
 
       <form
         ref={formRef}
@@ -316,6 +327,7 @@ const ContactForm = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           <label className="flex flex-col gap-2">
             <span className="text-xs uppercase tracking-widest text-text-secondary">
+              <span className="text-text-secondary/50 font-mono mr-2">01.</span>
               Імʼя{' '}
               <span className="text-accent" aria-hidden="true">
                 *
@@ -348,6 +360,7 @@ const ContactForm = ({
           </label>
           <label className="flex flex-col gap-2">
             <span className="text-xs uppercase tracking-widest text-text-secondary">
+              <span className="text-text-secondary/50 font-mono mr-2">02.</span>
               Телефон{' '}
               <span className="text-accent" aria-hidden="true">
                 *
@@ -706,6 +719,7 @@ const ContactForm = ({
           )}
         </div>
       </form>
+      </div>
     </div>
   );
 };
