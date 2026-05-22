@@ -45,11 +45,30 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* Focus-visible ring (a11y) — двошаровий, працює на lime-кнопках теж */
-  :focus-visible {
+  /* Focus-visible ring (a11y) — scoped per element type.
+     Buttons/links/summary on lime/light backgrounds need the dark halo
+     for sufficient contrast. Form fields look ugly with the halo
+     (black box on dark surface) and use the lime accent border + bg
+     tint via Tailwind utilities instead. */
+  button:focus-visible,
+  a:focus-visible,
+  summary:focus-visible,
+  [role="button"]:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
     box-shadow: 0 0 0 4px var(--color-bg-deep);
+  }
+
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: none;
+  }
+
+  /* Fallback for any other interactive element — visible accent ring without dark halo */
+  :focus-visible:not(button):not(a):not(summary):not([role="button"]):not(input):not(textarea):not(select) {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
   }
 
   :focus:not(:focus-visible) {

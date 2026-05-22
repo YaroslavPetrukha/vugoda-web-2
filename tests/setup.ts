@@ -27,6 +27,23 @@ Object.defineProperty(globalThis, 'ResizeObserver', {
   value: MockResizeObserver,
 });
 
+// matchMedia — відсутній у jsdom; HeroAmbient та інші компоненти
+// перевіряють prefers-reduced-motion через window.matchMedia
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  configurable: true,
+  value: vi.fn().mockImplementation((query: string) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+    dispatchEvent: vi.fn(),
+  })),
+});
+
 afterEach(() => {
   cleanup();
 });
