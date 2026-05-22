@@ -261,26 +261,14 @@ const ContactForm = ({
 
   return (
     <div
-      className={`relative bg-bg-surface border-l-2 border-accent p-8 md:p-10 overflow-hidden ${className}`}
+      className={`bg-bg-surface border-l-2 border-accent p-8 md:p-10 ${className}`}
     >
-      {/* Subtle isometric grid texture — brand pattern at ~4% opacity */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: 'url("/isometric-grid.svg")',
-          backgroundRepeat: 'repeat',
-          backgroundSize: '220px auto',
-        }}
-        aria-hidden="true"
-      />
-
-      <div className="relative">
-        <h3
-          id={headingId}
-          className="text-2xl md:text-3xl font-bold text-text-primary leading-snug mb-2"
-        >
-          {heading}
-        </h3>
+      <h3
+        id={headingId}
+        className="text-2xl md:text-3xl font-bold text-text-primary leading-snug mb-2"
+      >
+        {heading}
+      </h3>
         {description && (
           <p className="text-text-secondary mb-6 text-sm md:text-base leading-relaxed">
             {description}
@@ -719,7 +707,6 @@ const ContactForm = ({
           )}
         </div>
       </form>
-      </div>
     </div>
   );
 };
