@@ -2,7 +2,7 @@ import type { MetaFunction } from 'react-router';
 import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight } from 'lucide-react';
 import FadeIn from '../../src/components/FadeIn';
-import PageHero from '../../src/components/PageHero';
+import ApproachHero from '../../src/components/ApproachHero';
 import SectionHeading from '../../src/components/SectionHeading';
 import Button from '../../src/components/Button';
 
@@ -99,11 +99,10 @@ const NOT_DOING = [
 const Approach = () => {
   return (
     <>
-      <PageHero
+      <ApproachHero
         eyebrow="Розділ 02"
         title="Як ми ухвалюємо рішення"
-        lead="Проект проходить чотири фази до старту продажів. Кожна — з конкретними документами і строками. Нижче — як це виглядає на практиці."
-        decorative
+        lead="Проект проходить чотири фази до старту продажів. Кожна — з конкретними документами і строками. Без обходів."
       >
         <Button as="router" href="/portfolio" variant="primary" size="lg">
           Переглянути портфель <ArrowRight className="w-4 h-4" />
@@ -111,7 +110,7 @@ const Approach = () => {
         <Button as="router" href="/partneram" variant="ghost" size="lg">
           Запит для партнерів
         </Button>
-      </PageHero>
+      </ApproachHero>
 
       {/* PHASES */}
       <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-b border-bg-surface">

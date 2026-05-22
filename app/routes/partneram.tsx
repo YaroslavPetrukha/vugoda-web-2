@@ -2,7 +2,7 @@ import type { MetaFunction } from 'react-router';
 import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight } from 'lucide-react';
 import FadeIn from '../../src/components/FadeIn';
-import PageHero from '../../src/components/PageHero';
+import PartnerHero from '../../src/components/PartnerHero';
 import SectionHeading from '../../src/components/SectionHeading';
 import Button from '../../src/components/Button';
 import ContactForm from '../../src/components/ContactForm';
@@ -10,7 +10,7 @@ import ContactForm from '../../src/components/ContactForm';
 export const meta: MetaFunction = ({ location }) => {
   const title = 'Партнерам і банкам — реквізити ВИГОДА';
   const description =
-    'ПП «ДІК "Вигода +"», ЄДРПОУ 44876801, ліцензія від 27.12.2019. Документи для due diligence — за запитом.';
+    'ПП «ДІК "Вигода +"», ЄДРПОУ 44876801. Юридична картка, реквізити, документи для due diligence — за запитом.';
   const image = siteUrl('/og/partners.png');
   const url = siteUrl(location.pathname);
   return [
@@ -65,11 +65,10 @@ const FOR_CONTRACTORS = [
 const Partners = () => {
   return (
     <>
-      <PageHero
-        eyebrow="Розділ 05"
-        title="Партнерам і банкам"
-        lead="Юридична картка, ліцензії, реквізити. Документи для due diligence — за запитом."
-        decorative
+      <PartnerHero
+        eyebrow="Розділ 05 · партнерство"
+        title="Юридичний контур забудовника"
+        lead="Юридична картка справа — повний пакет реквізитів. Деталі для due diligence (документи по проектах, експертиза) — за запитом."
       >
         <Button as="a" href="#zapyt" variant="primary" size="lg">
           Запит документів <ArrowRight className="w-4 h-4" />
@@ -82,7 +81,7 @@ const Partners = () => {
         >
           vygoda.sales@gmail.com
         </Button>
-      </PageHero>
+      </PartnerHero>
 
       {/* REQUISITES */}
       <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-b border-bg-surface">
@@ -121,7 +120,7 @@ const Partners = () => {
       <section className="bg-bg-deep py-24 md:py-32 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
-            <SectionHeading eyebrow="02" title="Ліцензії та дозволи" />
+            <SectionHeading eyebrow="02" title="Дозвільна документація" />
           </FadeIn>
           <ul className="mt-12 divide-y divide-bg-surface border-y border-bg-surface">
             {LICENSES.map((item, i) => (
