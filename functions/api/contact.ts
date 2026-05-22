@@ -7,6 +7,7 @@ import { ContactSchema, type ContactPayload } from '../../shared/contact-schema'
 import { hmacSign } from '../_shared/hmac';
 import { sanitizeUnicode, collapseWhitespace, containsUrl, isMixedScript, hasRepetition, isAllCaps, emojiCount } from '../../src/lib/sanitize';
 import { normalizePhoneUA } from '../../src/lib/phone-ua';
+import { isDisposableEmail } from '../../shared/disposable-emails';
 
 // Minimal Cloudflare Pages Function types — avoids requiring @cloudflare/workers-types
 interface Env {
@@ -374,6 +375,20 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
   }
 
   const data = parsed.data;
+
+  // 8a. Disposable email check — reject known burner domains (Phase 4)
+  if (data.email && isDisposableEmail(data.email)) {
+    console.log(`[spam_disposable_email] requestId=${requestId}`);
+    return jsonResponse(
+      {
+        ok: false,
+        error: 'validation',
+        message: 'Тимчасові email не приймаються. Вкажіть, будь ласка, основну адресу.',
+        requestId,
+      },
+      400,
+    );
+  }
 
   // 8. TIME_TRAP_SECRET config check — fail-closed
   if (!env.TIME_TRAP_SECRET) {
