@@ -51,6 +51,7 @@ const KNOWN_PRERENDERED_ROUTES = new Set<string>([
 // Keep in sync with functions/api/*.ts file list.
 const KNOWN_API_ENDPOINTS = new Set<string>([
   '/api/contact',
+  '/api/form-token',
 ]);
 
 // Static asset extensions served as-is. Functions still intercept these,

@@ -64,6 +64,7 @@ const ContactForm = ({
 }: ContactFormProps) => {
   const [state, setState] = useState<FormState>({ kind: 'idle' });
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [formToken, setFormToken] = useState<string | null>(null);
   const [errors, setErrors] = useState<Partial<Record<string, string>>>({});
   const [messageLen, setMessageLen] = useState(0);
   const turnstileRef = useRef<TurnstileInstance>(null);
@@ -71,6 +72,19 @@ const ContactForm = ({
   const formRef = useRef<HTMLFormElement>(null);
   // Stable id prefix — avoids hydration mismatch from useId on SSG
   const uid = useId();
+
+  // Fetch time-trap token on mount — required before submission is enabled
+  useEffect(() => {
+    fetch('/api/form-token')
+      .then((r) => r.json())
+      .then((d: unknown) => {
+        const res = d as { ok?: boolean; token?: string } | null;
+        if (res?.ok && res?.token) setFormToken(res.token);
+      })
+      .catch(() => {
+        // Silent failure — token stays null, submit stays disabled until retry
+      });
+  }, []);
 
   // Countdown timer for rate-limited state
   useEffect(() => {
@@ -119,7 +133,7 @@ const ContactForm = ({
     }
 
     const formData = new FormData(e.currentTarget);
-    const raw: Record<string, unknown> = { source, turnstileToken, consent: false };
+    const raw: Record<string, unknown> = { source, turnstileToken, consent: false, formToken: formToken ?? '' };
     formData.forEach((v, k) => {
       if (k === 'consent') {
         raw.consent = v === 'on';
@@ -223,15 +237,15 @@ const ContactForm = ({
     ? (state as { kind: 'rate_limited'; secondsLeft: number }).secondsLeft
     : 0;
 
-  // Submit button copy — 4 states
+  // Submit button copy — 5 states (idle, busy, rate-limited, awaiting Turnstile, awaiting time-trap)
   const submitButtonLabel = isBusy
     ? 'Надсилаю...'
     : isRateLimited
       ? `Спробуйте через ${secondsLeft}s`
-      : !turnstileToken
+      : !formToken || !turnstileToken
         ? 'Перевірка безпеки...'
         : submitLabel;
-  const isSubmitDisabled = isBusy || isRateLimited || !turnstileToken;
+  const isSubmitDisabled = isBusy || isRateLimited || !turnstileToken || !formToken;
 
   return (
     <div className={`bg-bg-surface border border-bg-surface p-8 md:p-10 ${className}`}>

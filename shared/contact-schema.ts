@@ -19,6 +19,8 @@ export type FormSource = (typeof FORM_SOURCES)[number];
 
 // Ukrainian phone: allows +380XX XXX XX XX with spaces/dashes/parens.
 // Two-step check: format regex + minimum 9 digits (P1-6).
+// Server-side normalizePhoneUA() (src/lib/phone-ua.ts) converts to canonical
+// +380XXXXXXXXX after schema validation — schema stays permissive intentionally.
 const PHONE_REGEX = /^[+\d][\d\s()+-]{7,20}$/;
 
 export const ContactSchema = z.object({
@@ -54,6 +56,11 @@ export const ContactSchema = z.object({
   turnstileToken: z
     .string({ error: 'Перевірка Turnstile не пройдена' })
     .min(1, 'Перевірка Turnstile не пройдена'),
+  // Time-trap token — issued by GET /api/form-token on mount, verified server-side.
+  // Required (not optional): ContactForm always fetches on mount before enabling submit.
+  formToken: z
+    .string({ error: 'Time-trap токен відсутній' })
+    .min(1, 'Time-trap токен порожній'),
   // Honeypot: must be empty — bots fill it
   company: z.string().max(0, 'Spam detected').optional().or(z.literal('')),
 });
@@ -68,8 +75,8 @@ export const ContactSuccess = z.object({
 
 export const ContactError = z.object({
   ok: z.literal(false),
-  error: z.enum(['validation', 'origin', 'turnstile', 'rate_limit', 'spam', 'server']),
-  message: z.string(),
+  error: z.enum(['validation', 'origin', 'turnstile', 'rate_limit', 'spam', 'server', 'method_not_allowed', 'config']),
+  message: z.string().optional(),
   retryAfter: z.number().optional(),
 });
 

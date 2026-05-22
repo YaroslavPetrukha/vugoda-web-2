@@ -1,17 +1,20 @@
 // Cloudflare Pages Function: POST /api/contact
 // Telegram-only delivery (per spec §5.3 — Resend is out of scope)
-// 5-layer defense: Origin / Rate-limit / Turnstile / Honeypot / Zod
+// Defense layers: Origin / Body-size / Rate-limit / Honeypot / Zod /
+//                 Time-trap HMAC / Sanitize / URL-block / Turnstile / Telegram
 
 import { ContactSchema, type ContactPayload } from '../../shared/contact-schema';
+import { hmacSign } from '../_shared/hmac';
+import { sanitizeUnicode, collapseWhitespace, containsUrl, isMixedScript, hasRepetition, isAllCaps, emojiCount } from '../../src/lib/sanitize';
+import { normalizePhoneUA } from '../../src/lib/phone-ua';
 
 // Minimal Cloudflare Pages Function types — avoids requiring @cloudflare/workers-types
 interface Env {
   TELEGRAM_BOT_TOKEN: string;
   TELEGRAM_CHAT_ID: string;
   TURNSTILE_SECRET_KEY: string;
-  // Optional: set a random 32-byte hex string in CF Pages env vars as Encrypted Secret.
-  // If absent, fallback salt is used (weaker pseudonymization — acceptable for MVP).
-  HASH_SALT?: string;
+  HASH_SALT: string;
+  TIME_TRAP_SECRET: string;
 }
 
 interface EventContext<E = Env> {
@@ -155,6 +158,39 @@ function sourceLabel(source: ContactPayload['source']): string {
 }
 
 // ---------------------------------------------------------------------------
+// Time-trap HMAC token verification.
+// Token format: `${issuedAt}.${nonce}.${signature}`
+// Window: 3s (min) … 30min (max)
+// ---------------------------------------------------------------------------
+async function verifyFormToken(
+  token: string,
+  secret: string,
+): Promise<{ valid: boolean; reason?: string }> {
+  const parts = token.split('.');
+  if (parts.length !== 3) return { valid: false, reason: 'malformed' };
+
+  const [issuedAtStr, nonce, signature] = parts;
+  const issuedAt = parseInt(issuedAtStr, 10);
+  if (!Number.isFinite(issuedAt)) return { valid: false, reason: 'bad-timestamp' };
+
+  const expected = await hmacSign(`${issuedAtStr}.${nonce}`, secret);
+
+  // Constant-time compare — guard against timing attacks
+  if (signature.length !== expected.length) return { valid: false, reason: 'sig-mismatch' };
+  let diff = 0;
+  for (let i = 0; i < signature.length; i++) {
+    diff |= signature.charCodeAt(i) ^ expected.charCodeAt(i);
+  }
+  if (diff !== 0) return { valid: false, reason: 'sig-mismatch' };
+
+  const age = Date.now() - issuedAt;
+  if (age < 3000) return { valid: false, reason: 'too-fast' };
+  if (age > 30 * 60 * 1000) return { valid: false, reason: 'expired' };
+
+  return { valid: true };
+}
+
+// ---------------------------------------------------------------------------
 // Telegram sender with AbortController timeout (P1-3) and 1 retry on
 // 429/5xx with 2-second backoff (P1-4).
 // ---------------------------------------------------------------------------
@@ -163,6 +199,8 @@ async function sendTelegram(
   env: Env,
   requestId: string,
   ipHash: string,
+  normalizedPhone: string,
+  flags: string[],
 ): Promise<boolean> {
   const lines: string[] = [];
   const label = sourceLabel(payload.source);
@@ -171,10 +209,9 @@ async function sendTelegram(
   lines.push('');
   lines.push(`<b>Імʼя:</b> ${escapeHtml(payload.name)}`);
 
-  // Phone wrapped as tel: link for one-tap dial from mobile
-  const phoneClean = payload.phone.replace(/[^\d+]/g, '');
+  // Phone: use normalized canonical form for tel: link
   lines.push(
-    `<b>Телефон:</b> <a href="tel:${escapeHtml(phoneClean)}">${escapeHtml(payload.phone)}</a>`,
+    `<b>Телефон:</b> <a href="tel:${escapeHtml(normalizedPhone)}">${escapeHtml(normalizedPhone)}</a>`,
   );
 
   if (payload.email) lines.push(`<b>Email:</b> ${escapeHtml(payload.email)}`);
@@ -187,6 +224,11 @@ async function sendTelegram(
   if (payload.goal) lines.push(`<b>Ціль:</b> ${escapeHtml(payload.goal)}`);
   if (payload.message)
     lines.push(`<b>Повідомлення:</b>\n${escapeHtml(payload.message)}`);
+
+  if (flags.length > 0) {
+    lines.push('');
+    lines.push(`<b>Flags:</b> ${escapeHtml(flags.join(', '))}`);
+  }
 
   lines.push('');
   lines.push(`<i>requestId: ${escapeHtml(requestId)}</i>`);
@@ -258,8 +300,9 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
   // 1. Origin check
   const origin = request.headers.get('Origin');
   if (!isOriginAllowed(origin)) {
+    const requestId = crypto.randomUUID();
     return jsonResponse(
-      { ok: false, error: 'origin', message: 'Origin not allowed' },
+      { ok: false, error: 'origin', message: 'Origin not allowed', requestId },
       403,
     );
   }
@@ -267,23 +310,31 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
   // 2. Body size limit — max 10 KB (P1-5)
   const contentLength = request.headers.get('content-length');
   if (contentLength && parseInt(contentLength, 10) > 10240) {
+    const requestId = crypto.randomUUID();
     return jsonResponse(
-      { ok: false, error: 'validation', message: 'Payload too large' },
+      { ok: false, error: 'validation', message: 'Payload too large', requestId },
       413,
     );
   }
 
+  // Generate requestId early — referenced by rate-limit, honeypot, and all downstream paths
+  const requestId = crypto.randomUUID();
+
   // 3. IP hash (needed for rate limit before we parse body)
   const ip = request.headers.get('CF-Connecting-IP') ?? 'unknown';
-  // ENV-driven salt for IP hash pseudonymization (P1-9).
-  // Set HASH_SALT in CF Pages env vars as Encrypted Secret (random 32-byte hex).
-  const salt = env.HASH_SALT ?? 'vugoda-fallback-salt';
+
+  // HASH_SALT fail-closed — no fallback string in source (P2: security hardening)
+  if (!env.HASH_SALT) {
+    console.error(`[config_error] HASH_SALT missing requestId=${requestId}`);
+    return jsonResponse({ ok: false, error: 'server', message: 'Server config error', requestId }, 500);
+  }
+  const salt = env.HASH_SALT;
   const ipHash = await hashIp(ip, salt);
 
   // 4. Rate limit: 5 req / 60s / IP (P0-1)
   if (!checkRateLimit(ipHash)) {
     return jsonResponse(
-      { ok: false, error: 'rate_limit', message: 'Забагато запитів. Спробуйте через хвилину.', retryAfter: 60 },
+      { ok: false, error: 'rate_limit', message: 'Забагато запитів. Спробуйте через хвилину.', retryAfter: 60, requestId },
       429,
       { 'Retry-After': '60' },
     );
@@ -295,7 +346,7 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
     raw = await request.json();
   } catch {
     return jsonResponse(
-      { ok: false, error: 'validation', message: 'Invalid JSON' },
+      { ok: false, error: 'validation', message: 'Invalid JSON', requestId },
       400,
     );
   }
@@ -304,7 +355,6 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
   const rawRecord = raw as Record<string, unknown> | null;
   const honeypotValue = rawRecord?.company;
   if (typeof honeypotValue === 'string' && honeypotValue.length > 0) {
-    const requestId = crypto.randomUUID();
     console.log(`[spam_honeypot] requestId=${requestId}`);
     return jsonResponse({ ok: true, requestId }, 200);
   }
@@ -317,15 +367,80 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
         ok: false,
         error: 'validation',
         message: parsed.error.issues[0]?.message ?? 'Validation failed',
+        requestId,
       },
       400,
     );
   }
 
-  const payload = parsed.data;
-  const requestId = crypto.randomUUID();
+  const data = parsed.data;
 
-  // 8. Turnstile server-side verification (runs BEFORE Telegram)
+  // 8. TIME_TRAP_SECRET config check — fail-closed
+  if (!env.TIME_TRAP_SECRET) {
+    console.error(`[config_error] TIME_TRAP_SECRET missing requestId=${requestId}`);
+    return jsonResponse({ ok: false, error: 'server', message: 'Server config error', requestId }, 500);
+  }
+
+  // 9. Time-trap HMAC verification
+  const tokenCheck = await verifyFormToken(data.formToken, env.TIME_TRAP_SECRET);
+  if (!tokenCheck.valid) {
+    console.log(`[spam_time_trap] requestId=${requestId} reason=${tokenCheck.reason}`);
+    return jsonResponse(
+      { ok: false, error: 'spam', message: 'Перевірка форми не пройдена. Оновіть сторінку.', requestId },
+      403,
+    );
+  }
+
+  // 10. Sanitize — Unicode normalization + whitespace collapse on name
+  const sanitizedData = {
+    ...data,
+    name: collapseWhitespace(sanitizeUnicode(data.name)),
+    message: data.message ? sanitizeUnicode(data.message) : data.message,
+    goal: data.goal ? sanitizeUnicode(data.goal) : data.goal,
+    topic: data.topic ? sanitizeUnicode(data.topic) : data.topic,
+  };
+  const payload = sanitizedData;
+
+  // 11. URL detection — hard reject URLs in structural fields
+  const noUrlFields = ['name', 'goal', 'topic', 'org_type', 'investor_format', 'project'] as const;
+  for (const field of noUrlFields) {
+    const value = payload[field];
+    if (typeof value === 'string' && containsUrl(value)) {
+      console.log(`[spam_url_block] requestId=${requestId} field=${field}`);
+      return jsonResponse(
+        { ok: false, error: 'spam', message: 'Виявлено заборонені посилання у полях форми', requestId },
+        400,
+      );
+    }
+  }
+
+  // 12. Phone normalization
+  const phoneResult = normalizePhoneUA(payload.phone);
+  if (!phoneResult) {
+    return jsonResponse(
+      { ok: false, error: 'validation', message: 'Невірний формат телефону', requestId },
+      400,
+    );
+  }
+  const normalizedPhone = phoneResult.canonical;
+  const isForeignPhone = phoneResult.isForeign;
+
+  // 13. Soft flag collection — informational, sent to Telegram but do NOT block submission
+  const flags: string[] = [];
+  if (isForeignPhone) flags.push('foreign-phone');
+  if (payload.message && containsUrl(payload.message)) flags.push('url-in-msg');
+  if (isMixedScript(payload.name)) flags.push('mixed-script');
+  if (hasRepetition(payload.name) || (payload.message && hasRepetition(payload.message)))
+    flags.push('repetition');
+  if (payload.message && isAllCaps(payload.message)) flags.push('all-caps');
+  if (emojiCount(payload.name) > 5 || (payload.message && emojiCount(payload.message) > 10))
+    flags.push('emoji-spam');
+
+  if (flags.length > 0) {
+    console.log(`[spam_flags] requestId=${requestId} flags=${flags.join(',')}`);
+  }
+
+  // 14. Turnstile server-side verification (runs BEFORE Telegram)
   const turnstileOk = await verifyTurnstile(
     payload.turnstileToken,
     env.TURNSTILE_SECRET_KEY,
@@ -337,14 +452,15 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
         ok: false,
         error: 'turnstile',
         message: 'Перевірка Turnstile не пройдена. Оновіть сторінку і спробуйте знову.',
+        requestId,
       },
       403,
     );
   }
 
-  // 9. Send to Telegram (with timeout + retry)
+  // 15. Send to Telegram (with timeout + retry)
   try {
-    const sent = await sendTelegram(payload, env, requestId, ipHash);
+    const sent = await sendTelegram(payload, env, requestId, ipHash, normalizedPhone, flags);
     if (!sent) {
       console.error(`[telegram_fail] requestId=${requestId}`);
       return jsonResponse(
@@ -353,6 +469,7 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
           error: 'server',
           message:
             'Не вдалось доставити повідомлення. Зателефонуйте напряму: 0969 900 390',
+          requestId,
         },
         500,
       );
@@ -366,6 +483,7 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
         ok: false,
         error: 'server',
         message: 'Серверна помилка. Зателефонуйте напряму: 0969 900 390',
+        requestId,
       },
       500,
     );
