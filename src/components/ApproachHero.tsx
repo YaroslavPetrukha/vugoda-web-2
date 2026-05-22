@@ -13,7 +13,7 @@ type ApproachHeroProps = {
 
 const DEFAULT_TRUST: TrustItem[] = [
   { label: 'ЄДРПОУ', value: '44876801' },
-  { label: 'Ліцензія', value: 'з 27.12.2019' },
+  { label: 'Технологія', value: 'монолітно-каркас' },
   { label: 'Портфель', value: '1 активний · 4 pipeline' },
 ];
 

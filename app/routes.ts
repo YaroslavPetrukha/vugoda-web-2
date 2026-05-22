@@ -14,6 +14,7 @@ export default [
     route('investoram', 'routes/investoram.tsx'),
     route('pilot-investoram', 'routes/pilot-investoram.tsx'),
     route('partneram', 'routes/partneram.tsx'),
+    route('pilot-partneram', 'routes/pilot-partneram.tsx'),
     route('kontakty', 'routes/kontakty.tsx'),
     route('novyny', 'routes/novyny.tsx'),
     route('diakuyu', 'routes/diakuyu.tsx'),

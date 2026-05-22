@@ -20,7 +20,7 @@ type InvestorHeroProps = {
 };
 
 const DEFAULT_TRUST: TrustItem[] = [
-  { label: 'Ліцензія', value: 'з 27.12.2019' },
+  { label: 'ЄДРПОУ', value: '44876801' },
   { label: 'Pipeline', value: '1 активний · 4 у роботі' },
   { label: 'Стартова ціна', value: 'від $1600/м²' },
 ];
