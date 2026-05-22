@@ -1,5 +1,6 @@
 import { useRef, type ReactNode } from 'react';
 import { motion, useInView, type Variants } from 'motion/react';
+import HeroAmbient from './HeroAmbient';
 
 type TrustItem = { label: string; value: string };
 type ProjectMarker = {
@@ -158,6 +159,10 @@ const InvestorHero = ({
 
   return (
     <section className="relative bg-bg-deep py-12 md:py-16 px-6 lg:px-8 border-b border-bg-surface overflow-hidden">
+
+      {/* gridOpacity 0 — own iso-grid map already provides structure */}
+      <HeroAmbient grid={false} />
+
       <div
         aria-hidden="true"
         className="hidden md:block absolute right-[16%] top-[28%] w-[300px] h-[80px] pointer-events-none"

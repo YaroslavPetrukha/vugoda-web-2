@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { motion, useInView, AnimatePresence } from 'motion/react';
 import MarkCube, { type FaceIndex } from './MarkCube';
+import HeroAmbient from './HeroAmbient';
 
 type FaceFact = {
   num: '01' | '02' | '03';
@@ -86,6 +87,8 @@ const PartnerHero = ({
       ref={ref}
       className="relative bg-bg-deep py-12 md:py-16 px-6 lg:px-8 border-b border-bg-surface overflow-hidden"
     >
+      <HeroAmbient />
+
       {/* Atmospheric glow під кубом */}
       <div
         aria-hidden="true"

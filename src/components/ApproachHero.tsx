@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import MarkCube from './MarkCube';
+import HeroAmbient from './HeroAmbient';
 
 type TrustItem = { label: string; value: string };
 
@@ -39,6 +40,9 @@ const ApproachHero = ({
 }: ApproachHeroProps) => {
   return (
     <section className="relative bg-bg-deep py-12 md:py-16 px-6 lg:px-8 border-b border-bg-surface overflow-hidden">
+
+      <HeroAmbient />
+
       {/* Subtle floor glow під cube — додає weight без візуального шуму */}
       <div
         aria-hidden="true"
