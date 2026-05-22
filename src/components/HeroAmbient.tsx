@@ -20,8 +20,9 @@ type HeroAmbientProps = {
 const NOISE_URL =
   "url(\"data:image/svg+xml;utf8,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.95 0 0 0 0 0.95 0 0 0 0 0.95 0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";
 
-// унікальний класс для media-query bump на high-DPI displays
-const STYLE_TAG_ID = 'hero-ambient-styles';
+// Media-query bump для high-DPI displays + reduced-motion fallback.
+// Style injected per-mount (duplicate rules harmless — CSS rules ідентичні).
+// Якщо колись треба multiple heroes на одній сторінці — винести правила до src/index.css.
 
 /**
  * Reusable ambient overlay для hero-блоків. Прибирає anti-pattern «bare solid bg».
@@ -53,21 +54,19 @@ const HeroAmbient = ({
   return (
     <>
       {/* Style tag — media query bump для high-DPI (retina/OLED).
-          Інжектиться один раз (StrictMode-safe через id check). */}
+          Без id: duplicates безпечні (CSS rules ідентичні). */}
       <style
-        // eslint-disable-next-line react/no-unknown-property
         suppressHydrationWarning
         dangerouslySetInnerHTML={{
           __html: `
             @media (min-resolution: 2dppx) {
-              [data-hero-ambient-noise] { opacity: var(--hero-noise-retina, 0.18) !important; }
+              [data-hero-ambient-noise] { opacity: 0.18 !important; }
             }
             @media (prefers-reduced-motion: reduce) {
               [data-hero-ambient-noise] { opacity: 0.08 !important; }
             }
           `,
         }}
-        id={STYLE_TAG_ID}
       />
 
       <div

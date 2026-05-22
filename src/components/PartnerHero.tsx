@@ -140,6 +140,12 @@ const PartnerHero = ({
                       setPaused(true);
                     }}
                     onBlur={() => setPaused(false)}
+                    onTouchStart={() => {
+                      setActiveIdx(i);
+                      setPaused(true);
+                    }}
+                    onTouchEnd={() => setPaused(false)}
+                    onTouchCancel={() => setPaused(false)}
                     className="group block w-full text-left pl-5 pr-3 py-3 cursor-pointer"
                   >
                     <span className="flex items-baseline gap-3">

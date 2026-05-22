@@ -120,7 +120,7 @@ const Partners = () => {
       <section className="bg-bg-deep py-24 md:py-32 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
-            <SectionHeading eyebrow="02" title="Ліцензії та дозволи" />
+            <SectionHeading eyebrow="02" title="Дозвільна документація" />
           </FadeIn>
           <ul className="mt-12 divide-y divide-bg-surface border-y border-bg-surface">
             {LICENSES.map((item, i) => (

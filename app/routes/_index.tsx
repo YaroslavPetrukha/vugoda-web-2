@@ -94,7 +94,7 @@ const DOCUMENTS = [
     external: false,
   },
   {
-    title: 'Ліцензія ДАБІ',
+    title: 'Реєстр забудовників',
     body: 'Перевірити статус — у Держреєстрі за ЄДРПОУ 44876801.',
     cta: 'Відкрити реєстр',
     href: 'https://e-construction.gov.ua/',
