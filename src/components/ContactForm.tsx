@@ -226,6 +226,23 @@ const ContactForm = ({
           Прийнято.
         </h3>
         <p className="text-text-secondary leading-relaxed max-w-md">{successText}</p>
+        <div className="flex flex-col sm:flex-row gap-3 mt-6">
+          <a
+            href="tel:+380969900390"
+            className="inline-flex items-center justify-center px-5 py-2.5 border border-accent text-accent text-sm uppercase tracking-widest font-medium hover:bg-accent hover:text-bg-deep transition-colors"
+          >
+            Зателефонувати: 0969 900 390
+          </a>
+          {/* TODO(client): confirm Telegram URL/username */}
+          <a
+            href="https://t.me/vygoda_sales"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center px-5 py-2.5 border border-bg-surface text-text-secondary text-sm uppercase tracking-widest font-medium hover:border-text-primary hover:text-text-primary transition-colors"
+          >
+            Telegram
+          </a>
+        </div>
       </div>
     );
   }
@@ -657,6 +674,27 @@ const ContactForm = ({
           <p className="text-xs text-text-secondary/80 max-w-xl leading-relaxed">
             {disclaimer}
           </p>
+          {isRateLimited && (
+            <p className="text-xs text-text-secondary/80 leading-relaxed mt-3">
+              Або напишіть напряму:{' '}
+              <a
+                href="tel:+380969900390"
+                className="text-text-primary hover:text-accent underline underline-offset-2 transition-colors"
+              >
+                0969 900 390
+              </a>
+              {' / '}
+              {/* TODO(client): confirm Telegram URL/username */}
+              <a
+                href="https://t.me/vygoda_sales"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-primary hover:text-accent underline underline-offset-2 transition-colors"
+              >
+                Telegram
+              </a>
+            </p>
+          )}
         </div>
       </form>
     </div>
