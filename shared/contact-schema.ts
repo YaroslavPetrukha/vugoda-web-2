@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { sanitizeUnicode } from '../src/lib/sanitize';
 
 // All form source identifiers used across routes.
 // 'contacts' removed — canonical identifier is 'kontakty' (duplicate cleanup P1-7).
@@ -23,12 +24,16 @@ export type FormSource = (typeof FORM_SOURCES)[number];
 // +380XXXXXXXXX after schema validation — schema stays permissive intentionally.
 const PHONE_REGEX = /^[+\d][\d\s()+-]{7,20}$/;
 
+// Order: max → trim → transform(sanitize) → refine.
+// Sanitize MUST run before final length refine — otherwise a bot can submit
+// 2 zero-width chars and pass .min(2) before server strips them to empty.
 export const ContactSchema = z.object({
   name: z
     .string()
-    .min(2, 'Імʼя — мінімум 2 символи')
     .max(100, "Ім'я задовге")
-    .trim(),
+    .trim()
+    .transform(sanitizeUnicode)
+    .refine((v) => v.length >= 2, { message: 'Імʼя — мінімум 2 символи' }),
   phone: z
     .string()
     .regex(PHONE_REGEX, 'Має починатись з +380 і містити мінімум 9 цифр')
@@ -41,11 +46,16 @@ export const ContactSchema = z.object({
     .email('Перевірте формат — приклад: name@domain.com')
     .optional()
     .or(z.literal('')),
-  message: z.string().max(2000, 'Повідомлення задовге').optional().or(z.literal('')),
-  project: z.string().max(200).optional().or(z.literal('')),
+  message: z
+    .string()
+    .max(2000, 'Повідомлення задовге')
+    .transform(sanitizeUnicode)
+    .optional()
+    .or(z.literal('')),
+  project: z.string().max(200).transform(sanitizeUnicode).optional().or(z.literal('')),
   investor_format: z.string().max(100).optional().or(z.literal('')),
   org_type: z.string().max(100).optional().or(z.literal('')),
-  goal: z.string().max(500).optional().or(z.literal('')),
+  goal: z.string().max(500).transform(sanitizeUnicode).optional().or(z.literal('')),
   topic: z.string().max(100).optional().or(z.literal('')),
   // Zod v4: 'error' string is the unified message for missing/invalid values (P1-8)
   source: z.enum(FORM_SOURCES, { error: "source поле обов'язкове або має невірне значення" }),

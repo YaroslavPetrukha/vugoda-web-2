@@ -24,9 +24,12 @@ export function collapseWhitespace(s: string): string {
 }
 
 /**
- * Matches http(s)://, www., or ftp:// — used for URL spam detection.
+ * Matches http(s)://, www.<char>, or ftp:// — used for URL spam detection.
+ * The `www.` branch requires a word boundary before and at least one word
+ * char after to avoid false-positives on stray "www." typos or things like
+ * "John www. Petrenko". Catches real URLs like "www.example.com".
  */
-export const URL_REGEX: RegExp = /(https?:\/\/|www\.|ftp:\/\/)/i;
+export const URL_REGEX: RegExp = /(https?:\/\/|\bwww\.\w|ftp:\/\/)/i;
 
 /**
  * Returns true if the string appears to contain a URL.

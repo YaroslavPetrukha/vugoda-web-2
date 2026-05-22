@@ -73,35 +73,56 @@ const ContactForm = ({
   // Stable id prefix — avoids hydration mismatch from useId on SSG
   const uid = useId();
 
-  // Fetch time-trap token on mount — required before submission is enabled
+  // Fetch time-trap token on mount — required before submission is enabled.
+  // Retries up to 3 times with exponential backoff (1s, 3s, 9s) to recover
+  // from transient failures (server cold-start, TIME_TRAP_SECRET propagation
+  // window after deploy). After final retry fail, formTokenFailed flips true
+  // and the UI shows a fallback CTA (tel + Telegram) instead of a dead form.
+  const [formTokenFailed, setFormTokenFailed] = useState(false);
   useEffect(() => {
-    fetch('/api/form-token')
-      .then((r) => r.json())
-      .then((d: unknown) => {
-        const res = d as { ok?: boolean; token?: string } | null;
-        if (res?.ok && res?.token) setFormToken(res.token);
-      })
-      .catch(() => {
-        // Silent failure — token stays null, submit stays disabled until retry
-      });
+    let cancelled = false;
+    const attempt = async (n: number): Promise<void> => {
+      try {
+        const r = await fetch('/api/form-token');
+        const d = (await r.json()) as { ok?: boolean; token?: string } | null;
+        if (cancelled) return;
+        if (d?.ok && d?.token) {
+          setFormToken(d.token);
+          return;
+        }
+        throw new Error('no-token');
+      } catch {
+        if (cancelled) return;
+        if (n >= 3) {
+          setFormTokenFailed(true);
+          return;
+        }
+        const delay = Math.pow(3, n) * 1000; // 1s, 3s, 9s
+        setTimeout(() => {
+          if (!cancelled) void attempt(n + 1);
+        }, delay);
+      }
+    };
+    void attempt(0);
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  // Countdown timer for rate-limited state
+  // Countdown timer for rate-limited state.
+  // Uses setInterval bound to state.kind so it fires once per rate-limit
+  // session (no drift from per-tick effect re-creation, no extra renders).
   useEffect(() => {
     if (state.kind !== 'rate_limited') return;
-    if (state.secondsLeft <= 0) {
-      setState({ kind: 'idle' });
-      return;
-    }
-    const t = setTimeout(() => {
-      setState((prev) =>
-        prev.kind === 'rate_limited'
-          ? { kind: 'rate_limited', secondsLeft: prev.secondsLeft - 1 }
-          : prev,
-      );
+    const interval = setInterval(() => {
+      setState((prev) => {
+        if (prev.kind !== 'rate_limited') return prev;
+        if (prev.secondsLeft <= 1) return { kind: 'idle' };
+        return { kind: 'rate_limited', secondsLeft: prev.secondsLeft - 1 };
+      });
     }, 1000);
-    return () => clearTimeout(t);
-  }, [state]);
+    return () => clearInterval(interval);
+  }, [state.kind]);
 
   // Per-field Zod validation (used on blur and onChange-after-error)
   const validateField = (fieldName: string, value: unknown) => {
@@ -124,7 +145,6 @@ const ContactForm = ({
     e.preventDefault();
     if (submitLockRef.current) return;
     if (state.kind === 'submitting' || state.kind === 'rate_limited') return;
-    submitLockRef.current = true;
     setErrors({});
 
     if (!turnstileToken) {
@@ -158,6 +178,10 @@ const ContactForm = ({
       return;
     }
 
+    // Lock acquired only when committing to the actual network submit.
+    // Validation early-returns above must NOT set the lock — otherwise the
+    // form gets permanently disabled (no try/finally on those paths).
+    submitLockRef.current = true;
     setState({ kind: 'submitting' });
 
     try {
@@ -677,6 +701,27 @@ const ContactForm = ({
           {isRateLimited && (
             <p className="text-xs text-text-secondary/80 leading-relaxed mt-3">
               Або напишіть напряму:{' '}
+              <a
+                href="tel:+380969900390"
+                className="text-text-primary hover:text-accent underline underline-offset-2 transition-colors"
+              >
+                0969 900 390
+              </a>
+              {' / '}
+              {/* TODO(client): confirm Telegram URL/username */}
+              <a
+                href="https://t.me/vygoda_sales"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-text-primary hover:text-accent underline underline-offset-2 transition-colors"
+              >
+                Telegram
+              </a>
+            </p>
+          )}
+          {formTokenFailed && !formToken && (
+            <p className="text-xs text-red-400 leading-relaxed mt-3" role="alert">
+              Не вдалось підключитись до сервера. Зателефонуйте напряму:{' '}
               <a
                 href="tel:+380969900390"
                 className="text-text-primary hover:text-accent underline underline-offset-2 transition-colors"
