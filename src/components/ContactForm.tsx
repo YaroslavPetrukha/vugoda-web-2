@@ -3,6 +3,7 @@ import type { FormEvent } from 'react';
 import { useNavigate } from 'react-router';
 import { IMaskInput } from 'react-imask';
 import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
+import { Phone, Send } from 'lucide-react';
 import Button from './Button';
 import {
   ContactSchema,
@@ -56,9 +57,9 @@ const ContactForm = ({
   heading,
   description,
   fields = [],
-  submitLabel = 'Надіслати запит',
+  submitLabel = 'Замовити дзвінок',
   successText = 'Прийнято. Зателефонуємо протягом робочого дня.',
-  disclaimer = 'Натискаючи кнопку, ви погоджуєтесь на обробку персональних даних відповідно до законодавства України.',
+  disclaimer = 'Відповідаємо у робочий час: Пн–Пт, 09:00–19:00',
   source,
   className = '',
 }: ContactFormProps) => {
@@ -267,10 +268,34 @@ const ContactForm = ({
         {heading}
       </h3>
       {description && (
-        <p className="text-text-secondary mb-8 text-sm md:text-base leading-relaxed">
+        <p className="text-text-secondary mb-6 text-sm md:text-base leading-relaxed">
           {description}
         </p>
       )}
+
+      {/* Alternative CTAs — always visible, removes form-friction for users who prefer direct channels */}
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-3 mb-8 pb-6 border-b border-bg-base/60">
+        <span className="text-xs uppercase tracking-widest text-text-secondary">
+          Або напряму:
+        </span>
+        <a
+          href="tel:+380969900390"
+          className="inline-flex items-center gap-2 text-sm text-text-primary hover:text-accent transition-colors font-medium"
+        >
+          <Phone className="w-4 h-4" aria-hidden="true" />
+          0969 900 390
+        </a>
+        <a
+          href="https://t.me/vygoda_sales"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-sm text-text-primary hover:text-accent transition-colors font-medium"
+        >
+          <Send className="w-4 h-4" aria-hidden="true" />
+          Telegram
+        </a>
+      </div>
+
       <form
         ref={formRef}
         className="flex flex-col gap-7"
@@ -307,8 +332,8 @@ const ContactForm = ({
               placeholder="Як до вас звертатися"
               maxLength={100}
               enterKeyHint="next"
-              className={`bg-transparent border-b pb-3 text-text-primary placeholder:text-text-secondary/60 focus:outline-none focus:border-accent rounded-none ${
-                errors.name ? 'border-red-500' : 'border-bg-surface'
+              className={`bg-transparent border-b pb-4 text-text-primary placeholder:text-text-secondary/60 focus:outline-none focus:border-accent hover:border-text-secondary/70 transition-colors rounded-none ${
+                errors.name ? 'border-red-500' : 'border-text-secondary/40'
               }`}
               onBlur={(e) => validateField(e.target.name, e.target.value)}
               onChange={(e) => {
@@ -342,8 +367,8 @@ const ContactForm = ({
               inputMode="tel"
               enterKeyHint="next"
               placeholder="+380 ..."
-              className={`bg-transparent border-b pb-3 text-text-primary placeholder:text-text-secondary/60 focus:outline-none focus:border-accent rounded-none ${
-                errors.phone ? 'border-red-500' : 'border-bg-surface'
+              className={`bg-transparent border-b pb-4 text-text-primary placeholder:text-text-secondary/60 focus:outline-none focus:border-accent hover:border-text-secondary/70 transition-colors rounded-none ${
+                errors.phone ? 'border-red-500' : 'border-text-secondary/40'
               }`}
               onBlur={(e) => validateField('phone', (e.target as HTMLInputElement).value)}
               onChange={(e) => {
@@ -373,8 +398,8 @@ const ContactForm = ({
               enterKeyHint="next"
               maxLength={320}
               placeholder="you@example.com"
-              className={`bg-transparent border-b pb-3 text-text-primary placeholder:text-text-secondary/60 focus:outline-none focus:border-accent rounded-none ${
-                errors.email ? 'border-red-500' : 'border-bg-surface'
+              className={`bg-transparent border-b pb-4 text-text-primary placeholder:text-text-secondary/60 focus:outline-none focus:border-accent hover:border-text-secondary/70 transition-colors rounded-none ${
+                errors.email ? 'border-red-500' : 'border-text-secondary/40'
               }`}
               onBlur={(e) => validateField(e.target.name, e.target.value)}
               onChange={(e) => {
@@ -401,8 +426,8 @@ const ContactForm = ({
               aria-describedby={errors.topic ? `${uid}-topic-err` : undefined}
               autoComplete="off"
               enterKeyHint="next"
-              className={`bg-transparent border-b pb-3 text-text-primary focus:outline-none focus:border-accent rounded-none ${
-                errors.topic ? 'border-red-500' : 'border-bg-surface'
+              className={`bg-transparent border-b pb-4 text-text-primary focus:outline-none focus:border-accent hover:border-text-secondary/70 transition-colors rounded-none ${
+                errors.topic ? 'border-red-500' : 'border-text-secondary/40'
               }`}
               onBlur={(e) => validateField(e.target.name, e.target.value)}
               onChange={(e) => {
@@ -448,8 +473,8 @@ const ContactForm = ({
               aria-describedby={errors.investor_format ? `${uid}-investor-format-err` : undefined}
               autoComplete="off"
               enterKeyHint="next"
-              className={`bg-transparent border-b pb-3 text-text-primary focus:outline-none focus:border-accent rounded-none ${
-                errors.investor_format ? 'border-red-500' : 'border-bg-surface'
+              className={`bg-transparent border-b pb-4 text-text-primary focus:outline-none focus:border-accent hover:border-text-secondary/70 transition-colors rounded-none ${
+                errors.investor_format ? 'border-red-500' : 'border-text-secondary/40'
               }`}
               onBlur={(e) => validateField(e.target.name, e.target.value)}
               onChange={(e) => {
@@ -493,8 +518,8 @@ const ContactForm = ({
               aria-describedby={errors.org_type ? `${uid}-org-type-err` : undefined}
               autoComplete="off"
               enterKeyHint="next"
-              className={`bg-transparent border-b pb-3 text-text-primary focus:outline-none focus:border-accent rounded-none ${
-                errors.org_type ? 'border-red-500' : 'border-bg-surface'
+              className={`bg-transparent border-b pb-4 text-text-primary focus:outline-none focus:border-accent hover:border-text-secondary/70 transition-colors rounded-none ${
+                errors.org_type ? 'border-red-500' : 'border-text-secondary/40'
               }`}
               onBlur={(e) => validateField(e.target.name, e.target.value)}
               onChange={(e) => {
@@ -542,8 +567,8 @@ const ContactForm = ({
               enterKeyHint="next"
               maxLength={500}
               placeholder="Коротко — що саме потрібно"
-              className={`bg-transparent border-b pb-3 text-text-primary placeholder:text-text-secondary/60 focus:outline-none focus:border-accent rounded-none ${
-                errors.goal ? 'border-red-500' : 'border-bg-surface'
+              className={`bg-transparent border-b pb-4 text-text-primary placeholder:text-text-secondary/60 focus:outline-none focus:border-accent hover:border-text-secondary/70 transition-colors rounded-none ${
+                errors.goal ? 'border-red-500' : 'border-text-secondary/40'
               }`}
               onBlur={(e) => validateField(e.target.name, e.target.value)}
               onChange={(e) => {
@@ -571,8 +596,8 @@ const ContactForm = ({
               enterKeyHint="done"
               maxLength={2000}
               placeholder="Опишіть запит"
-              className={`bg-transparent border-b pb-3 text-text-primary placeholder:text-text-secondary/60 focus:outline-none focus:border-accent rounded-none resize-none ${
-                errors.message ? 'border-red-500' : 'border-bg-surface'
+              className={`bg-transparent border-b pb-4 text-text-primary placeholder:text-text-secondary/60 focus:outline-none focus:border-accent hover:border-text-secondary/70 transition-colors rounded-none resize-none ${
+                errors.message ? 'border-red-500' : 'border-text-secondary/40'
               }`}
               onChange={(e) => {
                 setMessageLen(e.target.value.length);
@@ -654,12 +679,12 @@ const ContactForm = ({
           </div>
         )}
 
-        <div className="flex flex-col gap-4 pt-2">
+        <div className="flex flex-col gap-3 pt-2">
           <Button
             type="submit"
             variant="primary"
             size="lg"
-            className="self-start"
+            className="w-full md:w-auto md:self-start"
             disabled={isSubmitDisabled}
             aria-disabled={isSubmitDisabled}
           >
@@ -669,45 +694,14 @@ const ContactForm = ({
             {disclaimer}
           </p>
           {isRateLimited && (
-            <p className="text-xs text-text-secondary/80 leading-relaxed mt-3">
-              Або напишіть напряму:{' '}
-              <a
-                href="tel:+380969900390"
-                className="text-text-primary hover:text-accent underline underline-offset-2 transition-colors"
-              >
-                0969 900 390
-              </a>
-              {' / '}
-              {/* TODO(client): confirm Telegram URL/username */}
-              <a
-                href="https://t.me/vygoda_sales"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-text-primary hover:text-accent underline underline-offset-2 transition-colors"
-              >
-                Telegram
-              </a>
+            <p className="text-xs text-text-secondary/80 leading-relaxed mt-2">
+              Багато запитів — спробуйте через {secondsLeft}s або скористайтесь альтернативними
+              каналами вище.
             </p>
           )}
           {formTokenFailed && !formToken && (
-            <p className="text-xs text-red-400 leading-relaxed mt-3" role="alert">
-              Не вдалось підключитись до сервера. Зателефонуйте напряму:{' '}
-              <a
-                href="tel:+380969900390"
-                className="text-text-primary hover:text-accent underline underline-offset-2 transition-colors"
-              >
-                0969 900 390
-              </a>
-              {' / '}
-              {/* TODO(client): confirm Telegram URL/username */}
-              <a
-                href="https://t.me/vygoda_sales"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-text-primary hover:text-accent underline underline-offset-2 transition-colors"
-              >
-                Telegram
-              </a>
+            <p className="text-xs text-red-400 leading-relaxed mt-2" role="alert">
+              Не вдалось підключитись до сервера. Скористайтесь альтернативними каналами вище.
             </p>
           )}
         </div>
