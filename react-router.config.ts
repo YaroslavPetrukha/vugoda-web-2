@@ -15,6 +15,8 @@ export default {
     '/partneram',
     '/kontakty',
     '/novyny',
+    // Thank-you page — conversion page, noindex, prerendered for clean URL tracking
+    '/diakuyu',
     // Catch-all 404 — prerendered so CF Pages can serve it with 404 status
     // via _redirects rule: /* /404/index.html 404
     '/404',

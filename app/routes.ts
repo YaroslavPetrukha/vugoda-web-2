@@ -4,6 +4,7 @@ export default [
   layout('../src/components/Layout.tsx', [
     index('routes/_index.tsx'),
     route('pidkhid', 'routes/pidkhid.tsx'),
+    route('pilot-pidkhid', 'routes/pilot-pidkhid.tsx'),
     route('portfolio', 'routes/portfolio._index.tsx'),
     route('portfolio/lakeview', 'routes/portfolio.lakeview.tsx'),
     route('portfolio/etno-dim', 'routes/portfolio.etno-dim.tsx'),
@@ -14,6 +15,7 @@ export default [
     route('partneram', 'routes/partneram.tsx'),
     route('kontakty', 'routes/kontakty.tsx'),
     route('novyny', 'routes/novyny.tsx'),
+    route('diakuyu', 'routes/diakuyu.tsx'),
     route('*', 'routes/$.tsx'),
   ]),
 ] satisfies RouteConfig;

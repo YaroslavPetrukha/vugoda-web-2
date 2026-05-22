@@ -43,6 +43,7 @@ const KNOWN_PRERENDERED_ROUTES = new Set<string>([
   '/partneram',
   '/kontakty',
   '/novyny',
+  '/diakuyu',
   '/404',
   '/404/index.html',
 ]);

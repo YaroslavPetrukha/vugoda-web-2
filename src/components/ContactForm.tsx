@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useId } from 'react';
 import type { FormEvent } from 'react';
+import { useNavigate } from 'react-router';
 import { IMaskInput } from 'react-imask';
 import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 import Button from './Button';
@@ -42,7 +43,6 @@ const FIELD_LABELS: Record<ExtraField, string> = {
 type FormState =
   | { kind: 'idle' }
   | { kind: 'submitting' }
-  | { kind: 'success' }
   | { kind: 'error'; message: string }
   | { kind: 'rate_limited'; secondsLeft: number };
 
@@ -62,6 +62,7 @@ const ContactForm = ({
   source,
   className = '',
 }: ContactFormProps) => {
+  const navigate = useNavigate();
   const [state, setState] = useState<FormState>({ kind: 'idle' });
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [formToken, setFormToken] = useState<string | null>(null);
@@ -199,7 +200,11 @@ const ContactForm = ({
       }
 
       if (data && data.ok === true) {
-        setState({ kind: 'success' });
+        // Navigate to dedicated thank-you page. replace:true ensures Back skips the form.
+        void navigate(
+          `/diakuyu?source=${encodeURIComponent(source)}&id=${encodeURIComponent(data.requestId)}`,
+          { replace: true },
+        );
         return;
       }
 
@@ -235,41 +240,6 @@ const ContactForm = ({
       submitLockRef.current = false;
     }
   };
-
-  if (state.kind === 'success') {
-    return (
-      <div
-        className={`bg-bg-surface border border-accent p-8 md:p-10 ${className}`}
-        role="status"
-        aria-live="polite"
-      >
-        <div className="w-12 h-12 mb-5 border border-accent flex items-center justify-center">
-          <div className="w-2 h-2 bg-accent" />
-        </div>
-        <h3 className="text-2xl md:text-3xl font-bold text-text-primary leading-snug mb-3">
-          Прийнято.
-        </h3>
-        <p className="text-text-secondary leading-relaxed max-w-md">{successText}</p>
-        <div className="flex flex-col sm:flex-row gap-3 mt-6">
-          <a
-            href="tel:+380969900390"
-            className="inline-flex items-center justify-center px-5 py-2.5 border border-accent text-accent text-sm uppercase tracking-widest font-medium hover:bg-accent hover:text-bg-deep transition-colors"
-          >
-            Зателефонувати: 0969 900 390
-          </a>
-          {/* TODO(client): confirm Telegram URL/username */}
-          <a
-            href="https://t.me/vygoda_sales"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-5 py-2.5 border border-bg-surface text-text-secondary text-sm uppercase tracking-widest font-medium hover:border-text-primary hover:text-text-primary transition-colors"
-          >
-            Telegram
-          </a>
-        </div>
-      </div>
-    );
-  }
 
   const headingId = `cf-${uid}-heading`;
   const isBusy = state.kind === 'submitting';
