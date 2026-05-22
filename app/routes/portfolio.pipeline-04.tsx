@@ -2,12 +2,11 @@ import type { MetaFunction } from 'react-router';
 import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight } from 'lucide-react';
 import FadeIn from '../../src/components/FadeIn';
-import PageHero from '../../src/components/PageHero';
+import PipelineHero from '../../src/components/PipelineHero';
 import SectionHeading from '../../src/components/SectionHeading';
 import Button from '../../src/components/Button';
 import StagePill from '../../src/components/StagePill';
 import ContactForm from '../../src/components/ContactForm';
-import IsometricCubePlaceholder from '../../src/components/IsometricCubePlaceholder';
 
 export const meta: MetaFunction = ({ location }) => {
   const title = 'Новий проект ВИГОДА у підготовці';
@@ -42,36 +41,23 @@ const NO_NAME_REASONS = [
 const ProjectPipeline04 = () => {
   return (
     <>
-      <PageHero
-        eyebrow="Pipeline"
-        title="Проект у роботі"
-        lead="Рання стадія. Прораховуємо економіку. Назва, адреса і параметри зʼявляться, коли буде що показати."
-        decorative
+      <PipelineHero
+        eyebrow="Pipeline · 04"
+        title="Поки без імені. До затвердження концепту."
+        lead="Не вигадуємо тимчасові назви для маркетингу. Назва, рендери і параметри з'являться після затвердження концепту і кошторису — не раніше. Підпишіться, щоб дізнатись першими."
+        caption="каркасний знак ВИГОДА — placeholder проекту без назви"
       >
         <Button as="a" href="#pidpyska" variant="primary" size="lg">
           Підписатись на оновлення <ArrowRight className="w-4 h-4" />
         </Button>
-        <Button as="router" href="/pidkhid" variant="ghost" size="lg">
-          Як ми працюємо
+        <Button as="router" href="/pidkhid" variant="link" size="md">
+          Як ми працюємо →
         </Button>
-      </PageHero>
+      </PipelineHero>
 
       <section className="bg-bg-deep border-b border-bg-surface py-6 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center gap-4 text-sm text-text-secondary">
           <StagePill stage="pre-budget" label="Прорахунок кошторисної вартості" />
-        </div>
-      </section>
-
-      {/* HERO PLACEHOLDER */}
-      <section className="bg-bg-deep py-16 md:py-24 px-6 lg:px-8 border-b border-bg-surface">
-        <div className="max-w-3xl mx-auto flex flex-col items-center justify-center text-center">
-          <IsometricCubePlaceholder
-            className="w-[280px] md:w-[400px] lg:w-[480px] opacity-60 mb-10"
-            ariaLabel="Каркасний знак ВИГОДА — placeholder проекту без назви"
-          />
-          <p className="text-text-secondary text-sm uppercase tracking-widest">
-            Назва — після узгодження з інвестором
-          </p>
         </div>
       </section>
 
