@@ -47,11 +47,6 @@ export function Layout({ children }: { children: ReactNode }) {
         telephone: '+380969900390',
         identifier: [
           { '@type': 'PropertyValue', propertyID: 'ЄДРПОУ', value: '44876801' },
-          {
-            '@type': 'PropertyValue',
-            propertyID: 'Ліцензія на будівництво',
-            value: 'Видана 27.12.2019, безстрокова',
-          },
         ],
         sameAs: ['https://www.instagram.com/lakeviewlviv/'],
         knowsLanguage: ['uk'],
