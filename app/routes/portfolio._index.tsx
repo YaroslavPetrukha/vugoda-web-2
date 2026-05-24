@@ -1,4 +1,5 @@
 import type { MetaFunction } from 'react-router';
+import { Link } from 'react-router';
 import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import FadeIn from '../../src/components/FadeIn';
@@ -44,34 +45,36 @@ const Portfolio = () => {
         <Button as="router" href="/portfolio/lakeview" variant="primary" size="md">
           Перейти до Lakeview <ArrowRight className="w-4 h-4" />
         </Button>
-        <a
-          href="/kontakty"
+        <Link
+          to="/kontakty"
           className="inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-accent transition-colors border-b border-text-secondary/30 hover:border-accent pb-0.5"
         >
           Залишити заявку <ArrowUpRight className="w-3.5 h-3.5" />
-        </a>
+        </Link>
       </PortfolioHero>
 
       {/* === Capacity statement — позиція в портфелі === */}
       <section className="bg-bg-deep border-b border-bg-surface py-12 md:py-16 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 md:gap-12">
-          <div>
-            <span className="text-xs font-mono tracking-[0.18em] text-accent uppercase">
-              // Позиція в портфелі
-            </span>
+        <FadeIn>
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 md:gap-12">
+            <div>
+              <span className="text-xs font-mono tracking-[0.18em] text-accent uppercase">
+                <span aria-hidden="true">// </span>Позиція в портфелі
+              </span>
+            </div>
+            <div className="flex flex-col gap-5">
+              <p className="text-xl md:text-2xl font-bold text-text-primary leading-snug max-w-2xl">
+                Один активний обʼєкт — не обмеження, а принцип.
+              </p>
+              <p className="text-base text-text-secondary leading-relaxed max-w-2xl">
+                Системний девелопмент означає не масштабувати кількість, а тримати якість від проектування до здачі. Повний фокус команди — на живому обʼєкті.
+              </p>
+              <p className="text-base text-text-secondary leading-relaxed max-w-2xl">
+                Наступні проекти — у підготовці дозвільної документації. Публічний анонс — після завершення процедур.
+              </p>
+            </div>
           </div>
-          <div className="flex flex-col gap-5">
-            <p className="text-xl md:text-2xl font-bold text-text-primary leading-snug max-w-2xl">
-              Один активний обʼєкт — не обмеження, а принцип.
-            </p>
-            <p className="text-base text-text-secondary leading-relaxed max-w-2xl">
-              Системний девелопмент означає не масштабувати кількість, а тримати якість від проектування до здачі. Повний фокус команди — на живому обʼєкті.
-            </p>
-            <p className="text-base text-text-secondary leading-relaxed max-w-2xl">
-              Наступні проекти — у підготовці дозвільної документації. Публічний анонс — після завершення процедур.
-            </p>
-          </div>
-        </div>
+        </FadeIn>
       </section>
 
       {/* === Lakeview featured + meta === */}

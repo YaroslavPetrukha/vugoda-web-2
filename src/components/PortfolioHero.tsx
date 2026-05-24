@@ -78,7 +78,7 @@ const PortfolioHero = ({
         <div className="md:order-1 flex flex-col gap-5">
           {eyebrow && (
             <span className="inline-block text-xs font-mono tracking-[0.18em] text-accent uppercase">
-              // {eyebrow}
+              <span aria-hidden="true">// </span>{eyebrow}
             </span>
           )}
           <h1 className="text-[clamp(2rem,4.2vw,3.5rem)] leading-[1.05] tracking-tight font-bold text-text-primary max-w-3xl">
@@ -89,7 +89,7 @@ const PortfolioHero = ({
               {lead}
             </p>
           )}
-          {children && <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-3">{children}</div>}
+          {children && <div className="mt-2 flex flex-wrap gap-3 items-center">{children}</div>}
 
           {/* Trust row — 4-cell canonical pool. Mobile 2×2, md+ 4×1 */}
           <dl className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 pt-5 border-t border-bg-surface">
