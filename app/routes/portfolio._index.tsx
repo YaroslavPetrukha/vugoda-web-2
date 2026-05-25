@@ -1,16 +1,17 @@
 import type { MetaFunction } from 'react-router';
+import { Link } from 'react-router';
 import { siteUrl } from '../../src/lib/site-url';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import FadeIn from '../../src/components/FadeIn';
-import PageHero from '../../src/components/PageHero';
+import PortfolioHero from '../../src/components/PortfolioHero';
 import ProjectCard from '../../src/components/ProjectCard';
 import Button from '../../src/components/Button';
 import { projects } from '../../src/data/projects';
 
 export const meta: MetaFunction = ({ location }) => {
-  const title = 'Портфель ЖК і pipeline — забудовник ВИГОДА';
+  const title = 'Портфель — забудовник ВИГОДА';
   const description =
-    '1 активний обʼєкт у Львові (ЖК Lakeview, бізнес-клас) і 4 проекти у підготовці. Стадії, адреси, терміни.';
+    'Один активний обʼєкт у Львові — ЖК Lakeview, бізнес-клас, здача 2027. Системний девелопмент: повний цикл власними силами.';
   const image = siteUrl('/og/news.png');
   const url = siteUrl(location.pathname);
   return [
@@ -36,55 +37,53 @@ const lakeview = projects.find((p) => p.slug === 'lakeview')!;
 const Portfolio = () => {
   return (
     <>
-      <PageHero
+      <PortfolioHero
         eyebrow="Розділ 03"
-        title="Портфель і pipeline"
-        lead="Зараз у портфелі один активний обʼєкт — ЖК Lakeview у стадії будівництва. Нові обʼєкти у підготовці."
+        title="Один обʼєкт. Повний цикл."
+        lead="Системний девелопмент означає не масштабувати кількість, а тримати якість від проектування до здачі."
       >
-        <Button as="router" href="/portfolio/lakeview" variant="primary" size="lg">
+        <Button as="router" href="/portfolio/lakeview" variant="primary" size="md">
           Перейти до Lakeview <ArrowRight className="w-4 h-4" />
         </Button>
-      </PageHero>
+        <Link
+          to="/kontakty"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary hover:text-accent transition-colors border-b border-text-secondary/30 hover:border-accent pb-0.5"
+        >
+          Залишити заявку <ArrowUpRight className="w-3.5 h-3.5" />
+        </Link>
+      </PortfolioHero>
 
-      {/* Filter labels (informational, not interactive — прототип) */}
-      <section className="bg-bg-deep border-b border-bg-surface py-8 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center gap-3 md:gap-4">
-          <span className="text-[11px] font-medium uppercase tracking-widest text-text-secondary mr-2">
-            Фільтр за стадією
-          </span>
-          {[
-            { label: 'Усі', count: 5, active: true },
-            { label: 'Будується', count: 1 },
-            { label: 'Дозвільна документація', count: 1 },
-            { label: 'Проєктні роботи', count: 1 },
-            { label: 'Відкриті продажі', count: 1 },
-            { label: 'Попереднє бронування квартир', count: 1 },
-          ].map((f) => (
-            <button
-              type="button"
-              key={f.label}
-              aria-pressed={f.active ?? false}
-              className={`px-3 py-2 text-xs uppercase tracking-widest border transition-colors rounded-none ${
-                f.active
-                  ? 'bg-accent text-bg-deep border-accent'
-                  : 'bg-transparent text-text-secondary border-bg-surface hover:border-accent hover:text-accent'
-              }`}
-            >
-              {f.label} ({f.count})
-            </button>
-          ))}
-        </div>
+      {/* === Capacity statement — позиція в портфелі === */}
+      <section className="bg-bg-deep border-b border-bg-surface py-12 md:py-16 px-6 lg:px-8">
+        <FadeIn>
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 md:gap-12">
+            <div>
+              <span className="text-xs font-mono tracking-[0.18em] text-accent uppercase">
+                <span aria-hidden="true">// </span>Позиція в портфелі
+              </span>
+            </div>
+            <div className="flex flex-col gap-5">
+              <p className="text-xl md:text-2xl font-bold text-text-primary leading-snug max-w-2xl">
+                Один активний обʼєкт — не обмеження, а принцип.
+              </p>
+              <p className="text-base text-text-secondary leading-relaxed max-w-2xl">
+                Системний девелопмент означає не масштабувати кількість, а тримати якість від проектування до здачі. Повний фокус команди — на живому обʼєкті.
+              </p>
+              <p className="text-base text-text-secondary leading-relaxed max-w-2xl">
+                Наступні проекти — у підготовці дозвільної документації. Публічний анонс — після завершення процедур.
+              </p>
+            </div>
+          </div>
+        </FadeIn>
       </section>
 
-      {/* PROJECTS GRID */}
+      {/* === Lakeview featured + meta === */}
       <section className="bg-bg-base py-16 md:py-24 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          {/* Featured */}
           <FadeIn>
             <ProjectCard project={lakeview} variant="featured" />
           </FadeIn>
 
-          {/* Lakeview meta info */}
           <FadeIn delay={0.05}>
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 text-sm">
               <div>
@@ -119,7 +118,6 @@ const Portfolio = () => {
               Деталі проекту <ArrowRight className="w-4 h-4" />
             </Button>
           </FadeIn>
-
         </div>
       </section>
     </>
