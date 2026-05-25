@@ -483,7 +483,7 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
           ok: false,
           error: 'server',
           message:
-            'Не вдалось доставити повідомлення. Зателефонуйте напряму: 0969 900 390',
+            'Не вдалось доставити повідомлення. Зателефонуйте напряму: 096 990 03 90',
           requestId,
         },
         500,
@@ -497,7 +497,7 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
       {
         ok: false,
         error: 'server',
-        message: 'Серверна помилка. Зателефонуйте напряму: 0969 900 390',
+        message: 'Серверна помилка. Зателефонуйте напряму: 096 990 03 90',
         requestId,
       },
       500,

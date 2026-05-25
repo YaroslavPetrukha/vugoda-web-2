@@ -227,7 +227,7 @@ const ContactForm = ({
       setTurnstileToken(null);
       setState({
         kind: 'error',
-        message: 'Несподівана відповідь сервера. Зателефонуйте напряму: 0969 900 390',
+        message: 'Несподівана відповідь сервера. Зателефонуйте напряму: 096 990 03 90',
       });
     } catch {
       turnstileRef.current?.reset();
@@ -235,7 +235,7 @@ const ContactForm = ({
       setState({
         kind: 'error',
         message:
-          'Не вдалось підключитись до сервера. Спробуйте ще раз або зателефонуйте: 0969 900 390',
+          'Не вдалось підключитись до сервера. Спробуйте ще раз або зателефонуйте: 096 990 03 90',
       });
     } finally {
       submitLockRef.current = false;
@@ -282,7 +282,7 @@ const ContactForm = ({
             className="inline-flex items-center gap-2 text-sm text-text-primary hover:text-accent transition-colors font-medium"
           >
             <Phone className="w-4 h-4" aria-hidden="true" />
-            0969 900 390
+            096 990 03 90
           </a>
           <a
             href="https://t.me/vygoda_sales"

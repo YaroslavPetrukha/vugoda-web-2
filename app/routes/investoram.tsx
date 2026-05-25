@@ -77,22 +77,6 @@ const OPPORTUNITIES = [
     cta: 'Деталі проекту',
     href: '/portfolio/lakeview',
   },
-  {
-    title: 'Дохідний дім NTEREST',
-    badge: 'Дозвільна документація',
-    badgeStage: 'permits' as const,
-    body: 'Концепт дохідної нерухомості. Перші угоди — після отримання дозволу на будівельні роботи.',
-    cta: 'Підписатись на оновлення',
-    href: '/portfolio/nterest',
-  },
-  {
-    title: 'Інші проекти pipeline',
-    badge: 'Pre-construction',
-    badgeStage: 'memorandum' as const,
-    body: 'Етно Дім, Маєток Винниківський, проект без назви — на ранніх стадіях. Інвестиційні умови — за запитом.',
-    cta: 'Переглянути портфель',
-    href: '/portfolio',
-  },
 ];
 
 const Investors = () => {
@@ -101,7 +85,7 @@ const Investors = () => {
       <InvestorHero
         eyebrow="Розділ 04 · інвестиції"
         title="Прямі інвестиції в забудову Львова"
-        lead="П'ять проектів у роботі, від $1600/м². Прямий договір з ПП «ДІК Вигода+» — без посередницьких ланцюжків."
+        lead="Активний обʼєкт у продажу — ЖК Lakeview, від $1600/м². Pipeline у дозвільних процедурах — імена і умови після отримання дозволів. Прямий договір з ПП «ДІК Вигода+» — без посередницьких ланцюжків."
       >
         <Button as="a" href="#zustrich" variant="primary" size="lg">
           Записатись на зустріч <ArrowRight className="w-4 h-4" />
@@ -182,17 +166,21 @@ const Investors = () => {
       <section className="bg-bg-deep py-24 md:py-32 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
-            <SectionHeading eyebrow="04" title="Поточні можливості" />
+            <SectionHeading
+              eyebrow="04"
+              title="Поточні можливості"
+              description="Публічно представляємо проект з повним пакетом дозвільних документів. Решта pipeline — у процедурах; імена і умови — після отримання дозволів."
+            />
           </FadeIn>
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-px bg-bg-surface border border-bg-surface">
+          <div className="mt-12 max-w-3xl mx-auto border border-bg-surface bg-bg-deep">
             {OPPORTUNITIES.map((o, i) => (
               <FadeIn
                 key={o.title}
                 delay={i * 0.05}
-                className="bg-bg-deep p-8 flex flex-col"
+                className="p-8 md:p-12 flex flex-col"
               >
                 <StagePill stage={o.badgeStage} label={o.badge} className="mb-5" />
-                <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-3 leading-snug">
+                <h3 className="text-2xl md:text-3xl font-bold text-text-primary mb-3 leading-snug">
                   {o.title}
                 </h3>
                 <p className="text-text-secondary leading-relaxed mb-6 flex-1">
