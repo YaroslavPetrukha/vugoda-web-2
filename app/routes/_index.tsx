@@ -230,7 +230,7 @@ const Home = () => {
                   <dt className="text-[11px] font-mono uppercase tracking-[0.18em] text-text-secondary self-center">
                     Роль
                   </dt>
-                  <dd className="text-text-primary font-medium">Забудовник, ген.підрядник</dd>
+                  <dd className="text-text-primary font-medium">Забудовник</dd>
                 </div>
                 <div className="grid grid-cols-[120px_1fr] py-4 gap-4">
                   <dt className="text-[11px] font-mono uppercase tracking-[0.18em] text-text-secondary self-center">
@@ -244,8 +244,7 @@ const Home = () => {
           <div className="lg:col-span-8 lg:pl-8 space-y-6 leading-relaxed">
             <FadeIn delay={0.05}>
               <p className="text-xl md:text-2xl text-text-primary leading-snug font-medium">
-                ПП «ДІК "Вигода +"» — забудовник і генеральний підрядник зі
-                Львова.
+                ПП «ДІК "Вигода +"» — забудовник зі Львова.
               </p>
             </FadeIn>
             <FadeIn delay={0.1}>

@@ -47,7 +47,7 @@ const REQUISITES: Requisite[] = [
   { label: 'Email', value: 'vygoda.sales@gmail.com', link: 'mailto:vygoda.sales@gmail.com' },
   {
     label: 'Сфера діяльності',
-    value: 'Будівництво житлових і нежитлових будівель, генеральне підрядництво',
+    value: 'Будівництво житлових і нежитлових будівель',
   },
 ];
 
