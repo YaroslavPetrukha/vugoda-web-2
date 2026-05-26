@@ -92,7 +92,7 @@ const ProjectCard = ({
       <a
         href={targetHref}
         target="_blank"
-        rel="noopener noreferrer"
+        rel="nofollow noopener noreferrer"
         aria-label={ariaLabel}
         className={wrapperCls}
       >

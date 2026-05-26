@@ -59,6 +59,14 @@ const Footer = () => {
             <ul className="flex flex-col gap-3 text-sm">
               <li>
                 <a
+                  href="tel:+380969900390"
+                  className="hover:text-accent transition-colors"
+                >
+                  096 990 03 90
+                </a>
+              </li>
+              <li>
+                <a
                   href="mailto:vygoda.sales@gmail.com"
                   className="hover:text-accent transition-colors"
                 >
@@ -69,7 +77,7 @@ const Footer = () => {
                 <a
                   href="https://yaroslavpetrukha.github.io/Lakeview/"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="nofollow noopener noreferrer"
                   className="hover:text-accent transition-colors"
                 >
                   Сайт ЖК Lakeview ↗
@@ -79,7 +87,7 @@ const Footer = () => {
                 <a
                   href="https://www.instagram.com/lakeviewlviv/"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="nofollow noopener noreferrer"
                   className="hover:text-accent transition-colors"
                 >
                   @lakeviewlviv
@@ -91,7 +99,7 @@ const Footer = () => {
 
         <div className="border-t border-bg-surface pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-text-secondary">
           <div className="flex flex-wrap gap-x-3 gap-y-1">
-            <span>© 2026 ПП «ДІК "Вигода +"»</span>
+            <span>© 2026 ПП «ДІК "Вигода +"» / Vyhoda</span>
             <span aria-hidden="true">·</span>
             <span>ЄДРПОУ 44876801</span>
           </div>
