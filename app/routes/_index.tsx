@@ -15,6 +15,21 @@ import { projects } from '../../src/data/projects';
 // LCP-кандидат: ?preset=hero генерує AVIF/WebP srcset 480–1920w
 import aerialHero from '../../src/assets/projects/lakeview/aerial.jpg?preset=hero';
 
+const heroSource = aerialHero as unknown as PictureSource;
+
+export const links = () =>
+  heroSource.sources.avif
+    ? [
+        {
+          rel: 'preload',
+          as: 'image',
+          type: 'image/avif',
+          imageSrcSet: heroSource.sources.avif,
+          imageSizes: '100vw',
+        },
+      ]
+    : [];
+
 export const meta: MetaFunction = ({ location }) => {
   const title = 'Забудовник ВИГОДА — системний девелопмент у Львові';
   const description =

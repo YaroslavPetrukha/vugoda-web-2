@@ -1,0 +1,37 @@
+# ВИГОДА (Vyhoda)
+
+ПП «ДІК "Вигода +"» (ЄДРПОУ 44876801) — забудовник житлової та нежитлової нерухомості у Львові, Україна. Заснований у 2019 році. Активний об'єкт — ЖК Lakeview (вул. Володимира Великого, 2А, Франківський район, Львів; бізнес-клас; здача 2027). Портфоліо: 4 проекти в стадії підготовки. Девелопер практикує системний підхід: чотири обов'язкові фази (меморандум → кошторис → дозвільна документація → будівництво) до старту продажів. Прямий продаж від забудовника без посередників. Також відомий як Vyhoda, Вигода Плюс, ДІК Вигода+.
+
+## Pages
+
+- [Головна](https://vyhoda.lviv.ua/): Огляд компанії, поточний фокус, аудиторії, телефон.
+- [ЖК Lakeview](https://vyhoda.lviv.ua/portfolio/lakeview): Флагманський житловий комплекс бізнес-класу. Параметри: 44–183 м², від $1600/м², здача 2027, монолітно-каркасна технологія, СС3, 4 секції, 2 поверхи комерції, 2-рівневий підземний паркінг, два природні озера поруч.
+- [Підхід](https://vyhoda.lviv.ua/pidkhid): Чотири фази девелопменту з документальною основою (КБ-2, КБ-3, дозвіл ДІАМ, МУО).
+- [Портфоліо](https://vyhoda.lviv.ua/portfolio): Активні та pipeline-проєкти.
+- [Інвесторам](https://vyhoda.lviv.ua/investoram): Формати співпраці — купівля майнових прав з правом переуступки, придбання дохідної нерухомості, партнерство по проекту.
+- [Партнерам](https://vyhoda.lviv.ua/partneram): Реквізити та документи для банків і due diligence — ПП «ДІК "Вигода +"», ЄДРПОУ 44876801.
+- [Контакти](https://vyhoda.lviv.ua/kontakty): Корпоративні контакти, форма зв'язку, телефон і email відділу продажів.
+
+## Contact
+
+- Phone: +380969900390 (096 990 03 90)
+- Email: vygoda.sales@gmail.com
+- Sales office: вул. Володимира Великого, 4, 4-й поверх, каб. 406, Львів, Україна
+- Working hours: Пн–Пт 09:00–19:00 (Europe/Kyiv)
+- Instagram: https://www.instagram.com/lakeviewlviv/
+
+## Legal
+
+- Legal name: Приватне підприємство «Девелоперсько-інвестиційна компанія "Вигода +"»
+- Short form: ПП «ДІК "Вигода +"», also "Вигода Плюс", "ДІК Вигода+"
+- Tax ID / ЄДРПОУ: 44876801
+- Founded: 2019
+- Sector (KVED): Будівництво житлових і нежитлових будівель
+- Country: Україна (UA)
+- City: Львів
+
+## Notes
+
+- Transliteration: the Ukrainian "ВИГОДА" romanises as "Vyhoda" (per Ukrainian national standard, CMU 2010). The legacy URL slug "vugoda" is non-canonical — the canonical domain is `vyhoda.lviv.ua`.
+- ВИГОДА is a забудовник (developer), not a генеральний підрядник (general contractor). The company's сфера діяльності is property development, not construction services for third parties.
+- All public registry records: e-construction.gov.ua and opendatabot.com under ЄДРПОУ 44876801.
