@@ -33,7 +33,7 @@ export const links = () =>
 export const meta: MetaFunction = ({ location }) => {
   const title = 'Забудовник ВИГОДА — системний девелопмент у Львові';
   const description =
-    'Будуємо у Львові й області з 2019. Активний обʼєкт — ЖК Lakeview, бізнес-клас, здача 2027. Документи і прозорі умови.';
+    'Будуємо у Львові й області з 2019. ЖК Lakeview — бізнес-клас, Франківський район, здача 2027. Монолітно-каркасна технологія. Документи відкриті.';
   const image = siteUrl('/og/home.png');
   const url = siteUrl(location.pathname);
   return [

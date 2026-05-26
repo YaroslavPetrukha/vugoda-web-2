@@ -9,9 +9,9 @@ import Button from '../../src/components/Button';
 import { projects } from '../../src/data/projects';
 
 export const meta: MetaFunction = ({ location }) => {
-  const title = 'Портфель — забудовник ВИГОДА';
+  const title = 'Портфоліо нерухомості Львів — забудовник ВИГОДА';
   const description =
-    'Один активний обʼєкт у Львові — ЖК Lakeview, бізнес-клас, здача 2027. Системний девелопмент: повний цикл власними силами.';
+    "ЖК Lakeview — активний обʼєкт у Львові: бізнес-клас, Франківський район, монолітно-каркас, здача 2027. ВИГОДА — системний девелопмент повним циклом.";
   const image = siteUrl('/og/news.png');
   const url = siteUrl(location.pathname);
   return [

@@ -7,9 +7,9 @@ import SectionHeading from '../../src/components/SectionHeading';
 import Button from '../../src/components/Button';
 
 export const meta: MetaFunction = ({ location }) => {
-  const title = 'Як працює забудовник ВИГОДА — підхід і етапи';
+  const title = 'Як обрати забудовника у Львові — підхід ВИГОДА';
   const description =
-    'Чотири фази системного девелопменту: меморандум, кошторис, дозвільна документація, будівництво. Без обходів.';
+    'Чотири фази від меморандуму до введення в експлуатацію: кошторис, дозвільна документація, будівництво. Як ВИГОДА приймає рішення і що це означає для покупця.';
   const image = siteUrl('/og/approach.png');
   const url = siteUrl(location.pathname);
   return [

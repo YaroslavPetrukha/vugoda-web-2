@@ -8,9 +8,9 @@ import Button from '../../src/components/Button';
 import ContactForm from '../../src/components/ContactForm';
 
 export const meta: MetaFunction = ({ location }) => {
-  const title = 'Контакти забудовника ВИГОДА — Львів';
+  const title = 'Контакти ВИГОДА — забудовник Львова, телефон і email';
   const description =
-    'Корпоративний email vygoda.sales@gmail.com, телефон, окремі контакти ЖК Lakeview. Форма звʼязку.';
+    "ВИГОДА, Львів: тел. 097 990 03 90, email vygoda.sales@gmail.com. Контакти ЖК Lakeview. Форма зворотного зв'язку — відповідаємо у робочі дні 10:00–18:00.";
   const image = siteUrl('/og/contacts.png');
   const url = siteUrl(location.pathname);
   return [

@@ -8,9 +8,9 @@ import Button from '../../src/components/Button';
 import ContactForm from '../../src/components/ContactForm';
 
 export const meta: MetaFunction = ({ location }) => {
-  const title = 'Партнерам і банкам — реквізити ВИГОДА';
+  const title = 'Реквізити забудовника ВИГОДА — ЄДРПОУ 44876801';
   const description =
-    'ПП «ДІК "Вигода +"», ЄДРПОУ 44876801. Юридична картка, реквізити, документи для due diligence — за запитом.';
+    'ПП «ДІК "Вигода +"», ЄДРПОУ 44876801, Львів. Юридична картка та реквізити для банків і партнерів. Документи для due diligence надаються за запитом.';
   const image = siteUrl('/og/partners.png');
   const url = siteUrl(location.pathname);
   return [

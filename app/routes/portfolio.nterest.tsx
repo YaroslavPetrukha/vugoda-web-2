@@ -1,6 +1,7 @@
 import type { MetaFunction } from 'react-router';
 import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router';
 import FadeIn from '../../src/components/FadeIn';
 import PageHero from '../../src/components/PageHero';
 import SectionHeading from '../../src/components/SectionHeading';
@@ -8,6 +9,7 @@ import Button from '../../src/components/Button';
 import StagePill from '../../src/components/StagePill';
 import ContactForm from '../../src/components/ContactForm';
 import ProjectGalleryStrip from '../../src/components/ProjectGalleryStrip';
+import Breadcrumb from '../../src/components/Breadcrumb';
 import type { PictureSource } from '../../src/components/ui/Picture';
 
 // Hero — ?preset=hero → AVIF/WebP srcset 480–1920w
@@ -20,7 +22,7 @@ import nterestRender3 from '../../src/assets/projects/nterest/render-3.webp?pres
 export const meta: MetaFunction = ({ location }) => {
   const title = 'Дохідний дім NTEREST — інвестиційна нерухомість Львів';
   const description =
-    'Концепт дохідної нерухомості. Погодження дозвільної документації. Оновлення — за підпискою.';
+    'Дохідна нерухомість NTEREST у Львові від ВИГОДА. Стадія погодження дозвільної документації. Підпишіться — повідомимо про умови і старт продажів першими.';
   const image = siteUrl('/og/nterest.png');
   const url = siteUrl(location.pathname);
   return [
@@ -59,8 +61,34 @@ const RENDERS = [
 ];
 
 const ProjectNterest = () => {
+  const breadcrumbLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Головна', item: siteUrl('/') },
+      { '@type': 'ListItem', position: 2, name: 'Портфоліо', item: siteUrl('/portfolio') },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'Дохідний дім NTEREST',
+        item: siteUrl('/portfolio/nterest'),
+      },
+    ],
+  });
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: breadcrumbLd }}
+      />
+      <Breadcrumb
+        items={[
+          { label: 'Головна', href: '/' },
+          { label: 'Портфоліо', href: '/portfolio' },
+          { label: 'Дохідний дім NTEREST' },
+        ]}
+      />
       <PageHero
         eyebrow="Pipeline"
         title="Дохідний дім NTEREST"
@@ -159,6 +187,58 @@ const ProjectNterest = () => {
             <Button as="router" href="/investoram" variant="ghost" size="md">
               Розділ для інвесторів <ArrowRight className="w-4 h-4" />
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* LOCATION & CONCEPT */}
+      <section id="lokatsiia" className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-t border-bg-surface">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-5">
+            <FadeIn>
+              <SectionHeading eyebrow="Контекст" title="Локація і концепція" />
+            </FadeIn>
+          </div>
+          <div className="lg:col-span-7 space-y-6 text-text-secondary text-base md:text-lg leading-relaxed">
+            <FadeIn delay={0.05}>
+              <p>
+                Точна адреса NTEREST буде оголошена після завершення дозвільного
+                процесу — це стандартна практика ВИГОДА для обʼєктів на фазі
+                погодження. За концепцією проект орієнтований на ущільнену
+                міську локацію у Шевченківському або Франківському районі
+                Львова: пішохідна доступність до університетів, офісних
+                кластерів, зупинок громадського транспорту. Саме така локація
+                формує стабільний орендний попит — що є ключовим для дохідного
+                формату.
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.08}>
+              <p>
+                NTEREST — концепт, орієнтований передусім на інвестора, що шукає
+                пасивний дохід від оренди, а не на кінцевого мешканця. Очікуваний
+                продуктовий формат: студії та компактні 1-кімнатні квартири
+                площею орієнтовно 25–45 м², зосереджені в одному будинку з
+                єдиним управлінням. Монолітно-каркасна технологія забезпечить
+                клас CC3 за конструктивними характеристиками. Такий формат
+                відповідає зростаючому сегменту приватних орендодавців, які
+                хочуть керувати активом без операційного навантаження.
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.11}>
+              <p>
+                NTEREST перебуває на третій — найближчій до старту — фазі:
+                погодження дозвільної документації. Після отримання дозволу на
+                будівельні роботи відкриються продажі, а будівництво розпочнеться
+                паралельно з першою хвилею угод. ВИГОДА не практикує продажів
+                без повного дозвільного пакету — це принципова позиція, що
+                захищає і покупця, й репутацію забудовника. Про те, як улаштована
+                ця система дисципліни по фазах —{' '}
+                <Link to="/pidkhid" className="text-accent hover:underline">
+                  читайте про наш підхід
+                </Link>
+                .
+              </p>
+            </FadeIn>
           </div>
         </div>
       </section>

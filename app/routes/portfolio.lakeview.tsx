@@ -8,6 +8,7 @@ import SectionHeading from '../../src/components/SectionHeading';
 import Button from '../../src/components/Button';
 import StagePill from '../../src/components/StagePill';
 import ProjectGalleryStrip from '../../src/components/ProjectGalleryStrip';
+import Breadcrumb from '../../src/components/Breadcrumb';
 import type { ComponentProps } from 'react';
 
 // ContactForm is loaded only when the form section scrolls near the viewport.
@@ -160,9 +161,9 @@ export const links = () =>
     : [];
 
 export const meta: MetaFunction = ({ location }) => {
-  const title = 'ЖК Lakeview Львів — бізнес-клас, здача 2027';
+  const title = 'ЖК Lakeview Львів — бізнес-клас, Франківський район';
   const description =
-    'Володимира Великого 2А, Франківський район. 4 секції, монолітно-каркас, від $1600/м². Розстрочка до 2027.';
+    'Вул. Володимира Великого 2А, Франківський район Львова. 4 секції, монолітно-каркасна технологія, від $1600/м². Квартири 44–183 м², розстрочка до 2027.';
   const image = siteUrl('/og/lakeview.png');
   const url = siteUrl(location.pathname);
   return [
@@ -264,6 +265,13 @@ const ProjectLakeview = () => {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: lakeviewBreadcrumb }}
+      />
+      <Breadcrumb
+        items={[
+          { label: 'Головна', href: '/' },
+          { label: 'Портфоліо', href: '/portfolio' },
+          { label: 'ЖК Lakeview' },
+        ]}
       />
       <PageHero
         eyebrow="Активний обʼєкт"
