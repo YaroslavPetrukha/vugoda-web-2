@@ -444,7 +444,7 @@ const ProjectLakeview = () => {
           </FadeIn>
           <dl className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-px bg-bg-surface border border-bg-surface">
             {[
-              { label: 'Телефон', value: '096 990 03 90', href: 'tel:+380969900390' },
+              { label: 'Телефон', value: '097 990 03 90', href: 'tel:+380979900390' },
               { label: 'Email', value: 'vygoda.sales@gmail.com', href: 'mailto:vygoda.sales@gmail.com' },
               { label: 'Офіс продажу', value: 'вул. Володимира Великого, 4, 4-й поверх, каб. 406, Львів' },
               { label: 'Instagram', value: '@lakeviewlviv', href: LAKEVIEW_INSTAGRAM, external: true },

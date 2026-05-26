@@ -73,10 +73,10 @@ const ThankYou = () => {
         {/* Primary fallback CTAs */}
         <div className="flex flex-col sm:flex-row gap-3 mb-12">
           <a
-            href="tel:+380969900390"
+            href="tel:+380979900390"
             className="inline-flex items-center justify-center px-5 py-2.5 border border-accent text-accent text-sm uppercase tracking-widest font-medium hover:bg-accent hover:text-bg-deep transition-colors"
           >
-            Зателефонувати: 096&nbsp;990&nbsp;03&nbsp;90
+            Зателефонувати: 097&nbsp;990&nbsp;03&nbsp;90
           </a>
           {/* TODO(client): confirm Telegram URL/username */}
           <a

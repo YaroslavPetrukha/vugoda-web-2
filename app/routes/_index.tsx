@@ -551,7 +551,7 @@ const Home = () => {
                 </Button>
               </div>
               <p className="text-xs text-text-secondary/80 font-mono tracking-wide mt-2">
-                Відповідаємо у робочі години · Пн–Пт 09:00–19:00
+                Відповідаємо у робочі години · Пн–Пт 10:00–18:00
               </p>
             </div>
           </FadeIn>

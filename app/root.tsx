@@ -44,7 +44,7 @@ export function Layout({ children }: { children: ReactNode }) {
           { '@type': 'AdministrativeArea', name: 'Львівська область' },
         ],
         email: 'vygoda.sales@gmail.com',
-        telephone: '+380969900390',
+        telephone: '+380979900390',
         identifier: [
           { '@type': 'PropertyValue', propertyID: 'ЄДРПОУ', value: '44876801' },
         ],

@@ -33,7 +33,7 @@ export const meta: MetaFunction = ({ location }) => {
 
 const CORP_CONTACTS = [
   { label: 'Email', value: 'vygoda.sales@gmail.com', link: 'mailto:vygoda.sales@gmail.com' },
-  { label: 'Корпоративний телефон', value: '096 990 03 90', link: 'tel:+380969900390' },
+  { label: 'Корпоративний телефон', value: '097 990 03 90', link: 'tel:+380979900390' },
 ];
 
 const DIRECTIONS = [
@@ -62,7 +62,7 @@ const DIRECTIONS = [
 ];
 
 const LAKEVIEW_CONTACTS = [
-  { label: 'Телефон', value: '096 990 03 90', link: 'tel:+380969900390' },
+  { label: 'Телефон', value: '097 990 03 90', link: 'tel:+380979900390' },
   { label: 'Email', value: 'vygoda.sales@gmail.com', link: 'mailto:vygoda.sales@gmail.com' },
   {
     label: 'Офіс продажу',

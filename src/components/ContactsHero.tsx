@@ -30,8 +30,8 @@ const DEFAULT_TILES: ContactTile[] = [
   {
     kind: 'phone',
     label: 'Телефон',
-    value: '096 990 03 90',
-    href: 'tel:+380969900390',
+    value: '097 990 03 90',
+    href: 'tel:+380979900390',
   },
   {
     kind: 'address',
