@@ -145,6 +145,37 @@ const CONSTRUCTION_GROUPS = [
   },
 ];
 
+const FAQ_ITEMS = [
+  {
+    q: 'Скільки коштує квартира в ЖК Lakeview?',
+    a: 'Стартова ціна у ЖК Lakeview — від $1600 за квадратний метр. Площі квартир варіюються від 44 до 183 м², тобто орієнтовний діапазон вхідної вартості — від $70 000 за однокімнатну до $290 000+ за трирівневу. Умови оплати: 30% першого внеску, решта — розстрочка на період будівництва до 2027 року без прихованих комісій. Актуальні ціни по конкретних планувальних рішеннях і поверхах — на сайті ЖК або в офісі продажу за адресою вул. Володимира Великого, 4, каб. 406.',
+  },
+  {
+    q: 'Коли здача ЖК Lakeview?',
+    a: 'Плановий термін введення ЖК Lakeview в експлуатацію — 2027 рік. Будівництво ведеться відповідно до класу наслідків СС3 — найвищого в українській класифікації, що передбачає суворіший технічний нагляд і дотримання нормативів. Хід будівництва фіксується помісячно: фотозвіти за грудень 2025 — березень 2026 доступні на цій сторінці. Повний архів і актуальний стан — на окремому сайті проекту та в Instagram @lakeviewlviv.',
+  },
+  {
+    q: 'Хто забудовник ЖК Lakeview?',
+    a: 'Забудовник ЖК Lakeview — ПП «ДІК "Вигода +"», ЄДРПОУ 44876801, заснована 2019 року. Компанія спеціалізується виключно на будівництві житлових і нежитлових будівель як забудовник — без посередницьких підрядних ланцюжків. Юридичні документи, статут і дозвільна документація надаються на запит до підписання договору. Офіс продажу розташований безпосередньо на вул. Володимира Великого, 4, поверх 4, кабінет 406 — за 200 метрів від будмайданчика.',
+  },
+  {
+    q: 'Яка технологія будівництва і який клас надійності?',
+    a: 'ЖК Lakeview будується за монолітно-каркасною технологією: залізобетонний каркас, зовнішні стіни з керамоблоків, утеплення мінватою. Це рішення забезпечує вільне планування, довговічність конструкції і кращу звукоізоляцію порівняно з панельним будівництвом. Обʼєкт проектується за класом наслідків СС3 — найвищим рівнем відповідальності за українським законодавством, обовʼязковим для будинків від 9 поверхів у 4 секціях. Загальна поверховість — до 16 поверхів.',
+  },
+  {
+    q: 'Як купити квартиру в Lakeview через майнові права?',
+    a: 'Придбання квартири у ЖК Lakeview оформлюється через договір купівлі-продажу майнових прав — стандартний юридичний інструмент для покупки нерухомості на стадії будівництва в Україні. Покупець укладає прямий договір з ПП «ДІК "Вигода +"» (ЄДРПОУ 44876801) без посередників. Договір фіксує конкретний обʼєкт, площу, поверх, ціну та графік оплати. Передбачено право переуступки майнових прав третій особі до введення будинку в експлуатацію. Перший крок — запис на огляд через форму або дзвінок 097 990 03 90.',
+  },
+  {
+    q: 'Які площі квартир доступні і що є в інфраструктурі комплексу?',
+    a: 'У ЖК Lakeview пропонуються 1-, 2- і 3-кімнатні квартири площею 44–183 м² у чотирьох секціях висотою до 16 поверхів. Крім житлових поверхів, комплекс включає два поверхи комерційних приміщень (магазини, кафе, салони), 2-рівневий підземний паркінг, охорону з відеоспостереженням і контролем доступу та індивідуальне автономне опалення. Безпосередньо поряд з комплексом — два природні озера і ресторанний комплекс «Гуцульська Гражда».',
+  },
+  {
+    q: 'Що знаходиться поруч з ЖК Lakeview?',
+    a: 'ЖК Lakeview розташований на вул. Володимира Великого, 2А у Франківському районі Львова. Комплекс безпосередньо межує з двома природними озерами, від яких отримав назву. Пішохідна доступність — до стадіону «Динамо», міських парків і зон відпочинку біля води. Поруч — ресторанний комплекс «Гуцульська Гражда», що працює з 2004 року. Для бізнес-класу таке поєднання: вид на воду, зелена пішохідна інфраструктура і гастрономічний обʼєкт в одній локації — є рідкісним для Львова.',
+  },
+];
+
 const lakeviewHeroSource = lakeviewHero as unknown as PictureSource;
 
 export const links = () =>
@@ -172,6 +203,9 @@ export const meta: MetaFunction = ({ location }) => {
     { property: 'og:title', content: title },
     { property: 'og:description', content: description },
     { property: 'og:image', content: image },
+    { property: 'og:image:width', content: '1200' },
+    { property: 'og:image:height', content: '630' },
+    { property: 'og:image:type', content: 'image/png' },
     { property: 'og:url', content: url },
     { property: 'og:type', content: 'website' },
     { property: 'og:site_name', content: 'ВИГОДА' },
@@ -200,17 +234,20 @@ const ProjectLakeview = () => {
     description:
       'Житловий комплекс бізнес-класу у Франківському районі Львова. 4 секції, монолітно-каркасна технологія, до 16 поверхів, 2 поверхи комерції, 2-рівневий підземний паркінг. Біля двох природних озер.',
     url: siteUrl('/portfolio/lakeview'),
+    image: siteUrl('/og/lakeview.png'),
+    developer: { '@id': siteUrl('/#organization') },
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'вул. Володимира Великого, 2А',
       addressLocality: 'Львів',
       addressRegion: 'Львівська область',
+      postalCode: '79004',
       addressCountry: 'UA',
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: 49.821,
-      longitude: 24.0042,
+      latitude: 49.80887,
+      longitude: 24.0158,
     },
     numberOfRooms: '1-3',
     floorSize: {
@@ -241,6 +278,16 @@ const ProjectLakeview = () => {
     },
   });
 
+  const lakeviewFaqLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQ_ITEMS.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: item.a },
+    })),
+  });
+
   const lakeviewBreadcrumb = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -265,6 +312,10 @@ const ProjectLakeview = () => {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: lakeviewBreadcrumb }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: lakeviewFaqLd }}
       />
       <Breadcrumb
         items={[
@@ -479,6 +530,41 @@ const ProjectLakeview = () => {
               </div>
             ))}
           </dl>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-t border-bg-surface">
+        <div className="max-w-4xl mx-auto">
+          <FadeIn>
+            <SectionHeading
+              eyebrow="FAQ"
+              title="Часті питання про ЖК Lakeview"
+              description="Найчастіші запити покупців і інвесторів. Якщо вашого питання немає — напишіть, відповімо у робочі дні 10:00–18:00."
+            />
+          </FadeIn>
+          <div className="mt-12 divide-y divide-bg-surface border-y border-bg-surface">
+            {FAQ_ITEMS.map((item, i) => (
+              <FadeIn key={item.q} delay={i * 0.03}>
+                <details className="group py-6">
+                  <summary className="flex items-start gap-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                    <span className="text-accent font-mono text-xs tracking-widest pt-1.5 flex-none w-10">
+                      //{String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span className="text-text-primary text-lg md:text-xl font-bold leading-snug flex-1">
+                      {item.q}
+                    </span>
+                    <span aria-hidden="true" className="text-accent text-xl flex-none transition-transform group-open:rotate-45 pt-1">
+                      +
+                    </span>
+                  </summary>
+                  <p className="mt-4 ml-14 text-text-secondary text-base leading-relaxed">
+                    {item.a}
+                  </p>
+                </details>
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </section>
 
