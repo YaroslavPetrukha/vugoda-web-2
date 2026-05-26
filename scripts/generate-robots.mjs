@@ -2,9 +2,19 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const SITE_URL = (process.env.VITE_SITE_URL ?? 'https://vyhoda.lviv.ua').trim().replace(/\/$/, '');
-const IS_CANONICAL = SITE_URL.includes('vyhoda.lviv.ua');
 
 const CANONICAL_URL = 'https://vyhoda.lviv.ua';
+
+// Detect deployment environment. CF Pages auto-injects CF_PAGES_BRANCH and CF_PAGES
+// on every build. A production deploy is one of:
+//   (a) CF Pages build on the main branch
+//   (b) local build (no CF_PAGES env var — assume operator intent is production-targeted)
+// Anything else (PR previews, branch previews) gets a Disallow: / robots.txt so we
+// never compete with the canonical domain for the same content.
+const CF_BRANCH = process.env.CF_PAGES_BRANCH;
+const IS_CF_PREVIEW = process.env.CF_PAGES === '1' && CF_BRANCH && CF_BRANCH !== 'main';
+const IS_NON_CANONICAL_URL = !SITE_URL.includes('vyhoda.lviv.ua');
+const IS_PREVIEW = IS_CF_PREVIEW || IS_NON_CANONICAL_URL;
 
 const previewContent = `# Preview / non-canonical deploy — crawling disabled to prevent duplicate-content indexation.
 # Canonical domain: ${CANONICAL_URL}
@@ -49,8 +59,11 @@ Allow: /
 Sitemap: ${SITE_URL}/sitemap.xml
 `;
 
-const content = IS_CANONICAL ? productionContent : previewContent;
+const content = IS_PREVIEW ? previewContent : productionContent;
+const mode = IS_PREVIEW
+  ? `preview-disallow (CF_PAGES_BRANCH=${CF_BRANCH ?? 'unset'}, SITE_URL=${SITE_URL})`
+  : 'production';
 
 const OUT = path.join(process.cwd(), 'build', 'client', 'robots.txt');
 fs.writeFileSync(OUT, content, 'utf8');
-console.log(`[generate-robots] Wrote ${OUT} (mode: ${IS_CANONICAL ? 'production' : 'preview-disallow'})`);
+console.log(`[generate-robots] Wrote ${OUT} (mode: ${mode})`);
