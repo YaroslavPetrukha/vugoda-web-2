@@ -22,6 +22,21 @@ import render6 from '../../src/assets/projects/etno-dim/render-6.webp?preset=gal
 import render7 from '../../src/assets/projects/etno-dim/render-7.webp?preset=gallery';
 import render8 from '../../src/assets/projects/etno-dim/render-8.webp?preset=gallery';
 
+const etnoDimHeroSource = render1 as unknown as PictureSource;
+
+export const links = () =>
+  etnoDimHeroSource.sources.avif
+    ? [
+        {
+          rel: 'preload',
+          as: 'image',
+          type: 'image/avif',
+          imageSrcSet: etnoDimHeroSource.sources.avif,
+          imageSizes: '100vw',
+        },
+      ]
+    : [];
+
 export const meta: MetaFunction = ({ location }) => {
   const title = 'ЖК Етно Дім — Судова, Львів';
   const description =
@@ -73,7 +88,7 @@ const ProjectEtnoDim = () => {
         title="ЖК Етно Дім"
         lead="Львів, вул. Судова. Зафіксовані наміри з власником ділянки. Готуємо проектну і кошторисну документацію."
         image={render1 as unknown as PictureSource}
-        imageAlt=""
+        imageAlt="ЖК Етно Дім — архітектурна візуалізація, вул. Судова, Львів"
       >
         <Button as="a" href="#pidpyska" variant="primary" size="lg">
           Повідомити про старт продажів <ArrowRight className="w-4 h-4" />

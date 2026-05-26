@@ -144,6 +144,21 @@ const CONSTRUCTION_GROUPS = [
   },
 ];
 
+const lakeviewHeroSource = lakeviewHero as unknown as PictureSource;
+
+export const links = () =>
+  lakeviewHeroSource.sources.avif
+    ? [
+        {
+          rel: 'preload',
+          as: 'image',
+          type: 'image/avif',
+          imageSrcSet: lakeviewHeroSource.sources.avif,
+          imageSizes: '100vw',
+        },
+      ]
+    : [];
+
 export const meta: MetaFunction = ({ location }) => {
   const title = 'ЖК Lakeview Львів — бізнес-клас, здача 2027';
   const description =
@@ -255,7 +270,7 @@ const ProjectLakeview = () => {
         title="ЖК Lakeview"
         lead="Житловий комплекс бізнес-класу на вул. Володимира Великого, 2А: автономне опалення, два природні озера поруч, 2 поверхи комерції та 2-рівневий підземний паркінг. Чотири секції, монолітно-каркасна технологія, плановий термін введення в експлуатацію — 2027 рік."
         image={lakeviewHero as unknown as PictureSource}
-        imageAlt=""
+        imageAlt="ЖК Lakeview — житловий комплекс бізнес-класу на вул. Володимира Великого 2А, Франківський район Львова"
       >
         <Button as="a" href={LAKEVIEW_SITE} external variant="primary" size="lg">
           Перейти на сайт ЖК <ArrowUpRight className="w-4 h-4" />
