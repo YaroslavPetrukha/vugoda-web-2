@@ -16,11 +16,14 @@
 /favicon-32.svg
   Cache-Control: public, max-age=86400
 
-# robots.txt, sitemap.xml — short cache
+# robots.txt, sitemap.xml, llms.txt — short cache + explicit text/plain for AI crawlers
 /robots.txt
   Cache-Control: public, max-age=3600
 /sitemap.xml
   Cache-Control: public, max-age=3600
+/llms.txt
+  Cache-Control: public, max-age=3600
+  Content-Type: text/plain; charset=utf-8
 
 # Security headers — apply to all routes
 /*
