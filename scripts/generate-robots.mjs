@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const SITE_URL = process.env.VITE_SITE_URL ?? 'https://vyhoda.lviv.ua';
+const SITE_URL = (process.env.VITE_SITE_URL ?? 'https://vyhoda.lviv.ua').trim().replace(/\/$/, '');
 
 const content = `User-agent: *
 Allow: /
