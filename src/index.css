@@ -11,6 +11,7 @@
   --color-bg-surface: #3D3B43;     /* антрацит — картки, поверхні, hover-стани */
   --color-bg-deep: #020A0A;        /* глибокий чорний — header, hero overlay */
   --color-accent: #C1F33D;         /* acid-lime, point-use: CTA, active, focus */
+  --accent-rgb: 193 243 61;        /* accent у space-separated RGB для rgb(var(--accent-rgb) / α) */
   --color-text-primary: #F5F7FA;   /* основний текст */
   --color-text-secondary: #A7AFBC; /* допоміжний сірий, lead, captions */
   --color-text-muted: #A7AFBC;     /* alias на text-secondary */

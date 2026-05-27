@@ -92,7 +92,7 @@ const PipelineHero = ({
         className="hidden md:block absolute right-[15%] top-1/2 -translate-y-1/2 w-[460px] h-[180px] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(193,243,61,0.16) 0%, transparent 60%)',
+            'radial-gradient(ellipse at center, rgb(var(--accent-rgb) / 0.16) 0%, transparent 60%)',
           filter: 'blur(60px)',
         }}
       />
@@ -123,7 +123,7 @@ const PipelineHero = ({
             ref={cubeRef}
             className="relative w-full max-w-[360px] md:max-w-[440px]"
             style={{
-              filter: 'drop-shadow(0 0 40px rgba(193,243,61,0.14))',
+              filter: 'drop-shadow(0 0 40px rgb(var(--accent-rgb) / 0.14))',
               transition: 'transform 460ms cubic-bezier(0.2, 0.7, 0.2, 1)',
               transformStyle: 'preserve-3d',
               perspective: '1200px',

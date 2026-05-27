@@ -6,7 +6,7 @@ import FadeIn from '../../src/components/FadeIn';
 import PortfolioHero from '../../src/components/PortfolioHero';
 import ProjectCard from '../../src/components/ProjectCard';
 import Button from '../../src/components/Button';
-import { projects } from '../../src/data/projects';
+import { getRequiredProject } from '../../src/data/projects';
 
 export const meta: MetaFunction = ({ location }) => {
   const title = 'Портфоліо нерухомості Львів — забудовник ВИГОДА';
@@ -35,7 +35,7 @@ export const meta: MetaFunction = ({ location }) => {
   ];
 };
 
-const lakeview = projects.find((p) => p.slug === 'lakeview')!;
+const lakeview = getRequiredProject('lakeview');
 
 const Portfolio = () => {
   return (

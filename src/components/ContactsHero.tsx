@@ -108,7 +108,7 @@ const ContactsHero = ({
         className="hidden md:block absolute right-[6%] top-[20%] w-[340px] h-[180px] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(193,243,61,0.10) 0%, transparent 65%)',
+            'radial-gradient(ellipse at center, rgb(var(--accent-rgb) / 0.10) 0%, transparent 65%)',
           filter: 'blur(50px)',
         }}
       />

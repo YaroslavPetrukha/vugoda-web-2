@@ -10,7 +10,7 @@ import TrustStripe from '../../src/components/TrustStripe';
 import ProjectCard from '../../src/components/ProjectCard';
 import Picture from '../../src/components/ui/Picture';
 import type { PictureSource } from '../../src/components/ui/Picture';
-import { projects } from '../../src/data/projects';
+import { getRequiredProject } from '../../src/data/projects';
 
 // LCP-кандидат: ?preset=hero генерує AVIF/WebP srcset 480–1920w
 import aerialHero from '../../src/assets/projects/lakeview/aerial.jpg?preset=hero';
@@ -101,7 +101,7 @@ const AUDIENCES = [
   },
 ];
 
-const lakeview = projects.find((p) => p.slug === 'lakeview')!;
+const lakeview = getRequiredProject('lakeview');
 
 const DOCUMENTS = [
   {
