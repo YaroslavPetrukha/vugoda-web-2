@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-import type { ReactNode, Key } from 'react';
+import type { CSSProperties, ReactNode, Key } from 'react';
 
 type FadeInProps = {
   children: ReactNode;
@@ -8,34 +7,20 @@ type FadeInProps = {
   key?: Key | null;
 };
 
-// CSS-driven fade-in via IntersectionObserver. API-compatible with the previous
-// motion/react-based component: same {children, delay (seconds), className} props.
-// Saves the framer-motion runtime cost for every FadeIn instance.
-// Styles live in src/index.css (.fade-in / .fade-in--visible / reduced-motion).
+// CSS-only fade-in via animation-delay. No IntersectionObserver — SSR-safe.
+// Prerendered HTML ships with content visible (final state). animation-fill-mode:backwards
+// hides content during the delay period, then animates in. If JS fails or for
+// non-JS crawlers the element stays visible (no JS toggling required).
+// Keyframes defined in src/index.css. prefers-reduced-motion: no animation plays.
 const FadeIn = ({ children, delay = 0, className = '' }: FadeInProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (!ref.current) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          obs.disconnect();
-        }
-      },
-      { rootMargin: '0px 0px -80px 0px' },
-    );
-    obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
+  const animationStyle: CSSProperties = {
+    animation: `fade-in-up 0.6s ease-out ${delay}s both`,
+  };
 
   return (
     <div
-      ref={ref}
-      className={`fade-in${visible ? ' fade-in--visible' : ''}${className ? ' ' + className : ''}`}
-      style={delay > 0 ? { transitionDelay: `${delay}s` } : undefined}
+      className={className || undefined}
+      style={animationStyle}
     >
       {children}
     </div>

@@ -90,27 +90,29 @@
   }
 }
 
-@layer utilities {
-  /* CSS-driven fade-in used by <FadeIn>. IntersectionObserver toggles
-     .fade-in--visible to trigger the transition. Reduced-motion bypasses
-     it via the @layer base rule above. */
-  .fade-in {
+/* CSS-only fade-in animation used by <FadeIn>.
+   animation-fill-mode:both (via shorthand "both") means:
+   - backwards: initial keyframe (opacity:0) applies during delay period
+   - forwards: final keyframe (opacity:1) persists after animation ends
+   Prerendered/SSR HTML is always in visible final state — animation is a
+   progressive enhancement. No IntersectionObserver or JS state required. */
+@keyframes fade-in-up {
+  from {
     opacity: 0;
     transform: translateY(20px);
-    transition:
-      opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
-      transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: opacity, transform;
   }
-  .fade-in--visible {
+  to {
     opacity: 1;
     transform: translateY(0);
   }
-  @media (prefers-reduced-motion: reduce) {
-    .fade-in {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
+}
+
+/* prefers-reduced-motion: disable the keyframe animation entirely.
+   The @layer base rule above also collapses animation-duration to 0.01ms,
+   this rule makes the intent explicit for <FadeIn> specifically. */
+@media (prefers-reduced-motion: reduce) {
+  @keyframes fade-in-up {
+    from { opacity: 1; transform: none; }
+    to   { opacity: 1; transform: none; }
   }
 }
