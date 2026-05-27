@@ -89,3 +89,30 @@
     }
   }
 }
+
+/* CSS-only fade-in animation used by <FadeIn>.
+   animation-fill-mode:both (via shorthand "both") means:
+   - backwards: initial keyframe (opacity:0) applies during delay period
+   - forwards: final keyframe (opacity:1) persists after animation ends
+   Prerendered/SSR HTML is always in visible final state — animation is a
+   progressive enhancement. No IntersectionObserver or JS state required. */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* prefers-reduced-motion: disable the keyframe animation entirely.
+   The @layer base rule above also collapses animation-duration to 0.01ms,
+   this rule makes the intent explicit for <FadeIn> specifically. */
+@media (prefers-reduced-motion: reduce) {
+  @keyframes fade-in-up {
+    from { opacity: 1; transform: none; }
+    to   { opacity: 1; transform: none; }
+  }
+}

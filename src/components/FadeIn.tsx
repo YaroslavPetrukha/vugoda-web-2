@@ -1,5 +1,4 @@
-import type { ReactNode, Key } from 'react';
-import { motion } from 'motion/react';
+import type { CSSProperties, ReactNode, Key } from 'react';
 
 type FadeInProps = {
   children: ReactNode;
@@ -8,18 +7,24 @@ type FadeInProps = {
   key?: Key | null;
 };
 
-// initial={false} — не застосовує початковий стан під час першого рендеру (SSR-safe).
-// Контент видимий одразу; анімація запускається лише коли елемент входить у viewport.
-const FadeIn = ({ children, delay = 0, className = '' }: FadeInProps) => (
-  <motion.div
-    initial={false}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: '-80px' }}
-    transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
-    className={className}
-  >
-    {children}
-  </motion.div>
-);
+// CSS-only fade-in via animation-delay. No IntersectionObserver — SSR-safe.
+// Prerendered HTML ships with content visible (final state). animation-fill-mode:backwards
+// hides content during the delay period, then animates in. If JS fails or for
+// non-JS crawlers the element stays visible (no JS toggling required).
+// Keyframes defined in src/index.css. prefers-reduced-motion: no animation plays.
+const FadeIn = ({ children, delay = 0, className = '' }: FadeInProps) => {
+  const animationStyle: CSSProperties = {
+    animation: `fade-in-up 0.6s ease-out ${delay}s both`,
+  };
+
+  return (
+    <div
+      className={className || undefined}
+      style={animationStyle}
+    >
+      {children}
+    </div>
+  );
+};
 
 export default FadeIn;
