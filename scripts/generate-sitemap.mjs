@@ -12,12 +12,16 @@ const FILE_MAP = {
   '/pidkhid': 'app/routes/pidkhid.tsx',
   '/portfolio': 'app/routes/portfolio._index.tsx',
   '/portfolio/lakeview': 'app/routes/portfolio.lakeview.tsx',
-  '/portfolio/etno-dim': 'app/routes/portfolio.etno-dim.tsx',
-  '/portfolio/maetok': 'app/routes/portfolio.maetok.tsx',
-  '/portfolio/nterest': 'app/routes/portfolio.nterest.tsx',
   '/investoram': 'app/routes/investoram.tsx',
   '/partneram': 'app/routes/partneram.tsx',
   '/kontakty': 'app/routes/kontakty.tsx',
+  '/novyny': 'app/routes/novyny.tsx',
+  '/novyny/lakeview-progress-2026-04-05':
+    'src/content/articles/lakeview-progress-2026-04-05.tsx',
+  '/novyny/chek-list-pereveryty-zabudovnyka':
+    'src/content/articles/chek-list-pereveryty-zabudovnyka.tsx',
+  '/novyny/frankivskyi-raion-lokatsiia-lviv':
+    'src/content/articles/frankivskyi-raion-lokatsiia-lviv.tsx',
 };
 
 function gitLastmod(routePath) {
@@ -40,14 +44,14 @@ const ROUTES = [
   { path: '/pidkhid', priority: 0.7, changefreq: 'monthly' },
   { path: '/portfolio', priority: 0.9, changefreq: 'weekly' },
   { path: '/portfolio/lakeview', priority: 0.9, changefreq: 'weekly' },
-  { path: '/portfolio/etno-dim', priority: 0.7, changefreq: 'monthly' },
-  { path: '/portfolio/maetok', priority: 0.7, changefreq: 'monthly' },
-  { path: '/portfolio/nterest', priority: 0.7, changefreq: 'monthly' },
-  // pipeline-04 excluded (noindex)
+  // pipeline routes (etno-dim, maetok, nterest, pipeline-04) excluded — they are noindex
   { path: '/investoram', priority: 0.8, changefreq: 'monthly' },
   { path: '/partneram', priority: 0.6, changefreq: 'monthly' },
   { path: '/kontakty', priority: 0.8, changefreq: 'monthly' },
-  // novyny excluded (noindex)
+  { path: '/novyny', priority: 0.8, changefreq: 'weekly' },
+  { path: '/novyny/lakeview-progress-2026-04-05', priority: 0.7, changefreq: 'monthly' },
+  { path: '/novyny/chek-list-pereveryty-zabudovnyka', priority: 0.7, changefreq: 'monthly' },
+  { path: '/novyny/frankivskyi-raion-lokatsiia-lviv', priority: 0.7, changefreq: 'monthly' },
 ];
 
 const urls = ROUTES.map(

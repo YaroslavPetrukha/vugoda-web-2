@@ -21,6 +21,9 @@
   Cache-Control: public, max-age=3600
 /sitemap.xml
   Cache-Control: public, max-age=3600
+/feed.xml
+  Cache-Control: public, max-age=3600
+  Content-Type: application/rss+xml; charset=utf-8
 /llms.txt
   Cache-Control: public, max-age=3600
   Content-Type: text/plain; charset=utf-8
