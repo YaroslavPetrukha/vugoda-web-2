@@ -12,7 +12,7 @@ export const meta: MetaFunction = ({ location }) => {
   const title = 'Портфоліо нерухомості Львів — забудовник ВИГОДА';
   const description =
     "ЖК Lakeview — активний обʼєкт у Львові: бізнес-клас, Франківський район, монолітно-каркас, здача 2027. ВИГОДА — системний девелопмент повним циклом.";
-  const image = siteUrl('/og/news.png');
+  const image = siteUrl('/og/lakeview.png');
   const url = siteUrl(location.pathname);
   return [
     { title },
@@ -20,6 +20,9 @@ export const meta: MetaFunction = ({ location }) => {
     { property: 'og:title', content: title },
     { property: 'og:description', content: description },
     { property: 'og:image', content: image },
+    { property: 'og:image:width', content: '1200' },
+    { property: 'og:image:height', content: '630' },
+    { property: 'og:image:type', content: 'image/png' },
     { property: 'og:url', content: url },
     { property: 'og:type', content: 'website' },
     { property: 'og:site_name', content: 'ВИГОДА' },

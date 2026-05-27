@@ -17,7 +17,7 @@ export function Layout({ children }: { children: ReactNode }) {
         '@type': ['Organization', 'RealEstateAgent'],
         '@id': siteUrl('/#organization'),
         name: 'ВИГОДА',
-        alternateName: 'ПП «ДІК "Вигода +"»',
+        alternateName: ['Vyhoda', 'ПП «ДІК "Вигода +"»', 'ДІК Вигода+', 'Вигода Плюс'],
         legalName: 'ПП «ДІК "Вигода +"»',
         taxID: '44876801',
         foundingDate: '2019',
@@ -35,8 +35,10 @@ export function Layout({ children }: { children: ReactNode }) {
         slogan: 'Системний девелопмент, у якому цінність є результатом точних рішень.',
         address: {
           '@type': 'PostalAddress',
+          streetAddress: 'вул. Володимира Великого, 4, 4-й поверх, каб. 406',
           addressLocality: 'Львів',
           addressRegion: 'Львівська область',
+          postalCode: '79004',
           addressCountry: 'UA',
         },
         areaServed: [
@@ -45,6 +47,14 @@ export function Layout({ children }: { children: ReactNode }) {
         ],
         email: 'vygoda.sales@gmail.com',
         telephone: '+380979900390',
+        openingHoursSpecification: [
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+            opens: '10:00',
+            closes: '18:00',
+          },
+        ],
         identifier: [
           { '@type': 'PropertyValue', propertyID: 'ЄДРПОУ', value: '44876801' },
         ],
