@@ -12,9 +12,9 @@ import { news } from '../../src/data/news';
 import { articles } from '../../src/data/articles';
 
 export const meta: MetaFunction = ({ location }) => {
-  const title = 'Новини ВИГОДА — хід будівництва, гайди, аналіз ринку нерухомості Львова';
+  const title = 'Новини ВИГОДА — Lakeview, гіди покупця, аналітика';
   const description =
-    'Помісячні звіти з майданчика ЖК Lakeview, практичні гайди для покупців нерухомості та аналіз ринку забудовників у Львові. Все офіційно, без рекламних формулювань.';
+    'Звіти з майданчика ЖК Lakeview, чек-листи для покупців нерухомості та аналіз локацій Львова. Без рекламних формулювань — лише етапи, документи й дати.';
   const image = siteUrl('/og/news.png');
   const url = siteUrl(location.pathname);
   return [
@@ -39,7 +39,7 @@ export const meta: MetaFunction = ({ location }) => {
   ];
 };
 
-const CATEGORIES = ['Усі', 'Хід будівництва', 'Гайди', 'Аналіз ринку'];
+const CATEGORIES = ['Усі', 'Хід будівництва', 'Гід покупця', 'Аналітика'];
 
 const News = () => {
   return (

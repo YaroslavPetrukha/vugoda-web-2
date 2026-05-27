@@ -12,7 +12,7 @@ export const metadata: ArticleMetadata = {
   publishedAt: '2026-05-20',
   category: 'analysis',
   categoryLabel: 'Аналітика',
-  hero: '/og/portfolio.png',
+  hero: '/og/home.png',
   heroAlt: 'Вид на Франківський район Львова — локація ЖК Lakeview',
   author: 'Команда ВИГОДА',
   internalLinks: ['/portfolio/lakeview', '/pidkhid', '/investoram'],
