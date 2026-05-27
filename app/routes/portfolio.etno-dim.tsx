@@ -1,6 +1,7 @@
 import type { MetaFunction } from 'react-router';
 import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router';
 import FadeIn from '../../src/components/FadeIn';
 import PageHero from '../../src/components/PageHero';
 import SectionHeading from '../../src/components/SectionHeading';
@@ -8,6 +9,7 @@ import Button from '../../src/components/Button';
 import StagePill from '../../src/components/StagePill';
 import ContactForm from '../../src/components/ContactForm';
 import ProjectGalleryStrip from '../../src/components/ProjectGalleryStrip';
+import Breadcrumb from '../../src/components/Breadcrumb';
 import type { PictureSource } from '../../src/components/ui/Picture';
 
 // Hero — ?preset=hero → AVIF/WebP srcset 480–1920w
@@ -38,9 +40,9 @@ export const links = () =>
     : [];
 
 export const meta: MetaFunction = ({ location }) => {
-  const title = 'ЖК Етно Дім — Судова, Львів';
+  const title = 'ЖК Етно Дім Львів — дохідна нерухомість, Судова';
   const description =
-    'Дохідний концепт на вул. Судова. Стадія меморандуму про відновлення будівництва. Підпишіться на оновлення.';
+    'Дохідна нерухомість, вул. Судова, Львів. ЖК Етно Дім від ВИГОДА: стадія меморандуму про відновлення будівництва. Підпишіться на старт продажів і умови участі.';
   const image = siteUrl('/og/etno-dim.png');
   const url = siteUrl(location.pathname);
   return [
@@ -58,6 +60,7 @@ export const meta: MetaFunction = ({ location }) => {
     { name: 'twitter:description', content: description },
     { name: 'twitter:image', content: image },
     { tagName: 'link', rel: 'canonical', href: url },
+    { name: 'robots', content: 'noindex, follow' },
   ];
 };
 
@@ -81,8 +84,34 @@ const RENDERS = [
 ];
 
 const ProjectEtnoDim = () => {
+  const breadcrumbLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Головна', item: siteUrl('/') },
+      { '@type': 'ListItem', position: 2, name: 'Портфоліо', item: siteUrl('/portfolio') },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'ЖК Етно Дім',
+        item: siteUrl('/portfolio/etno-dim'),
+      },
+    ],
+  });
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: breadcrumbLd }}
+      />
+      <Breadcrumb
+        items={[
+          { label: 'Головна', href: '/' },
+          { label: 'Портфоліо', href: '/portfolio' },
+          { label: 'ЖК Етно Дім' },
+        ]}
+      />
       <PageHero
         eyebrow="Pipeline"
         title="ЖК Етно Дім"
@@ -177,6 +206,58 @@ const ProjectEtnoDim = () => {
             дозвільної документації. Старт продажів — після отримання дозволу
             на будівельні роботи.
           </p>
+        </div>
+      </section>
+
+      {/* LOCATION & CONCEPT */}
+      <section id="lokatsiia" className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-t border-bg-surface">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-5">
+            <FadeIn>
+              <SectionHeading eyebrow="Контекст" title="Локація і концепція" />
+            </FadeIn>
+          </div>
+          <div className="lg:col-span-7 space-y-6 text-text-secondary text-base md:text-lg leading-relaxed">
+            <FadeIn delay={0.05}>
+              <p>
+                Вулиця Судова знаходиться у Залізничному районі Львова — зоні
+                активної трансформації між історичним центром і новими житловими
+                масивами. Поруч — залізничний вокзал (пішки 10–12 хвилин),
+                зупинки громадського транспорту, банки, продуктові мережі.
+                Ділянка вписана у щільну міську тканину, де запит на компактне
+                житло з розвиненою інфраструктурою є стабільним. Саме тут ВИГОДА
+                побачила потенціал для проекту з виразною архітектурою в
+                локальному дусі.
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.08}>
+              <p>
+                Концепт Етно Дім орієнтований на покупців, яким важливе відчуття
+                місця — мешканців, що цінують архітектуру зі спадщиною, а не
+                типову панель. Очікуваний формат — компактний будинок з
+                невеликою кількістю секцій і планувальними рішеннями для сімей.
+                Технологія будівництва — монолітно-каркасна: вона дає гнучкість
+                у плануваннях і надійну конструктиву. Для Залізничного району,
+                де переважає стара забудова, подібний формат закриває дефіцит
+                нового якісного житла.
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.11}>
+              <p>
+                На сьогодні підписано меморандум про відновлення будівництва —
+                це перша фаза з чотирьох у методології ВИГОДА. Наступний крок:
+                формування кошторисної документації та визначення економіки
+                проекту. Старт продажів відбудеться виключно після отримання
+                повного пакету дозвільних документів — ця вимога є незмінною
+                для всіх обʼєктів компанії. Як саме ВИГОДА проходить кожну з
+                фаз до відкриття продажів —{' '}
+                <Link to="/pidkhid" className="text-accent hover:underline">
+                  читайте про наш підхід
+                </Link>
+                .
+              </p>
+            </FadeIn>
+          </div>
         </div>
       </section>
 

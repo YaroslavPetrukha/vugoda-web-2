@@ -1,12 +1,15 @@
 import { useRef, useEffect } from 'react';
 import type { MetaFunction } from 'react-router';
 import { useSearchParams, Link } from 'react-router';
+import { siteUrl } from '../../src/lib/site-url';
 import { FORM_SOURCES } from '../../shared/contact-schema';
 
-export const meta: MetaFunction = () => {
+export const meta: MetaFunction = ({ location }) => {
+  const url = siteUrl(location.pathname);
   return [
     { title: 'Заявку прийнято — ВИГОДА' },
     { name: 'robots', content: 'noindex,nofollow' },
+    { tagName: 'link', rel: 'canonical', href: url },
   ];
 };
 

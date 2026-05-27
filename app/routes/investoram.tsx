@@ -11,7 +11,7 @@ import ContactForm from '../../src/components/ContactForm';
 export const meta: MetaFunction = ({ location }) => {
   const title = 'Інвестиції в нерухомість Львів — забудовник ВИГОДА';
   const description =
-    'Формати співпраці, схема угоди, юридичний контур. Купівля майнових прав, дохідна нерухомість, партнерство.';
+    "Купівля майнових прав у Львові: формати співпраці, юридичний контур угоди, розстрочка. ВИГОДА — забудовник з активним об'єктом ЖК Lakeview, здача 2027.";
   const image = siteUrl('/og/investors.png');
   const url = siteUrl(location.pathname);
   return [
