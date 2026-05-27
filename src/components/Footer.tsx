@@ -59,7 +59,17 @@ const Footer = () => {
             <ul className="flex flex-col gap-3 text-sm">
               <li>
                 <a
+                  href="tel:+380979900390"
+                  aria-label="Зателефонувати: 097 990 03 90"
+                  className="hover:text-accent transition-colors"
+                >
+                  097 990 03 90
+                </a>
+              </li>
+              <li>
+                <a
                   href="mailto:vygoda.sales@gmail.com"
+                  aria-label="Написати на пошту: vygoda.sales@gmail.com"
                   className="hover:text-accent transition-colors"
                 >
                   vygoda.sales@gmail.com
@@ -79,7 +89,7 @@ const Footer = () => {
                 <a
                   href="https://www.instagram.com/lakeviewlviv/"
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="nofollow noopener noreferrer"
                   className="hover:text-accent transition-colors"
                 >
                   @lakeviewlviv
@@ -89,9 +99,13 @@ const Footer = () => {
           </div>
         </div>
 
+        <p className="text-[10px] text-text-secondary/60 mb-4">
+          Latin transliteration: Vyhoda. Альтернативні написання бренду: «ВИГОДА+», «ДІК Вигода+».
+        </p>
+
         <div className="border-t border-bg-surface pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-text-secondary">
           <div className="flex flex-wrap gap-x-3 gap-y-1">
-            <span>© 2026 ПП «ДІК "Вигода +"»</span>
+            <span>© 2026 ПП «ДІК "Вигода +"» / Vyhoda</span>
             <span aria-hidden="true">·</span>
             <span>ЄДРПОУ 44876801</span>
           </div>

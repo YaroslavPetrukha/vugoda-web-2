@@ -1,8 +1,39 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { execSync } from 'node:child_process';
 
 const SITE_URL = (process.env.VITE_SITE_URL ?? 'https://vyhoda.lviv.ua').trim().replace(/\/$/, '');
 const TODAY = new Date().toISOString().split('T')[0];
+
+// Map sitemap URL → source file used to derive lastmod via `git log -1 --format=%cs`.
+// If git lookup fails (e.g. shallow CI clone, file removed) we fall back to TODAY.
+const FILE_MAP = {
+  '/': 'app/routes/_index.tsx',
+  '/pidkhid': 'app/routes/pidkhid.tsx',
+  '/portfolio': 'app/routes/portfolio._index.tsx',
+  '/portfolio/lakeview': 'app/routes/portfolio.lakeview.tsx',
+  '/portfolio/etno-dim': 'app/routes/portfolio.etno-dim.tsx',
+  '/portfolio/maetok': 'app/routes/portfolio.maetok.tsx',
+  '/portfolio/nterest': 'app/routes/portfolio.nterest.tsx',
+  '/investoram': 'app/routes/investoram.tsx',
+  '/partneram': 'app/routes/partneram.tsx',
+  '/kontakty': 'app/routes/kontakty.tsx',
+};
+
+function gitLastmod(routePath) {
+  const file = FILE_MAP[routePath];
+  if (!file) return TODAY;
+  try {
+    const result = execSync(`git log -1 --format=%cs -- "${file}"`, {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    }).trim();
+    return result || TODAY;
+  } catch (err) {
+    console.warn(`[sitemap] git lastmod fallback for ${routePath}: ${err.message?.slice(0, 200) || 'no message'}`);
+    return TODAY;
+  }
+}
 
 const ROUTES = [
   { path: '/', priority: 1.0, changefreq: 'weekly' },
@@ -22,7 +53,7 @@ const ROUTES = [
 const urls = ROUTES.map(
   (r) => `  <url>
     <loc>${SITE_URL}${r.path}</loc>
-    <lastmod>${TODAY}</lastmod>
+    <lastmod>${gitLastmod(r.path)}</lastmod>
     <changefreq>${r.changefreq}</changefreq>
     <priority>${r.priority}</priority>
   </url>`,
