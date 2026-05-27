@@ -59,7 +59,7 @@ const ContactForm = ({
   fields = [],
   submitLabel = 'Замовити дзвінок',
   successText = 'Прийнято. Зателефонуємо протягом робочого дня.',
-  disclaimer = 'Відповідаємо у робочий час: Пн–Пт, 09:00–19:00',
+  disclaimer = 'Відповідаємо у робочий час: Пн–Пт, 10:00–18:00',
   source,
   className = '',
 }: ContactFormProps) => {
@@ -227,7 +227,7 @@ const ContactForm = ({
       setTurnstileToken(null);
       setState({
         kind: 'error',
-        message: 'Несподівана відповідь сервера. Зателефонуйте напряму: 096 990 03 90',
+        message: 'Несподівана відповідь сервера. Зателефонуйте напряму: 097 990 03 90',
       });
     } catch {
       turnstileRef.current?.reset();
@@ -235,7 +235,7 @@ const ContactForm = ({
       setState({
         kind: 'error',
         message:
-          'Не вдалось підключитись до сервера. Спробуйте ще раз або зателефонуйте: 096 990 03 90',
+          'Не вдалось підключитись до сервера. Спробуйте ще раз або зателефонуйте: 097 990 03 90',
       });
     } finally {
       submitLockRef.current = false;
@@ -278,11 +278,11 @@ const ContactForm = ({
         {/* Alternative CTAs — always visible, no label (confident, direct) */}
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-8 pb-6 border-b border-bg-base/60">
           <a
-            href="tel:+380969900390"
+            href="tel:+380979900390"
             className="inline-flex items-center gap-2 text-sm text-text-primary hover:text-accent transition-colors font-medium"
           >
             <Phone className="w-4 h-4" aria-hidden="true" />
-            096 990 03 90
+            097 990 03 90
           </a>
           <a
             href="https://t.me/vygoda_sales"
