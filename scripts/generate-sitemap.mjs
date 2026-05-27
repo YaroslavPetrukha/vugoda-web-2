@@ -26,10 +26,11 @@ function gitLastmod(routePath) {
   try {
     const result = execSync(`git log -1 --format=%cs -- "${file}"`, {
       encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'ignore'],
+      stdio: ['ignore', 'pipe', 'pipe'],
     }).trim();
     return result || TODAY;
-  } catch {
+  } catch (err) {
+    console.warn(`[sitemap] git lastmod fallback for ${routePath}: ${err.message?.slice(0, 200) || 'no message'}`);
     return TODAY;
   }
 }
