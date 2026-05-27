@@ -15,7 +15,7 @@ const Breadcrumb = ({ items, className = '' }: BreadcrumbProps) => {
   return (
     <nav
       aria-label="breadcrumb"
-      className={`bg-bg-deep px-6 lg:px-8 pt-6 pb-2 border-b border-bg-surface ${className}`}
+      className={`bg-bg-deep px-4 sm:px-6 lg:px-8 pt-3 pb-1 sm:pt-6 sm:pb-2 border-b border-bg-surface ${className}`}
     >
       <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-text-secondary max-w-7xl mx-auto">
         {items.map((item, idx) => {
