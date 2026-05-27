@@ -61,3 +61,9 @@ export const projects: Project[] = [
 
 export const getProjectBySlug = (slug: string): Project | undefined =>
   projects.find((p) => p.slug === slug);
+
+export const getRequiredProject = (slug: string): Project => {
+  const p = projects.find((x) => x.slug === slug);
+  if (!p) throw new Error(`Project '${slug}' missing from data/projects.ts`);
+  return p;
+};

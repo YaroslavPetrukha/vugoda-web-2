@@ -77,7 +77,7 @@ const HeroAmbient = ({
           <div
             className="absolute inset-0"
             style={{
-              backgroundImage: `linear-gradient(rgba(193,243,61,${gridOpacity}) 1.25px, transparent 1.25px), linear-gradient(90deg, rgba(193,243,61,${gridOpacity}) 1.25px, transparent 1.25px)`,
+              backgroundImage: `linear-gradient(rgb(var(--accent-rgb) / ${gridOpacity}) 1.25px, transparent 1.25px), linear-gradient(90deg, rgb(var(--accent-rgb) / ${gridOpacity}) 1.25px, transparent 1.25px)`,
               backgroundSize: '88px 88px',
               backgroundPosition: '-1px -1px',
               maskImage:

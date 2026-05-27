@@ -95,7 +95,7 @@ const PartnerHero = ({
         className="hidden md:block absolute left-[12%] top-1/2 -translate-y-1/2 w-[360px] h-[120px] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(193,243,61,0.12) 0%, transparent 60%)',
+            'radial-gradient(ellipse at center, rgb(var(--accent-rgb) / 0.12) 0%, transparent 60%)',
           filter: 'blur(50px)',
         }}
       />
@@ -103,10 +103,10 @@ const PartnerHero = ({
       <div className="relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[5fr_6fr] gap-10 md:gap-14 items-center">
 
         {/* === LEFT: cube + 3 face captions === */}
-        <div className="flex flex-col gap-6 md:gap-7">
+        <div className="order-2 md:order-1 flex flex-col gap-6 md:gap-7">
           <div
             className="relative w-full max-w-[300px] md:max-w-[340px] mx-auto md:mx-0"
-            style={{ filter: 'drop-shadow(0 0 32px rgba(193,243,61,0.12))' }}
+            style={{ filter: 'drop-shadow(0 0 32px rgb(var(--accent-rgb) / 0.12))' }}
           >
             <MarkCube faceHi={faceHi} className="w-full h-auto" />
           </div>
@@ -198,7 +198,7 @@ const PartnerHero = ({
         </div>
 
         {/* === RIGHT: title + lead + CTAs === */}
-        <div className="flex flex-col gap-5">
+        <div className="order-1 md:order-2 flex flex-col gap-5">
           {eyebrow && (
             <span className="inline-block text-xs font-mono tracking-[0.18em] text-accent uppercase">
               // {eyebrow}

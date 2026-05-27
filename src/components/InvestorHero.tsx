@@ -168,7 +168,7 @@ const InvestorHero = ({
         className="hidden md:block absolute right-[16%] top-[28%] w-[300px] h-[80px] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(193,243,61,0.16) 0%, transparent 60%)',
+            'radial-gradient(ellipse at center, rgb(var(--accent-rgb) / 0.16) 0%, transparent 60%)',
           filter: 'blur(40px)',
         }}
       />

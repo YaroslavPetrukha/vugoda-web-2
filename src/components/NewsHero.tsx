@@ -99,7 +99,7 @@ const NewsHero = ({
           lineHeight: 0.85,
           letterSpacing: '-0.04em',
           color: 'transparent',
-          WebkitTextStroke: '1px rgba(193,243,61,0.12)',
+          WebkitTextStroke: '1px rgb(var(--accent-rgb) / 0.12)',
         }}
       >
         2026
@@ -162,7 +162,7 @@ const NewsHero = ({
                         <motion.span
                           aria-hidden="true"
                           className="absolute -top-1 -left-1 w-[18px] h-[18px] rounded-full"
-                          style={{ background: 'rgba(193,243,61,0.4)', filter: 'blur(2px)' }}
+                          style={{ background: 'rgb(var(--accent-rgb) / 0.4)', filter: 'blur(2px)' }}
                           initial={{ opacity: 0, scale: 0.6 }}
                           animate={
                             isInView

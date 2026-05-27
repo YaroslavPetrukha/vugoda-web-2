@@ -54,7 +54,7 @@ const PortfolioHero = ({
         className="hidden md:block absolute right-[8%] top-1/2 -translate-y-1/2 w-[320px] h-[80px] pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(193,243,61,0.14) 0%, transparent 60%)',
+            'radial-gradient(ellipse at center, rgb(var(--accent-rgb) / 0.14) 0%, transparent 60%)',
           filter: 'blur(36px)',
         }}
       />
@@ -62,10 +62,10 @@ const PortfolioHero = ({
       <div className="relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-8 md:gap-12 items-center">
 
         {/* === CUBE — secondary visual, brand mark === */}
-        <div className="md:order-2 relative flex items-center justify-center md:justify-end">
+        <div className="order-2 md:order-2 relative flex items-center justify-center md:justify-end">
           <div
             className="relative w-full max-w-[240px] sm:max-w-[300px] md:max-w-[380px]"
-            style={{ filter: 'drop-shadow(0 0 28px rgba(193,243,61,0.10))' }}
+            style={{ filter: 'drop-shadow(0 0 28px rgb(var(--accent-rgb) / 0.10))' }}
           >
             <MarkCube
               className="w-full h-auto"
@@ -75,7 +75,7 @@ const PortfolioHero = ({
         </div>
 
         {/* === TEXT — primary focal point === */}
-        <div className="md:order-1 flex flex-col gap-5">
+        <div className="order-1 md:order-1 flex flex-col gap-5">
           {eyebrow && (
             <span className="inline-block text-xs font-mono tracking-[0.18em] text-accent uppercase">
               <span aria-hidden="true">// </span>{eyebrow}
