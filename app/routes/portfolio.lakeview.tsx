@@ -1,4 +1,5 @@
 import type { MetaFunction } from 'react-router';
+import { Link } from 'react-router';
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
@@ -565,6 +566,29 @@ const ProjectLakeview = () => {
               </FadeIn>
             ))}
           </div>
+
+          {/* Related news / progress reports */}
+          <FadeIn delay={0.1} className="mt-12">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 bg-bg-deep border border-bg-surface">
+              <div>
+                <div className="text-[11px] font-medium uppercase tracking-widest text-accent mb-2">
+                  Хроніка будівництва
+                </div>
+                <p className="text-text-primary font-semibold">
+                  Хід будівництва ЖК Lakeview: квітень–травень 2026
+                </p>
+                <p className="text-sm text-text-secondary mt-1">
+                  Технічні умови на електропостачання, фасадні роботи, інверсійна покрівля.
+                </p>
+              </div>
+              <Link
+                to="/novyny/lakeview-progress-2026-04-05"
+                className="inline-flex items-center gap-2 text-accent hover:underline whitespace-nowrap"
+              >
+                Читати звіт <ArrowUpRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </FadeIn>
         </div>
       </section>
 

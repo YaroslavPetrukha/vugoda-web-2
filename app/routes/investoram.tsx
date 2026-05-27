@@ -1,4 +1,5 @@
 import type { MetaFunction } from 'react-router';
+import { Link } from 'react-router';
 import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import FadeIn from '../../src/components/FadeIn';
@@ -275,6 +276,29 @@ const Investors = () => {
               </FadeIn>
             ))}
           </div>
+
+          {/* Related guide for due diligence */}
+          <FadeIn delay={0.1} className="mt-12">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 bg-bg-deep border border-bg-surface">
+              <div>
+                <div className="text-[11px] font-medium uppercase tracking-widest text-accent mb-2">
+                  Практичний гайд
+                </div>
+                <p className="text-text-primary font-semibold">
+                  Як перевірити забудовника перед купівлею: 8 пунктів
+                </p>
+                <p className="text-sm text-text-secondary mt-1">
+                  Чек-лист для due diligence: ЄДРПОУ, дозволи, договір, репутація.
+                </p>
+              </div>
+              <Link
+                to="/novyny/chek-list-pereveryty-zabudovnyka"
+                className="inline-flex items-center gap-2 text-accent hover:underline whitespace-nowrap"
+              >
+                Читати гайд <ArrowUpRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </FadeIn>
         </div>
       </section>
 

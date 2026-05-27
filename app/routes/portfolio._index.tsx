@@ -121,6 +121,29 @@ const Portfolio = () => {
               Деталі проекту <ArrowRight className="w-4 h-4" />
             </Button>
           </FadeIn>
+
+          {/* Related location analysis */}
+          <FadeIn delay={0.15} className="mt-10">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 bg-bg-deep border border-bg-surface">
+              <div>
+                <div className="text-[11px] font-medium uppercase tracking-widest text-accent mb-2">
+                  Аналіз локації
+                </div>
+                <p className="text-text-primary font-semibold">
+                  Чому ми будуємо у Франківському районі Львова
+                </p>
+                <p className="text-sm text-text-secondary mt-1">
+                  Інфраструктура, демографія, ринок нерухомості — чому саме ця локація.
+                </p>
+              </div>
+              <Link
+                to="/novyny/frankivskyi-raion-lokatsiia-lviv"
+                className="inline-flex items-center gap-2 text-accent hover:underline whitespace-nowrap"
+              >
+                Читати аналіз <ArrowUpRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </FadeIn>
         </div>
       </section>
     </>

@@ -17,7 +17,7 @@
     "check:paths": "node scripts/check-no-legacy-paths.mjs",
     "check:paths:enforce": "node scripts/check-no-legacy-paths.mjs --enforce",
     "prebuild": "npm run check:paths:enforce",
-    "postbuild": "node scripts/generate-sitemap.mjs && node scripts/generate-robots.mjs && node scripts/postbuild-cleanup.mjs"
+    "postbuild": "node scripts/generate-sitemap.mjs && node scripts/generate-robots.mjs && node scripts/generate-rss.mjs && node scripts/postbuild-cleanup.mjs"
   },
   "dependencies": {
     "@fontsource/montserrat": "^5.2.8",

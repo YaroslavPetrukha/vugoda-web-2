@@ -8,6 +8,12 @@ import path from 'node:path';
 const ROOT = path.resolve(process.cwd());
 const BUILD_DIR = path.join(ROOT, 'build', 'client');
 
+const ARTICLE_SLUGS = [
+  'lakeview-progress-2026-04-05',
+  'chek-list-pereveryty-zabudovnyka',
+  'frankivskyi-raion-lokatsiia-lviv',
+];
+
 const PRERENDERED_ROUTES = [
   '/',
   '/pidkhid',
@@ -21,24 +27,32 @@ const PRERENDERED_ROUTES = [
   '/partneram',
   '/kontakty',
   '/novyny',
+  ...ARTICLE_SLUGS.map((slug) => `/novyny/${slug}`),
   '/diakuyu',
 ];
 
 // Routes that are in sitemap (excludes noindex routes)
+// /novyny + article slugs are now indexed (Phase 13C launch), pipeline routes excluded.
 const SITEMAP_ROUTES = [
   '/',
   '/pidkhid',
   '/portfolio',
   '/portfolio/lakeview',
-  '/portfolio/etno-dim',
-  '/portfolio/maetok',
-  '/portfolio/nterest',
   '/investoram',
   '/partneram',
   '/kontakty',
+  '/novyny',
+  ...ARTICLE_SLUGS.map((slug) => `/novyny/${slug}`),
 ];
 
-const NOINDEX_ROUTES = ['/portfolio/pipeline-04', '/novyny', '/diakuyu'];
+// Pipeline routes + thank-you are noindex. /novyny is now indexable (Phase 13C).
+const NOINDEX_ROUTES = [
+  '/portfolio/pipeline-04',
+  '/portfolio/etno-dim',
+  '/portfolio/maetok',
+  '/portfolio/nterest',
+  '/diakuyu',
+];
 
 function fail(msg) {
   console.error(`[verify-build] FAIL: ${msg}`);
@@ -108,7 +122,7 @@ for (const route of NOINDEX_ROUTES) {
   if (!html.includes('content="noindex'))
     fail(`Missing noindex robots meta in ${route}/index.html`);
 }
-pass('noindex robots meta present in pipeline-04 and novyny');
+pass(`noindex robots meta present on ${NOINDEX_ROUTES.length} routes (pipeline + diakuyu)`);
 
 // Check Lakeview has 3 JSON-LD blocks (global org + lakeview complex + breadcrumb)
 const lakeviewPath = path.join(BUILD_DIR, '/portfolio/lakeview', 'index.html');
