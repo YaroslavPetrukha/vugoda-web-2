@@ -12,7 +12,7 @@ export const metadata: ArticleMetadata = {
   publishedAt: '2026-05-26',
   category: 'guide',
   categoryLabel: 'Гід покупця',
-  hero: '/og/approach.png',
+  hero: '/og/approach-v2.png',
   heroAlt: 'Чек-лист перевірки забудовника перед купівлею квартири в Україні',
   author: 'Команда ВИГОДА',
   internalLinks: ['/pidkhid', '/partneram', '/portfolio/lakeview'],

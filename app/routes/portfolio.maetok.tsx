@@ -22,7 +22,7 @@ export const meta: MetaFunction = ({ location }) => {
   const title = 'ЖК Маєток Винниківський — новобудова Львів, Винники';
   const description =
     'Житловий комплекс у Винниках, агломерація Львова. Забудовник ВИГОДА на стадії кошторисної документації. Підпишіться на оновлення та умови майбутніх продажів.';
-  const image = siteUrl('/og/maetok.png');
+  const image = siteUrl('/og/maetok-v2.png');
   const url = siteUrl(location.pathname);
   return [
     { title },

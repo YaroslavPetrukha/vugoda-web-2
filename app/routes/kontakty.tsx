@@ -11,7 +11,7 @@ export const meta: MetaFunction = ({ location }) => {
   const title = 'Контакти ВИГОДА — забудовник Львова, телефон і email';
   const description =
     "ВИГОДА, Львів: тел. 097 990 03 90, email vygoda.sales@gmail.com. Контакти ЖК Lakeview. Форма зворотного зв'язку — відповідаємо у робочі дні 10:00–18:00.";
-  const image = siteUrl('/og/contacts.png');
+  const image = siteUrl('/og/contacts-v2.png');
   const url = siteUrl(location.pathname);
   return [
     { title },

@@ -15,7 +15,7 @@ export const meta: MetaFunction = ({ location }) => {
   const title = 'Новини ВИГОДА — Lakeview, гіди покупця, аналітика';
   const description =
     'Звіти з майданчика ЖК Lakeview, чек-листи для покупців нерухомості та аналіз локацій Львова. Без рекламних формулювань — лише етапи, документи й дати.';
-  const image = siteUrl('/og/news.png');
+  const image = siteUrl('/og/news-v2.png');
   const url = siteUrl(location.pathname);
   return [
     { title },

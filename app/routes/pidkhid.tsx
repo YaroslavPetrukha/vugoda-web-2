@@ -10,7 +10,7 @@ export const meta: MetaFunction = ({ location }) => {
   const title = 'Як обрати забудовника у Львові — підхід ВИГОДА';
   const description =
     'Чотири фази від меморандуму до введення в експлуатацію: кошторис, дозвільна документація, будівництво. Як ВИГОДА приймає рішення і що це означає для покупця.';
-  const image = siteUrl('/og/approach.png');
+  const image = siteUrl('/og/approach-v2.png');
   const url = siteUrl(location.pathname);
   return [
     { title },

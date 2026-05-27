@@ -12,7 +12,7 @@ export const meta: MetaFunction = ({ location }) => {
   const title = 'Новий проект ВИГОДА у підготовці';
   const description =
     'Закритий pipeline-проект на стадії прорахунку кошторисної вартості. Деталі — після рішення інвестора.';
-  const image = siteUrl('/og/pipeline-04.png');
+  const image = siteUrl('/og/pipeline-04-v2.png');
   const url = siteUrl(location.pathname);
   return [
     { title },

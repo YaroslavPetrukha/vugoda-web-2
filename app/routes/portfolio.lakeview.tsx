@@ -196,7 +196,7 @@ export const meta: MetaFunction = ({ location }) => {
   const title = 'ЖК Lakeview Львів — бізнес-клас, Франківський район';
   const description =
     'Вул. Володимира Великого 2А, Франківський район Львова. 4 секції, монолітно-каркасна технологія, від $1600/м². Квартири 44–183 м², розстрочка до 2027.';
-  const image = siteUrl('/og/lakeview.png');
+  const image = siteUrl('/og/lakeview-v2.png');
   const url = siteUrl(location.pathname);
   return [
     { title },
@@ -235,7 +235,7 @@ const ProjectLakeview = () => {
     description:
       'Житловий комплекс бізнес-класу у Франківському районі Львова. 4 секції, монолітно-каркасна технологія, до 16 поверхів, 2 поверхи комерції, 2-рівневий підземний паркінг. Біля двох природних озер.',
     url: siteUrl('/portfolio/lakeview'),
-    image: siteUrl('/og/lakeview.png'),
+    image: siteUrl('/og/lakeview-v2.png'),
     developer: { '@id': siteUrl('/#organization') },
     address: {
       '@type': 'PostalAddress',

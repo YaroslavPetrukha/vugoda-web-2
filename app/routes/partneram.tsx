@@ -11,7 +11,7 @@ export const meta: MetaFunction = ({ location }) => {
   const title = 'Реквізити забудовника ВИГОДА — ЄДРПОУ 44876801';
   const description =
     'ПП «ДІК "Вигода +"», ЄДРПОУ 44876801, Львів. Юридична картка та реквізити для банків і партнерів. Документи для due diligence надаються за запитом.';
-  const image = siteUrl('/og/partners.png');
+  const image = siteUrl('/og/partners-v2.png');
   const url = siteUrl(location.pathname);
   return [
     { title },

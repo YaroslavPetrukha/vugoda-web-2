@@ -23,7 +23,7 @@ export const meta: MetaFunction = ({ location }) => {
   const title = 'Дохідний дім NTEREST — інвестиційна нерухомість Львів';
   const description =
     'Дохідна нерухомість NTEREST у Львові від ВИГОДА. Стадія погодження дозвільної документації. Підпишіться — повідомимо про умови і старт продажів першими.';
-  const image = siteUrl('/og/nterest.png');
+  const image = siteUrl('/og/nterest-v2.png');
   const url = siteUrl(location.pathname);
   return [
     { title },

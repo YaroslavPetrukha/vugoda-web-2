@@ -43,7 +43,7 @@ export const meta: MetaFunction = ({ location }) => {
   const title = 'ЖК Етно Дім Львів — дохідна нерухомість, Судова';
   const description =
     'Дохідна нерухомість, вул. Судова, Львів. ЖК Етно Дім від ВИГОДА: стадія меморандуму про відновлення будівництва. Підпишіться на старт продажів і умови участі.';
-  const image = siteUrl('/og/etno-dim.png');
+  const image = siteUrl('/og/etno-dim-v2.png');
   const url = siteUrl(location.pathname);
   return [
     { title },

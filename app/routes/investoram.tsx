@@ -13,7 +13,7 @@ export const meta: MetaFunction = ({ location }) => {
   const title = 'Інвестиції в нерухомість Львів — забудовник ВИГОДА';
   const description =
     "Купівля майнових прав у Львові: формати співпраці, юридичний контур угоди, розстрочка. ВИГОДА — забудовник з активним об'єктом ЖК Lakeview, здача 2027.";
-  const image = siteUrl('/og/investors.png');
+  const image = siteUrl('/og/investors-v2.png');
   const url = siteUrl(location.pathname);
   return [
     { title },

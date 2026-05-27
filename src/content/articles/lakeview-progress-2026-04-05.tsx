@@ -12,7 +12,7 @@ export const metadata: ArticleMetadata = {
   publishedAt: '2026-05-13',
   category: 'construction-progress',
   categoryLabel: 'Хід будівництва',
-  hero: '/og/lakeview.png',
+  hero: '/og/lakeview-v2.png',
   heroAlt: 'Фасадні роботи на першій секції ЖК Lakeview у Львові',
   author: 'Команда ВИГОДА',
   internalLinks: ['/portfolio/lakeview', '/pidkhid'],
