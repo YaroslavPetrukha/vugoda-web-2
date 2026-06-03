@@ -15,10 +15,10 @@ const DEFAULT_FACTS: TrustFact[] = [
 const TrustStripe = ({ facts = DEFAULT_FACTS, className = '' }: TrustStripeProps) => {
   return (
     <section
-      className={`bg-bg-base border-t-2 border-t-accent border-b border-b-bg-surface py-10 md:py-12 px-6 lg:px-8 ${className}`}
+      className={`bg-bg-base border-t-2 border-t-accent border-b border-b-border py-10 md:py-12 px-6 lg:px-8 ${className}`}
       aria-label="Юридичний фактаж"
     >
-      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-px bg-bg-surface">
+      <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-px bg-border">
         {facts.map((f) => (
           <div key={f.label} className="bg-bg-base p-4 md:p-6">
             <div className="text-[11px] md:text-xs font-medium uppercase tracking-[0.14em] text-text-secondary mb-1.5">

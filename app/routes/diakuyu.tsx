@@ -86,14 +86,14 @@ const ThankYou = () => {
             href="https://t.me/vygoda_sales"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-5 py-2.5 border border-bg-surface text-text-secondary text-sm uppercase tracking-widest font-medium hover:border-text-primary hover:text-text-primary transition-colors"
+            className="inline-flex items-center justify-center px-5 py-2.5 border border-border text-text-secondary text-sm uppercase tracking-widest font-medium hover:border-text-primary hover:text-text-primary transition-colors"
           >
             Telegram
           </a>
         </div>
 
         {/* Divider */}
-        <div className="border-t border-bg-surface mb-10" />
+        <div className="border-t border-border mb-10" />
 
         {/* Contextual related content link */}
         <div className="mb-10">

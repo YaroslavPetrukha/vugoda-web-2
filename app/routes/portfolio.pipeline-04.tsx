@@ -58,14 +58,14 @@ const ProjectPipeline04 = () => {
         </Button>
       </PipelineHero>
 
-      <section className="bg-bg-deep border-b border-bg-surface py-6 px-6 lg:px-8">
+      <section className="bg-bg-deep border-b border-border py-6 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center gap-4 text-sm text-text-secondary">
           <StagePill stage="pre-budget" label="Прорахунок кошторисної вартості" />
         </div>
       </section>
 
       {/* STAGE */}
-      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-b border-bg-surface">
+      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-b border-border">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-5">
             <FadeIn>
@@ -88,7 +88,7 @@ const ProjectPipeline04 = () => {
           <FadeIn>
             <SectionHeading eyebrow="02" title="Чому без назви" />
           </FadeIn>
-          <ul className="mt-12 divide-y divide-bg-surface border-y border-bg-surface">
+          <ul className="mt-12 divide-y divide-border border-y border-border">
             {NO_NAME_REASONS.map((reason, i) => (
               <FadeIn key={i} delay={i * 0.06}>
                 <li className="flex gap-6 py-6 md:py-7">
@@ -106,7 +106,7 @@ const ProjectPipeline04 = () => {
       </section>
 
       {/* WHAT NEXT */}
-      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-bg-surface">
+      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-border">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading eyebrow="03" title="Що далі" />

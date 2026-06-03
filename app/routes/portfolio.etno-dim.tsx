@@ -130,7 +130,7 @@ const ProjectEtnoDim = () => {
         </Button>
       </PageHero>
 
-      <section className="bg-bg-deep border-b border-bg-surface py-6 px-6 lg:px-8">
+      <section className="bg-bg-deep border-b border-border py-6 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center gap-4 text-sm text-text-secondary">
           <StagePill stage="memorandum" label="Меморандум про відновлення будівництва" />
           <span aria-hidden="true">·</span>
@@ -139,7 +139,7 @@ const ProjectEtnoDim = () => {
       </section>
 
       {/* STAGE */}
-      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-b border-bg-surface">
+      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-b border-border">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-5">
             <FadeIn>
@@ -161,7 +161,7 @@ const ProjectEtnoDim = () => {
           <FadeIn>
             <SectionHeading eyebrow="02" title="Параметри" />
           </FadeIn>
-          <dl className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-px bg-bg-surface border border-bg-surface">
+          <dl className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
             {PARAMETERS.map((p) => (
               <div
                 key={p.label}
@@ -180,7 +180,7 @@ const ProjectEtnoDim = () => {
       </section>
 
       {/* RENDERS */}
-      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-bg-surface">
+      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-border">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading
@@ -213,7 +213,7 @@ const ProjectEtnoDim = () => {
       </section>
 
       {/* LOCATION & CONCEPT */}
-      <section id="lokatsiia" className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-t border-bg-surface">
+      <section id="lokatsiia" className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-t border-border">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-5">
             <FadeIn>
@@ -267,7 +267,7 @@ const ProjectEtnoDim = () => {
       {/* FORM */}
       <section
         id="pidpyska"
-        className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-t border-bg-surface"
+        className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-t border-border"
       >
         <div className="max-w-3xl mx-auto">
           <FadeIn>

@@ -56,7 +56,7 @@ const News = () => {
       </NewsHero>
 
       {/* CATEGORIES */}
-      <section className="bg-bg-deep border-b border-bg-surface py-8 px-6 lg:px-8">
+      <section className="bg-bg-deep border-b border-border py-8 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center gap-3 md:gap-4">
           <span className="text-[11px] font-medium uppercase tracking-widest text-text-secondary mr-2">
             Категорії
@@ -69,7 +69,7 @@ const News = () => {
               className={`px-3 py-2 text-xs uppercase tracking-widest border transition-colors rounded-none ${
                 i === 0
                   ? 'bg-accent text-bg-deep border-accent'
-                  : 'bg-transparent text-text-secondary border-bg-surface hover:border-accent hover:text-accent'
+                  : 'bg-transparent text-text-secondary border-border hover:border-accent hover:text-accent'
               }`}
             >
               {c}
@@ -99,7 +99,7 @@ const News = () => {
                 <FadeIn key={article.slug} delay={i * 0.05}>
                   <Link
                     to={`/novyny/${article.slug}`}
-                    className="group block h-full bg-bg-deep border border-bg-surface p-6 hover:border-accent transition-colors"
+                    className="group block h-full bg-bg-deep border border-border p-6 hover:border-accent transition-colors"
                   >
                     <div className="flex flex-wrap items-center gap-3 text-[11px] font-medium uppercase tracking-widest text-text-secondary mb-4">
                       <time dateTime={article.publishedAt}>{dateLabel}</time>
@@ -124,7 +124,7 @@ const News = () => {
       </section>
 
       {/* CONSTRUCTION UPDATES */}
-      <section className="bg-bg-deep border-t border-bg-surface py-16 md:py-24 px-6 lg:px-8">
+      <section className="bg-bg-deep border-t border-border py-16 md:py-24 px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading
@@ -152,7 +152,7 @@ const News = () => {
       {/* SUBSCRIBE FORM */}
       <section
         id="pidpyska"
-        className="bg-bg-deep py-24 md:py-32 px-6 lg:px-8 border-t border-bg-surface"
+        className="bg-bg-deep py-24 md:py-32 px-6 lg:px-8 border-t border-border"
       >
         <div className="max-w-3xl mx-auto">
           <FadeIn>

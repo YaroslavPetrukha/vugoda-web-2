@@ -10,6 +10,7 @@
   --color-bg-base: #2F3640;        /* головний темний фон, body */
   --color-bg-surface: #3D3B43;     /* антрацит — картки, поверхні, hover-стани */
   --color-bg-deep: #020A0A;        /* глибокий чорний — header, hero overlay */
+  --color-border: #4D5563;         /* видимий cool-slate hairline — рамки/divider/grid-lines (контраст і на base, і на deep) */
   --color-accent: #C1F33D;         /* acid-lime, point-use: CTA, active, focus */
   --accent-rgb: 193 243 61;        /* accent у space-separated RGB для rgb(var(--accent-rgb) / α) */
   --color-text-primary: #F5F7FA;   /* основний текст */

@@ -116,12 +116,12 @@ const Approach = () => {
       </ApproachHero>
 
       {/* PHASES */}
-      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-b border-bg-surface">
+      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-b border-border">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading eyebrow="01" title="Чотири фази проекту" />
           </FadeIn>
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-px bg-bg-surface border border-bg-surface">
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
             {PHASES.map((p, i) => (
               <FadeIn
                 key={p.num}
@@ -137,7 +137,7 @@ const Approach = () => {
                 <p className="text-text-secondary leading-relaxed mb-8">
                   {p.body}
                 </p>
-                <dl className="border-t border-bg-surface pt-6 grid grid-cols-1 gap-4 text-sm">
+                <dl className="border-t border-border pt-6 grid grid-cols-1 gap-4 text-sm">
                   <div className="flex flex-col gap-1">
                     <dt className="text-[11px] font-medium uppercase tracking-widest text-text-secondary">
                       Документи
@@ -163,7 +163,7 @@ const Approach = () => {
           <FadeIn>
             <SectionHeading eyebrow="02" title="Принципи, яких тримаємось" />
           </FadeIn>
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-bg-surface border border-bg-surface">
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border">
             {PRINCIPLES.map((p, i) => (
               <FadeIn
                 key={p.title}
@@ -186,12 +186,12 @@ const Approach = () => {
       </section>
 
       {/* NOT DOING */}
-      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-bg-surface">
+      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-border">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading eyebrow="03" title="Чого ми не робимо" />
           </FadeIn>
-          <ul className="mt-12 divide-y divide-bg-surface border-y border-bg-surface">
+          <ul className="mt-12 divide-y divide-border border-y border-border">
             {NOT_DOING.map((item, i) => (
               <FadeIn key={i} delay={i * 0.05}>
                 <li className="flex gap-6 py-6 md:py-7">
@@ -209,7 +209,7 @@ const Approach = () => {
       </section>
 
       {/* CTA */}
-      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-t border-bg-surface">
+      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-t border-border">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading

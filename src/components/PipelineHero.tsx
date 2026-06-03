@@ -82,7 +82,7 @@ const PipelineHero = ({
   return (
     <section
       ref={sectionRef}
-      className="relative bg-bg-deep py-12 md:py-16 px-6 lg:px-8 border-b border-bg-surface overflow-hidden"
+      className="relative bg-bg-deep py-12 md:py-16 px-6 lg:px-8 border-b border-border overflow-hidden"
     >
       <HeroAmbient />
 

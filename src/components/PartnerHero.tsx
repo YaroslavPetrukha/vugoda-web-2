@@ -85,7 +85,7 @@ const PartnerHero = ({
   return (
     <section
       ref={ref}
-      className="relative bg-bg-deep py-12 md:py-16 px-6 lg:px-8 border-b border-bg-surface overflow-hidden"
+      className="relative bg-bg-deep py-12 md:py-16 px-6 lg:px-8 border-b border-border overflow-hidden"
     >
       <HeroAmbient />
 
@@ -123,7 +123,7 @@ const PartnerHero = ({
                 <li
                   key={fact.num}
                   className={`border-l-2 transition-colors duration-300 ${
-                    isActive ? 'border-accent' : 'border-bg-surface'
+                    isActive ? 'border-accent' : 'border-border'
                   }`}
                 >
                   <button
@@ -215,7 +215,7 @@ const PartnerHero = ({
           {children && <div className="mt-2 flex flex-wrap gap-3">{children}</div>}
 
           {/* Live legal entity strip — постійно видна, малий заголовок */}
-          <div className="mt-6 pt-5 border-t border-bg-surface flex flex-col gap-3">
+          <div className="mt-6 pt-5 border-t border-border flex flex-col gap-3">
             <span className="text-[10px] font-mono tracking-[0.18em] text-text-secondary uppercase">
               // юридична особа
             </span>

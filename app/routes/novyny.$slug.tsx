@@ -83,7 +83,7 @@ const ArticleSlugRoute = () => {
 
       <article className="bg-bg-base">
         {/* Article header */}
-        <header className="bg-bg-deep border-b border-bg-surface py-16 md:py-24 px-6 lg:px-8">
+        <header className="bg-bg-deep border-b border-border py-16 md:py-24 px-6 lg:px-8">
           <div className="max-w-3xl mx-auto">
             <FadeIn>
               <div className="flex flex-wrap items-center gap-3 text-[11px] font-medium uppercase tracking-widest text-text-secondary mb-6">
@@ -115,7 +115,7 @@ const ArticleSlugRoute = () => {
         </section>
 
         {/* Author/footer attribution */}
-        <section className="border-t border-bg-surface bg-bg-deep py-8 px-6 lg:px-8">
+        <section className="border-t border-border bg-bg-deep py-8 px-6 lg:px-8">
           <div className="max-w-3xl mx-auto flex flex-wrap items-center justify-between gap-4 text-sm text-text-secondary">
             <span>
               Автор: <span className="text-text-primary">{article.author}</span>
@@ -132,7 +132,7 @@ const ArticleSlugRoute = () => {
 
         {/* Related */}
         {related.length > 0 ? (
-          <section className="bg-bg-base py-16 md:py-24 px-6 lg:px-8 border-t border-bg-surface">
+          <section className="bg-bg-base py-16 md:py-24 px-6 lg:px-8 border-t border-border">
             <div className="max-w-5xl mx-auto">
               <FadeIn>
                 <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-8">
@@ -144,7 +144,7 @@ const ArticleSlugRoute = () => {
                   <FadeIn key={r.slug} delay={i * 0.05}>
                     <Link
                       to={`/novyny/${r.slug}`}
-                      className="group block bg-bg-deep border border-bg-surface p-6 hover:border-accent transition-colors"
+                      className="group block bg-bg-deep border border-border p-6 hover:border-accent transition-colors"
                     >
                       <div className="flex flex-wrap items-center gap-3 text-[11px] font-medium uppercase tracking-widest text-text-secondary mb-3">
                         <time dateTime={r.publishedAt}>
@@ -175,7 +175,7 @@ const ArticleSlugRoute = () => {
         ) : null}
 
         {/* CTA */}
-        <section className="bg-bg-deep border-t border-bg-surface py-16 md:py-24 px-6 lg:px-8">
+        <section className="bg-bg-deep border-t border-border py-16 md:py-24 px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <FadeIn>
               <h2 className="text-2xl md:text-3xl font-bold text-text-primary mb-4">

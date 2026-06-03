@@ -39,7 +39,7 @@ const NewsCard = ({
   );
 
   const cls =
-    'block bg-bg-surface border border-bg-surface hover:border-accent transition-colors p-6 md:p-8 group rounded-none h-full';
+    'block bg-bg-surface border border-border hover:border-accent transition-colors p-6 md:p-8 group rounded-none h-full';
 
   if (href) {
     return (

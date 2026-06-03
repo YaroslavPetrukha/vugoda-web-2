@@ -27,7 +27,7 @@ const PageHero = ({
     align === 'center' ? 'text-center mx-auto items-center' : 'text-left items-start';
 
   return (
-    <section className="relative bg-bg-deep py-24 md:py-32 px-6 lg:px-8 border-b border-bg-surface overflow-hidden">
+    <section className="relative bg-bg-deep py-24 md:py-32 px-6 lg:px-8 border-b border-border overflow-hidden">
       {image && (
         <>
           <Picture
