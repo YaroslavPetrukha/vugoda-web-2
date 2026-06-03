@@ -22,7 +22,7 @@ const navColumns = [
 
 const Footer = () => {
   return (
-    <footer className="bg-bg-deep border-t border-bg-surface text-text-secondary px-6 lg:px-8">
+    <footer className="bg-bg-deep border-t border-border text-text-secondary px-6 lg:px-8">
       <div className="max-w-7xl mx-auto py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
           <div className="col-span-2 md:col-span-1">
@@ -103,7 +103,7 @@ const Footer = () => {
           Latin transliteration: Vyhoda. Альтернативні написання бренду: «ВИГОДА+», «ДІК Вигода+».
         </p>
 
-        <div className="border-t border-bg-surface pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-text-secondary">
+        <div className="border-t border-border pt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs text-text-secondary">
           <div className="flex flex-wrap gap-x-3 gap-y-1">
             <span>© 2026 ПП «ДІК "Вигода +"» / Vyhoda</span>
             <span aria-hidden="true">·</span>

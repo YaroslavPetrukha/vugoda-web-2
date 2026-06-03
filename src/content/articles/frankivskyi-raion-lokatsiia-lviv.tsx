@@ -36,7 +36,7 @@ export default function ArticleBody() {
         демографічний попит, що формується без спекулятивного перегріву.
       </p>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         Локація і кордони
@@ -73,7 +73,7 @@ export default function ArticleBody() {
         доступу до всіх ключових точок.
       </p>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         Інфраструктура і доступність
@@ -110,7 +110,7 @@ export default function ArticleBody() {
         прямо корелює з якістю щоденного досвіду мешканця.
       </p>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         Демографія і ринок
@@ -154,7 +154,7 @@ export default function ArticleBody() {
         .
       </p>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         Чому ВИГОДА обрала цю локацію для Lakeview
@@ -199,7 +199,7 @@ export default function ArticleBody() {
         .
       </p>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         Підсумок: локація як незмінна змінна

@@ -33,7 +33,7 @@ export default function ArticleBody() {
         у строки, що ведуть до здачі об'єкта у 2027 році.
       </p>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         Що відбувається на майданчику
@@ -127,7 +127,7 @@ export default function ArticleBody() {
         введення в експлуатацію.
       </p>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         Що далі
@@ -196,7 +196,7 @@ export default function ArticleBody() {
         </li>
       </ul>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         Що це означає для покупця
@@ -241,7 +241,7 @@ export default function ArticleBody() {
         </li>
       </ul>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         Як ми звітуємо
@@ -282,7 +282,7 @@ export default function ArticleBody() {
         , офіс продажу — вул. Володимира Великого, 4, каб. 406.
       </p>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <p className="text-sm text-text-secondary italic mt-12">
         <em>

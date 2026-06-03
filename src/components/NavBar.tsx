@@ -39,7 +39,7 @@ const NavBar = () => {
   const close = () => setOpen(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-bg-deep border-b border-bg-surface px-6 lg:px-8">
+    <nav className="sticky top-0 z-50 bg-bg-deep border-b border-border px-6 lg:px-8">
       <div className="max-w-7xl mx-auto h-20 flex items-center justify-between relative z-10">
         <Link
           to="/"
@@ -108,7 +108,7 @@ const NavBar = () => {
                 to={link.to}
                 onClick={close}
                 className={({ isActive }) =>
-                  `text-text-primary text-2xl md:text-3xl font-bold py-4 border-b border-bg-surface transition-colors ${
+                  `text-text-primary text-2xl md:text-3xl font-bold py-4 border-b border-border transition-colors ${
                     isActive ? 'text-accent' : 'hover:text-accent'
                   }`
                 }

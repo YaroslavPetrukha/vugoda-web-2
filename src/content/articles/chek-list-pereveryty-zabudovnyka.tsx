@@ -31,7 +31,7 @@ export default function ArticleBody() {
         рівня.
       </p>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         1. Юридична особа і ЄДРПОУ
@@ -73,7 +73,7 @@ export default function ArticleBody() {
         особа-підприємець, а не юридична особа-забудовник.
       </p>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         2. Дозвільна документація
@@ -137,7 +137,7 @@ export default function ArticleBody() {
         сайту і офісу продажів.
       </p>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         3. Технологія будівництва і клас наслідків
@@ -161,7 +161,7 @@ export default function ArticleBody() {
         проекті, і порівняйте її з тим, що фактично видно на майданчику.
       </p>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         4. Фінансова модель і умови оплати
@@ -199,7 +199,7 @@ export default function ArticleBody() {
         Повна передоплата на ранній стадії в його інтересах, але не у ваших.
       </p>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         5. Юридичний інструмент угоди
@@ -223,7 +223,7 @@ export default function ArticleBody() {
         підписанням.
       </p>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         6. Гарантії і відповідальність у договорі
@@ -264,7 +264,7 @@ export default function ArticleBody() {
         строків і санкцій є конкретним ризиком, а не формальністю.
       </p>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         7. Хід будівництва і прозорість
@@ -286,7 +286,7 @@ export default function ArticleBody() {
         будівельного процесу є ознакою організованого девелопменту.
       </p>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         8. Репутація і портфоліо
@@ -332,7 +332,7 @@ export default function ArticleBody() {
         , де видно незакриті боргові зобов'язання компанії.
       </p>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         Як ці 8 пунктів застосовуються до ВИГОДА
@@ -409,7 +409,7 @@ export default function ArticleBody() {
         конкретних документів на кожному етапі.
       </p>
 
-      <hr className="border-bg-surface my-12" />
+      <hr className="border-border my-12" />
 
       <h2 className="text-2xl md:text-3xl font-bold text-text-primary mt-12 mb-4">
         Підсумок

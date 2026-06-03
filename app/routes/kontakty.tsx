@@ -101,12 +101,12 @@ const Contacts = () => {
       </ContactsHero>
 
       {/* CORPORATE */}
-      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-b border-bg-surface">
+      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-b border-border">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading eyebrow="01" title="Корпоративні контакти" />
           </FadeIn>
-          <dl className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-px bg-bg-surface border border-bg-surface">
+          <dl className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border">
             {CORP_CONTACTS.map((c) => (
               <div key={c.label} className="bg-bg-base p-6 md:p-8">
                 <dt className="text-[11px] font-medium uppercase tracking-widest text-text-secondary mb-2">
@@ -136,14 +136,14 @@ const Contacts = () => {
           <FadeIn>
             <SectionHeading eyebrow="02" title="Куди писати" />
           </FadeIn>
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-px bg-bg-surface border border-bg-surface">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
             {DIRECTIONS.map((d, i) => (
               <FadeIn key={d.title} delay={i * 0.04} className="bg-bg-deep p-8">
                 <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-4 leading-snug">
                   {d.title}
                 </h3>
                 <p className="text-text-secondary leading-relaxed mb-5">{d.body}</p>
-                <p className="text-sm text-text-secondary leading-relaxed border-t border-bg-surface pt-4">
+                <p className="text-sm text-text-secondary leading-relaxed border-t border-border pt-4">
                   <span className="block text-[11px] uppercase tracking-widest text-accent mb-1">
                     Канал
                   </span>
@@ -163,7 +163,7 @@ const Contacts = () => {
       </section>
 
       {/* LAKEVIEW SEPARATE */}
-      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-bg-surface">
+      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-border">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading
@@ -172,7 +172,7 @@ const Contacts = () => {
               description="Це контакти проекту, не корпоративні. Бронювання, перегляди, ціни — за цими каналами."
             />
           </FadeIn>
-          <dl className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-px bg-bg-surface border border-bg-surface">
+          <dl className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
             {LAKEVIEW_CONTACTS.map((c) => (
               <div key={c.label} className="bg-bg-base p-6 md:p-8">
                 <dt className="text-[11px] font-medium uppercase tracking-widest text-text-secondary mb-2">
@@ -210,7 +210,7 @@ const Contacts = () => {
           <FadeIn>
             <SectionHeading eyebrow="04" title="Юридична картка" />
           </FadeIn>
-          <ul className="mt-12 divide-y divide-bg-surface border-y border-bg-surface">
+          <ul className="mt-12 divide-y divide-border border-y border-border">
             {LEGAL.map((line, i) => (
               <li key={i} className="py-5 text-text-primary text-base md:text-lg">
                 {line}
@@ -223,7 +223,7 @@ const Contacts = () => {
       {/* FORM */}
       <section
         id="napysaty"
-        className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-t border-bg-surface"
+        className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-t border-border"
       >
         <div className="max-w-3xl mx-auto">
           <FadeIn>

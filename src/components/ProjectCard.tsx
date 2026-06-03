@@ -39,7 +39,7 @@ const ProjectCard = ({
       ? 'aspect-[4/5]'
       : 'aspect-[4/5]';
 
-  const wrapperCls = `relative block overflow-hidden bg-bg-surface border border-bg-surface group rounded-none ${aspect} ${className}`;
+  const wrapperCls = `relative block overflow-hidden bg-bg-surface border border-border group rounded-none ${aspect} ${className}`;
 
   const ariaLabel = `${project.name}, стадія: ${project.stageLabel}`;
 
@@ -72,7 +72,7 @@ const ProjectCard = ({
   );
 
   const Overlay = (
-    <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 bg-bg-deep/75 backdrop-blur-md border-t border-bg-surface flex items-end justify-between gap-4">
+    <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 bg-bg-deep/75 backdrop-blur-md border-t border-border flex items-end justify-between gap-4">
       <div>
         <StagePill stage={project.stage} label={project.stageLabel} />
         <h3 className="text-lg md:text-2xl font-bold text-text-primary mt-3 leading-tight">

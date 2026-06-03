@@ -158,7 +158,7 @@ const InvestorHero = ({
   const isInView = useInView(mapRef, { once: true, margin: '-80px' });
 
   return (
-    <section className="relative bg-bg-deep py-12 md:py-16 px-6 lg:px-8 border-b border-bg-surface overflow-hidden">
+    <section className="relative bg-bg-deep py-12 md:py-16 px-6 lg:px-8 border-b border-border overflow-hidden">
 
       {/* gridOpacity 0 — own iso-grid map already provides structure */}
       <HeroAmbient grid={false} />
@@ -357,7 +357,7 @@ const InvestorHero = ({
           )}
           {children && <div className="mt-2 flex flex-wrap gap-3">{children}</div>}
 
-          <dl className="mt-6 grid grid-cols-3 gap-4 md:gap-6 pt-5 border-t border-bg-surface">
+          <dl className="mt-6 grid grid-cols-3 gap-4 md:gap-6 pt-5 border-t border-border">
             {trust.map((item) => (
               <div key={item.label}>
                 <dt className="text-[10px] font-mono tracking-[0.16em] text-text-secondary uppercase mb-1.5">

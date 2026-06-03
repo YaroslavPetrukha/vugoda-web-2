@@ -57,7 +57,7 @@ const Portfolio = () => {
       </PortfolioHero>
 
       {/* === Capacity statement — позиція в портфелі === */}
-      <section className="bg-bg-deep border-b border-bg-surface py-12 md:py-16 px-6 lg:px-8">
+      <section className="bg-bg-deep border-b border-border py-12 md:py-16 px-6 lg:px-8">
         <FadeIn>
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-6 md:gap-12">
             <div>
@@ -124,7 +124,7 @@ const Portfolio = () => {
 
           {/* Related location analysis */}
           <FadeIn delay={0.15} className="mt-10">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 bg-bg-deep border border-bg-surface">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 bg-bg-deep border border-border">
               <div>
                 <div className="text-[11px] font-medium uppercase tracking-widest text-accent mb-2">
                   Аналіз локації

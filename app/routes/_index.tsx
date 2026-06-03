@@ -8,6 +8,7 @@ import Button from '../../src/components/Button';
 import SectionHeading from '../../src/components/SectionHeading';
 import TrustStripe from '../../src/components/TrustStripe';
 import ProjectCard from '../../src/components/ProjectCard';
+import SectionBackdrop from '../../src/components/SectionBackdrop';
 import Picture from '../../src/components/ui/Picture';
 import type { PictureSource } from '../../src/components/ui/Picture';
 import { getRequiredProject } from '../../src/data/projects';
@@ -145,20 +146,6 @@ const Home = () => {
             className="w-full h-full object-cover opacity-50"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-bg-deep/40 via-bg-deep/55 to-bg-deep" />
-          {/* Half-bleed isometric pattern, fades from middle to bottom */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 opacity-[0.05]"
-            style={{
-              backgroundImage: "url('/isometric-grid.svg')",
-              backgroundSize: '420px 319px',
-              backgroundRepeat: 'repeat',
-              maskImage:
-                'linear-gradient(to bottom, transparent 25%, black 70%)',
-              WebkitMaskImage:
-                'linear-gradient(to bottom, transparent 25%, black 70%)',
-            }}
-          />
         </div>
 
         {/* Background wordmark — водяний знак, desktop only, нижній правий безпечний регіон */}
@@ -214,10 +201,10 @@ const Home = () => {
       <TrustStripe />
 
       {/* WHO WE ARE */}
-      <section className="relative bg-bg-base py-20 md:py-24 px-6 lg:px-8 border-b border-bg-surface overflow-hidden">
+      <section className="relative bg-bg-base py-20 md:py-24 px-6 lg:px-8 border-b border-border overflow-hidden">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-16 -right-16 w-[420px] h-[320px] opacity-[0.04]"
+          className="pointer-events-none absolute -bottom-16 -right-16 w-[420px] h-[320px] opacity-[0.07]"
           style={{
             backgroundImage: "url('/mark.svg')",
             backgroundSize: 'contain',
@@ -231,7 +218,7 @@ const Home = () => {
               <SectionHeading eyebrow="01" title="Хто ми" />
             </FadeIn>
             <FadeIn delay={0.1}>
-              <dl className="mt-10 border-t border-bg-surface divide-y divide-bg-surface">
+              <dl className="mt-10 border-t border-border divide-y divide-border">
                 <div className="grid grid-cols-[120px_1fr] py-4 gap-4">
                   <dt className="text-[11px] font-mono uppercase tracking-[0.18em] text-text-secondary self-center">
                     Засновано
@@ -277,22 +264,8 @@ const Home = () => {
 
       {/* SYSTEMIC DEVELOPMENT — 4 PRINCIPLES */}
       <section className="bg-bg-deep py-24 md:py-32 px-6 lg:px-8 relative overflow-hidden">
-        {/* Side-rail of isometric cubes on the right edge */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute right-0 top-0 bottom-0 w-[280px] opacity-[0.05]"
-          style={{
-            backgroundImage: "url('/isometric-grid.svg')",
-            backgroundSize: '280px auto',
-            backgroundRepeat: 'repeat-y',
-            backgroundPosition: 'right top',
-            maskImage:
-              'linear-gradient(to left, black 55%, transparent 100%)',
-            WebkitMaskImage:
-              'linear-gradient(to left, black 55%, transparent 100%)',
-          }}
-        />
-        <div className="relative max-w-7xl mx-auto">
+        <SectionBackdrop cube="bottom-right" glow="top-left" />
+        <div className="relative z-10 max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading
               eyebrow="02"
@@ -301,7 +274,7 @@ const Home = () => {
             />
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-bg-surface mt-16 border border-bg-surface">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border mt-16 border border-border">
             {PRINCIPLES.map((p, i) => (
               <FadeIn
                 key={p.num}
@@ -333,7 +306,7 @@ const Home = () => {
             ))}
           </div>
 
-          <FadeIn className="mt-px border-t border-bg-surface pt-8 md:pt-10 flex justify-end">
+          <FadeIn className="mt-px border-t border-border pt-8 md:pt-10 flex justify-end">
             <Button as="router" href="/pidkhid" variant="ghost" size="md">
               Детально про підхід <ArrowRight aria-hidden="true" className="w-4 h-4" />
             </Button>
@@ -342,7 +315,7 @@ const Home = () => {
       </section>
 
       {/* CURRENT FOCUS — PORTFOLIO */}
-      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-bg-surface">
+      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-border">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading
@@ -359,7 +332,7 @@ const Home = () => {
             </FadeIn>
           </div>
 
-          <FadeIn className="mt-px border-t border-bg-surface pt-8 md:pt-10 flex justify-end">
+          <FadeIn className="mt-px border-t border-border pt-8 md:pt-10 flex justify-end">
             <Button as="router" href="/portfolio" variant="ghost" size="md">
               Дивитись усі проекти <ArrowRight aria-hidden="true" className="w-4 h-4" />
             </Button>
@@ -369,16 +342,7 @@ const Home = () => {
 
       {/* AUDIENCES */}
       <section className="relative bg-bg-deep py-24 md:py-32 px-6 lg:px-8 overflow-hidden">
-        {/* Ambient full-bleed tile */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.05]"
-          style={{
-            backgroundImage: "url('/isometric-grid.svg')",
-            backgroundSize: '441px 335px',
-            backgroundRepeat: 'repeat',
-          }}
-        />
+        <SectionBackdrop cube="bottom-left" glow="top-right" />
         <div className="relative z-10 max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading
@@ -388,7 +352,7 @@ const Home = () => {
             />
           </FadeIn>
 
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-px bg-bg-surface border border-bg-surface">
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border">
             {AUDIENCES.map((a, i) => (
               <FadeIn key={a.title} delay={i * 0.06}>
                 <Link
@@ -418,10 +382,10 @@ const Home = () => {
       </section>
 
       {/* DOCUMENTS & FACTS */}
-      <section className="relative bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-bg-surface overflow-hidden">
+      <section className="relative bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-border overflow-hidden">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -top-12 -left-12 w-[360px] h-[273px] opacity-[0.035]"
+          className="pointer-events-none absolute -top-12 -left-12 w-[360px] h-[273px] opacity-[0.06]"
           style={{
             backgroundImage: "url('/mark.svg')",
             backgroundSize: 'contain',
@@ -438,7 +402,7 @@ const Home = () => {
             />
           </FadeIn>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-px bg-bg-surface border border-bg-surface">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border">
             {DOCUMENTS.map((doc, i) => {
               const cardClass = `group flex flex-col h-full bg-bg-base p-8 md:p-10
                                  hover:bg-bg-surface/40 transition-colors duration-500
@@ -496,32 +460,8 @@ const Home = () => {
       </section>
 
       {/* CTA TO CONTACT */}
-      <section className="relative bg-bg-deep py-24 md:py-32 px-6 lg:px-8 border-t border-bg-surface overflow-hidden">
-        {/* Asymmetric horizontal strip of cubes through the middle */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[260px] opacity-[0.05]"
-          style={{
-            backgroundImage: "url('/isometric-grid.svg')",
-            backgroundSize: '320px 243px',
-            backgroundRepeat: 'repeat-x',
-            maskImage:
-              'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)',
-            WebkitMaskImage:
-              'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)',
-          }}
-        />
-        {/* Mark watermark */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-16 -right-16 w-[420px] h-[320px] opacity-[0.05]"
-          style={{
-            backgroundImage: "url('/mark.svg')",
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'bottom right',
-          }}
-        />
+      <section className="relative bg-bg-deep py-24 md:py-32 px-6 lg:px-8 border-t border-border overflow-hidden">
+        <SectionBackdrop cube="bottom-right" glow="bottom-left" />
         <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <FadeIn>
             <SectionHeading

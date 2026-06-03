@@ -98,7 +98,7 @@ const ContactsHero = ({
   return (
     <section
       ref={ref}
-      className="relative bg-bg-deep py-10 md:py-14 px-6 lg:px-8 border-b border-bg-surface overflow-hidden"
+      className="relative bg-bg-deep py-10 md:py-14 px-6 lg:px-8 border-b border-border overflow-hidden"
     >
       <HeroAmbient />
 
@@ -148,7 +148,7 @@ const ContactsHero = ({
         </div>
 
         {/* === BOTTOM: 3 action tiles === */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-bg-surface border border-bg-surface">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border">
           {tiles.map((tile, i) => {
             const Icon = ICON_MAP[tile.kind];
             const isCopyable = tile.kind === 'email' || tile.kind === 'phone';
@@ -171,7 +171,7 @@ const ContactsHero = ({
                   aria-label={`${tile.label}: ${tile.value}`}
                 >
                   <div className="flex items-start justify-between gap-3 mb-4">
-                    <span className="inline-flex items-center justify-center w-9 h-9 bg-bg-deep border border-bg-surface group-hover:border-accent transition-colors">
+                    <span className="inline-flex items-center justify-center w-9 h-9 bg-bg-deep border border-border group-hover:border-accent transition-colors">
                       <Icon className="w-4 h-4 text-accent" strokeWidth={1.6} />
                     </span>
                     {isExternal && (

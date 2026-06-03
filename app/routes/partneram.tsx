@@ -87,12 +87,12 @@ const Partners = () => {
       </PartnerHero>
 
       {/* REQUISITES */}
-      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-b border-bg-surface">
+      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-b border-border">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading eyebrow="01" title="Реквізити" />
           </FadeIn>
-          <dl className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-px bg-bg-surface border border-bg-surface">
+          <dl className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
             {REQUISITES.map((r) => (
               <div
                 key={r.label}
@@ -125,7 +125,7 @@ const Partners = () => {
           <FadeIn>
             <SectionHeading eyebrow="02" title="Дозвільна документація" />
           </FadeIn>
-          <ul className="mt-12 divide-y divide-bg-surface border-y border-bg-surface">
+          <ul className="mt-12 divide-y divide-border border-y border-border">
             {LICENSES.map((item, i) => (
               <FadeIn key={i} delay={i * 0.05}>
                 <li className="flex gap-6 py-6 md:py-7">
@@ -166,7 +166,7 @@ const Partners = () => {
       {/* FORM */}
       <section
         id="zapyt"
-        className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-t border-bg-surface"
+        className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-t border-border"
       >
         <div className="max-w-3xl mx-auto">
           <FadeIn>

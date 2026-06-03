@@ -84,7 +84,7 @@ const NewsHero = ({
   return (
     <section
       ref={ref}
-      className="relative bg-bg-deep py-10 md:py-14 px-6 lg:px-8 border-b border-bg-surface overflow-hidden"
+      className="relative bg-bg-deep py-10 md:py-14 px-6 lg:px-8 border-b border-border overflow-hidden"
     >
       <HeroAmbient />
 
@@ -225,7 +225,7 @@ const NewsHero = ({
             </ol>
 
             {/* trust strip — cadence */}
-            <div className="mt-8 pt-5 border-t border-bg-surface flex flex-wrap items-center justify-between gap-3">
+            <div className="mt-8 pt-5 border-t border-border flex flex-wrap items-center justify-between gap-3">
               <span className="inline-flex items-center gap-2 text-[10px] font-mono tracking-[0.16em] text-text-secondary uppercase">
                 <span className="w-1.5 h-1.5 bg-accent" aria-hidden="true" />
                 {cadence}

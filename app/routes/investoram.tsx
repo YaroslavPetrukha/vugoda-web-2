@@ -145,12 +145,12 @@ const Investors = () => {
       </InvestorHero>
 
       {/* FORMATS */}
-      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-b border-bg-surface">
+      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-b border-border">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading eyebrow="01" title="Формати співпраці" />
           </FadeIn>
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-px bg-bg-surface border border-bg-surface">
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border">
             {FORMATS.map((f, i) => (
               <FadeIn key={f.title} delay={i * 0.05} className="bg-bg-base p-8">
                 <span className="block text-accent font-mono text-xs tracking-widest mb-4">
@@ -172,7 +172,7 @@ const Investors = () => {
           <FadeIn>
             <SectionHeading eyebrow="02" title="Як виглядає угода" />
           </FadeIn>
-          <ol className="mt-12 divide-y divide-bg-surface border-y border-bg-surface">
+          <ol className="mt-12 divide-y divide-border border-y border-border">
             {STEPS.map((step, i) => (
               <FadeIn key={i} delay={i * 0.04}>
                 <li className="flex gap-6 py-6">
@@ -190,12 +190,12 @@ const Investors = () => {
       </section>
 
       {/* WHAT INVESTOR RECEIVES */}
-      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-bg-surface">
+      <section className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-y border-border">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <SectionHeading eyebrow="03" title="Що отримує інвестор" />
           </FadeIn>
-          <ul className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-px bg-bg-surface border border-bg-surface">
+          <ul className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
             {RECEIVES.map((item, i) => (
               <li
                 key={i}
@@ -221,7 +221,7 @@ const Investors = () => {
               description="Публічно представляємо проект з повним пакетом дозвільних документів. Решта pipeline — у процедурах; імена і умови — після отримання дозволів."
             />
           </FadeIn>
-          <div className="mt-12 max-w-3xl mx-auto border border-bg-surface bg-bg-deep">
+          <div className="mt-12 max-w-3xl mx-auto border border-border bg-bg-deep">
             {OPPORTUNITIES.map((o, i) => (
               <FadeIn
                 key={o.title}
@@ -245,7 +245,7 @@ const Investors = () => {
       </section>
 
       {/* FAQ */}
-      <section id="faq" className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-t border-bg-surface">
+      <section id="faq" className="bg-bg-base py-24 md:py-32 px-6 lg:px-8 border-t border-border">
         <div className="max-w-4xl mx-auto">
           <FadeIn>
             <SectionHeading
@@ -254,7 +254,7 @@ const Investors = () => {
               description="Найчастіші запити перед підписанням договору. Якщо вашого питання немає — заповніть форму нижче або зателефонуйте."
             />
           </FadeIn>
-          <div className="mt-12 divide-y divide-bg-surface border-y border-bg-surface">
+          <div className="mt-12 divide-y divide-border border-y border-border">
             {FAQ_ITEMS.map((item, i) => (
               <FadeIn key={item.q} delay={i * 0.03}>
                 <details className="group py-6">
@@ -279,7 +279,7 @@ const Investors = () => {
 
           {/* Related guide for due diligence */}
           <FadeIn delay={0.1} className="mt-12">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 bg-bg-deep border border-bg-surface">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 bg-bg-deep border border-border">
               <div>
                 <div className="text-[11px] font-medium uppercase tracking-widest text-accent mb-2">
                   Практичний гайд
