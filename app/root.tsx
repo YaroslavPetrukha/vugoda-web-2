@@ -20,7 +20,6 @@ export function Layout({ children }: { children: ReactNode }) {
         alternateName: ['Vyhoda', 'ПП «ДІК "Вигода +"»', 'ДІК Вигода+', 'Вигода Плюс'],
         legalName: 'ПП «ДІК "Вигода +"»',
         taxID: '44876801',
-        foundingDate: '2019',
         url: siteUrl('/'),
         logo: {
           '@type': 'ImageObject',
