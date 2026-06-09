@@ -99,7 +99,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <p className="text-[10px] text-text-secondary/60 mb-4">
+        <p className="text-[10px] text-text-secondary mb-4">
           Latin transliteration: Vyhoda. Альтернативні написання бренду: «ВИГОДА+», «ДІК Вигода+».
         </p>
 
@@ -109,7 +109,7 @@ const Footer = () => {
             <span aria-hidden="true">·</span>
             <span>ЄДРПОУ 44876801</span>
           </div>
-          <div className="text-text-secondary/80 max-w-md leading-relaxed">
+          <div className="text-text-secondary max-w-md leading-relaxed">
             Інформація про обʼєкти має ознайомлювальний характер. Точні параметри,
             ціни і умови — у договорі та на сайті відповідного ЖК.
           </div>

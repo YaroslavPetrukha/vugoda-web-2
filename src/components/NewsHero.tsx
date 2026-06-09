@@ -207,7 +207,7 @@ const NewsHero = ({
                         {item.dateLabel}
                       </span>
                       {item.category && (
-                        <span className="text-[10px] text-text-secondary/70 tracking-wider">
+                        <span className="text-[10px] text-text-secondary tracking-wider">
                           {item.category}
                         </span>
                       )}
@@ -230,7 +230,7 @@ const NewsHero = ({
                 <span className="w-1.5 h-1.5 bg-accent" aria-hidden="true" />
                 {cadence}
               </span>
-              <span className="text-[10px] font-mono tracking-[0.14em] text-text-secondary/60 uppercase">
+              <span className="text-[10px] font-mono tracking-[0.14em] text-text-secondary uppercase">
                 // показано {top3.length} останніх з {items.length}
               </span>
             </div>
