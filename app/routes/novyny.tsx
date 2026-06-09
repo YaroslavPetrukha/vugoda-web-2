@@ -1,5 +1,5 @@
 import type { MetaFunction } from 'react-router';
-import { Link } from 'react-router';
+import { Link, useSearchParams } from 'react-router';
 import { siteUrl } from '../../src/lib/site-url';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import FadeIn from '../../src/components/FadeIn';
@@ -9,7 +9,7 @@ import Button from '../../src/components/Button';
 import NewsCard from '../../src/components/NewsCard';
 import ContactForm from '../../src/components/ContactForm';
 import { news } from '../../src/data/news';
-import { articles } from '../../src/data/articles';
+import { articles, articleCategoryChips } from '../../src/data/articles';
 
 export const meta: MetaFunction = ({ location }) => {
   const title = 'Новини ВИГОДА — Lakeview, гіди покупця, аналітика';
@@ -39,9 +39,26 @@ export const meta: MetaFunction = ({ location }) => {
   ];
 };
 
-const CATEGORIES = ['Усі', 'Хід будівництва', 'Гід покупця', 'Аналітика'];
+// Ukrainian plural agreement for «публікація» (1 публікацію / 2-4 публікації / 5+ публікацій).
+const pluralizePublications = (n: number): string => {
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return 'публікацію';
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return 'публікації';
+  return 'публікацій';
+};
 
 const News = () => {
+  // Filter state lives in the URL (?category=<slug>) — shareable, deep-linkable,
+  // back/forward-aware. null = «Усі». The prerendered /novyny ships ALL articles,
+  // so without JS / before hydration the list fails open (shows everything) and
+  // nothing is hidden from crawlers; canonical stays /novyny (query excluded).
+  const [searchParams] = useSearchParams();
+  const active = searchParams.get('category');
+  const filtered = active
+    ? articles.filter((a) => a.category === active)
+    : articles;
+
   return (
     <>
       <NewsHero
@@ -55,27 +72,36 @@ const News = () => {
         </Button>
       </NewsHero>
 
-      {/* CATEGORIES */}
+      {/* CATEGORIES — URL-driven filter (Link + aria-current, not tabs/buttons) */}
       <section className="bg-bg-deep border-b border-border py-8 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center gap-3 md:gap-4">
+        <nav
+          aria-label="Категорії новин"
+          className="max-w-7xl mx-auto flex flex-wrap items-center gap-3 md:gap-4"
+        >
           <span className="text-[11px] font-medium uppercase tracking-widest text-text-secondary mr-2">
             Категорії
           </span>
-          {CATEGORIES.map((c, i) => (
-            <button
-              type="button"
-              key={c}
-              aria-pressed={i === 0}
-              className={`px-3 py-2 text-xs uppercase tracking-widest border transition-colors rounded-none ${
-                i === 0
-                  ? 'bg-accent text-bg-deep border-accent'
-                  : 'bg-transparent text-text-secondary border-border hover:border-accent hover:text-accent'
-              }`}
-            >
-              {c}
-            </button>
-          ))}
-        </div>
+          {[{ slug: null, label: 'Усі' }, ...articleCategoryChips].map(
+            ({ slug, label }) => {
+              const isActive = slug === active; // null === active(null) → «Усі»
+              return (
+                <Link
+                  key={slug ?? 'all'}
+                  to={slug ? `/novyny?category=${slug}` : '/novyny'}
+                  aria-current={isActive ? 'true' : undefined}
+                  preventScrollReset
+                  className={`px-3 py-2 text-xs uppercase tracking-widest border transition-colors rounded-none ${
+                    isActive
+                      ? 'bg-accent text-bg-deep border-accent'
+                      : 'bg-transparent text-text-secondary border-border hover:border-accent hover:text-accent'
+                  }`}
+                >
+                  {label}
+                </Link>
+              );
+            },
+          )}
+        </nav>
       </section>
 
       {/* EDITORIAL ARTICLES */}
@@ -88,8 +114,27 @@ const News = () => {
               description="Поглиблені матеріали: звіти з майданчика, гайди для покупців, аналіз локацій."
             />
           </FadeIn>
+
+          {/* Polite SR announcement of the filtered result count */}
+          <p role="status" aria-live="polite" className="sr-only">
+            Показано {filtered.length} {pluralizePublications(filtered.length)}
+          </p>
+
+          {filtered.length === 0 ? (
+            <div className="mt-12 border border-border bg-bg-deep p-10 text-center">
+              <p className="text-text-secondary">
+                Поки що немає публікацій у цій категорії.
+              </p>
+              <Link
+                to="/novyny"
+                className="mt-4 inline-flex items-center gap-1 text-xs uppercase tracking-widest text-accent hover:underline"
+              >
+                Показати всі публікації
+              </Link>
+            </div>
+          ) : (
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {articles.map((article, i) => {
+            {filtered.map((article, i) => {
               const dateLabel = new Date(article.publishedAt).toLocaleDateString('uk-UA', {
                 day: 'numeric',
                 month: 'long',
@@ -120,6 +165,7 @@ const News = () => {
               );
             })}
           </div>
+          )}
         </div>
       </section>
 
