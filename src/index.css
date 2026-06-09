@@ -247,6 +247,16 @@ html.vg-seen #vg-splash .vg-inner {
   animation: none;
 }
 
+/* Windows High Contrast / forced-colors: фон overlay примусово стає Canvas
+   (білим), а SVG fill/stroke exempt → лаймовий куб на білому ~1.65s. Pin-имо
+   темний фон, щоб декоративний куб зберіг рамку. */
+@media (forced-colors: active) {
+  #vg-splash {
+    forced-color-adjust: none;
+    background-color: #020A0A;
+  }
+}
+
 /* reduced-motion: явний override — overlay зникає МИТТЄВО (інакше
    глобальний duration:0.01ms все одно чекав би 1.25s delay). */
 @media (prefers-reduced-motion: reduce) {

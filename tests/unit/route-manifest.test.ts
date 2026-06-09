@@ -48,6 +48,25 @@ describe('route-manifest drift-guard', () => {
     for (const r of indexableRoutes) expect(pre.has(r.path), r.path).toBe(true);
   });
 
+  it('indexableRoutes ПОРЯДОК стабільний (sitemap.xml output stability)', () => {
+    // Manifest claims order stability; sitemap.xml depends on it. Lock the
+    // exact sequence so a reorder of STATIC_ROUTES fails CI instead of silently
+    // reshuffling the published sitemap.
+    expect(indexableRoutes.map((r) => r.path)).toEqual([
+      '/',
+      '/pidkhid',
+      '/portfolio',
+      '/portfolio/lakeview',
+      '/investoram',
+      '/partneram',
+      '/kontakty',
+      '/novyny',
+      '/novyny/lakeview-progress-2026-04-05',
+      '/novyny/chek-list-pereveryty-zabudovnyka',
+      '/novyny/frankivskyi-raion-lokatsiia-lviv',
+    ]);
+  });
+
   it('жоден noindex-маршрут (pipeline/diakuyu/404) не в indexableRoutes', () => {
     const idx = new Set(indexableRoutes.map((r) => r.path));
     for (const p of ['/portfolio/etno-dim', '/portfolio/maetok', '/portfolio/nterest', '/portfolio/pipeline-04', '/diakuyu', '/404']) {

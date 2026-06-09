@@ -32,6 +32,20 @@ describe('catchall function', () => {
     expect(next).toHaveBeenCalledOnce();
   });
 
+  it('404-ить .data для НЕВІДОМОГО route (no 200 SPA-fallback leak)', async () => {
+    const { c, next } = ctx('/novyny/does-not-exist.data');
+    const res = await onRequest(c);
+    expect(next).not.toHaveBeenCalled();
+    expect(res.status).toBe(404);
+  });
+
+  it('404-ить bogus top-level .data', async () => {
+    const { c, next } = ctx('/totally-bogus.data');
+    const res = await onRequest(c);
+    expect(next).not.toHaveBeenCalled();
+    expect(res.status).toBe(404);
+  });
+
   it('пропускає відому prerendered-сторінку', async () => {
     const { c, next } = ctx('/novyny/frankivskyi-raion-lokatsiia-lviv');
     await onRequest(c);
