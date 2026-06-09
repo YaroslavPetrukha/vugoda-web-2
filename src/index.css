@@ -118,3 +118,152 @@
     to   { opacity: 1; transform: none; }
   }
 }
+
+/* ============================================================
+   SITE-LOAD PRELOADER — cube «Конструктор» (<Splash/>)
+   Повністю CSS-driven. Markup у prerendered HTML → малюється на
+   byte 0; анімація грає до hydration. Overlay fixed → CLS=0.
+   Hero prerendered за overlay → LCP не страждає (Google фільтрує
+   full-viewport overlay). Усі рухи — transform/opacity (+ dashoffset
+   для одного лого) → 60fps.
+   ============================================================ */
+#vg-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg-deep, #020A0A);
+  /* Авто-вихід наприкінці reveal — failsafe навіть без JS. */
+  animation: vg-splash-out 0.4s ease-out 1.25s forwards;
+}
+
+#vg-splash .vg-splash-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#vg-splash .vg-cube-wrap {
+  width: min(58vw, 200px);
+  filter: drop-shadow(0 0 28px rgb(var(--accent-rgb, 193 243 61) / 0.12));
+}
+
+#vg-splash svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* «Ґрунт» — тонка лаймова лінія, що розкривається під кубом. */
+#vg-splash .vg-ground {
+  display: block;
+  width: min(58vw, 200px);
+  height: 1px;
+  margin-top: 16px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(var(--accent-rgb, 193 243 61) / 0.5),
+    transparent
+  );
+  transform: scaleX(0);
+  transform-origin: center;
+  animation: vg-ground-in 0.6s ease-out 0.3s forwards;
+}
+
+/* Грань «зводиться» знизу (метафора будівництва). */
+#vg-splash .vg-face {
+  transform: translateY(14px);
+  animation: vg-grow 0.6s cubic-bezier(0.65, 0, 0.35, 1)
+    calc(var(--i) * 0.18s) forwards;
+}
+
+/* Зовнішній ромб — малюється stroke-by-stroke, потім заливається. */
+#vg-splash .vg-outer {
+  fill: var(--color-accent, #C1F33D);
+  stroke: var(--color-accent, #C1F33D);
+  stroke-width: 0.8;
+  fill-opacity: 0;
+  stroke-opacity: 0.95;
+  /* pathLength=1 нормалізує контур → dasharray/offset у частках. */
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation:
+    vg-draw 0.7s cubic-bezier(0.65, 0, 0.35, 1) calc(var(--i) * 0.18s) forwards,
+    vg-fill 0.4s ease-out calc(var(--i) * 0.18s + 0.5s) forwards;
+}
+
+/* Внутрішній виріз кольором фону — створює wireframe-ring. */
+#vg-splash .vg-inner {
+  fill: var(--color-bg-deep, #020A0A);
+  opacity: 0;
+  animation: vg-inner-in 0.3s ease-out calc(var(--i) * 0.18s + 0.7s) forwards;
+}
+
+@keyframes vg-grow {
+  from { transform: translateY(14px); }
+  to   { transform: translateY(0); }
+}
+@keyframes vg-draw {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes vg-fill {
+  from { fill-opacity: 0; stroke-opacity: 0.95; }
+  to   { fill-opacity: 0.6; stroke-opacity: 0; }
+}
+@keyframes vg-inner-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes vg-ground-in {
+  to { transform: scaleX(1); }
+}
+@keyframes vg-splash-out {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
+/* «Раз на сесію»: повторний hard-load у тій же сесії (клас ставить
+   inline <head>-скрипт синхронно до paint) → пропустити build-анімацію,
+   показати куб у фінальному стані й швидко згаснути. */
+html.vg-seen #vg-splash {
+  animation: vg-splash-out 0.25s ease-out 0.15s forwards;
+}
+html.vg-seen #vg-splash .vg-face,
+html.vg-seen #vg-splash .vg-ground {
+  transform: none;
+  animation: none;
+}
+html.vg-seen #vg-splash .vg-outer {
+  fill-opacity: 0.6;
+  stroke-opacity: 0;
+  stroke-dashoffset: 0;
+  animation: none;
+}
+html.vg-seen #vg-splash .vg-inner {
+  opacity: 1;
+  animation: none;
+}
+
+/* reduced-motion: явний override — overlay зникає МИТТЄВО (інакше
+   глобальний duration:0.01ms все одно чекав би 1.25s delay). */
+@media (prefers-reduced-motion: reduce) {
+  #vg-splash {
+    animation: vg-splash-out 0.01ms linear forwards !important;
+  }
+  #vg-splash .vg-face,
+  #vg-splash .vg-ground,
+  #vg-splash .vg-outer,
+  #vg-splash .vg-inner {
+    animation: none !important;
+    transform: none !important;
+  }
+  #vg-splash .vg-outer {
+    fill-opacity: 0.6;
+    stroke-opacity: 0;
+    stroke-dashoffset: 0;
+  }
+  #vg-splash .vg-inner { opacity: 1; }
+}

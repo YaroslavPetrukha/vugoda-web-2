@@ -1,8 +1,20 @@
-import type { ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 import { MotionConfig } from 'motion/react';
 import { siteUrl } from '../src/lib/site-url';
+import Splash from '../src/components/Splash';
 import '../src/index.css';
+
+// Inline критичний CSS — темний фон на <html> до завантаження stylesheet
+// (anti-white-flash перед тим, як намалюється dark preloader overlay).
+const SPLASH_BG_CSS = 'html{background-color:#020A0A}';
+
+// Sync pre-paint скрипт: «раз на сесію». Читає прапорець синхронно ДО paint;
+// якщо вже бачили цієї сесії — додає клас vg-seen (CSS пропустить build-анімацію
+// й швидко згасить overlay). Інакше ставить прапорець для наступних load-ів.
+// try/catch — sessionStorage може кидати у private mode → graceful (грає щоразу).
+const SPLASH_SEEN_SCRIPT =
+  "try{if(sessionStorage.getItem('vg_splash')){document.documentElement.className+=' vg-seen'}else{sessionStorage.setItem('vg_splash','1')}}catch(e){}";
 
 export const links = () => [
   { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
@@ -77,6 +89,8 @@ export function Layout({ children }: { children: ReactNode }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#2F3640" />
+        <style dangerouslySetInnerHTML={{ __html: SPLASH_BG_CSS }} />
+        <script dangerouslySetInnerHTML={{ __html: SPLASH_SEEN_SCRIPT }} />
         <Meta />
         <Links />
         <script
@@ -85,6 +99,7 @@ export function Layout({ children }: { children: ReactNode }) {
         />
       </head>
       <body>
+        <Splash />
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -94,6 +109,20 @@ export function Layout({ children }: { children: ReactNode }) {
 }
 
 export default function App() {
+  // Failsafe: гарантовано прибрати preloader, якщо CSS-вихід чомусь не спрацював
+  // (наприклад, анімації вимкнено на рівні ОС). CSS вже ховає overlay ~1.65s;
+  // цей таймер — запасний на 3s, щоб сплеш ніколи не «застрягав».
+  useEffect(() => {
+    const el = document.getElementById('vg-splash');
+    if (!el) return;
+    const t = window.setTimeout(() => {
+      el.style.opacity = '0';
+      el.style.visibility = 'hidden';
+      el.style.pointerEvents = 'none';
+    }, 3000);
+    return () => window.clearTimeout(t);
+  }, []);
+
   return (
     <MotionConfig reducedMotion="user">
       <Outlet />
