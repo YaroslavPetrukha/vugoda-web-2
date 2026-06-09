@@ -1,6 +1,7 @@
 import type { MetaFunction } from 'react-router';
 import { Link, useSearchParams } from 'react-router';
 import { siteUrl } from '../../src/lib/site-url';
+import { formatUkDate } from '../../src/lib/format-date';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import FadeIn from '../../src/components/FadeIn';
 import NewsHero from '../../src/components/NewsHero';
@@ -135,11 +136,7 @@ const News = () => {
           ) : (
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((article, i) => {
-              const dateLabel = new Date(article.publishedAt).toLocaleDateString('uk-UA', {
-                day: 'numeric',
-                month: 'long',
-                year: 'numeric',
-              });
+              const dateLabel = formatUkDate(article.publishedAt);
               return (
                 <FadeIn key={article.slug} delay={i * 0.05}>
                   <Link

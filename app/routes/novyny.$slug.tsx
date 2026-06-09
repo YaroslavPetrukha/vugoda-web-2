@@ -2,6 +2,7 @@ import type { MetaFunction, LoaderFunctionArgs } from 'react-router';
 import { Link, useLoaderData } from 'react-router';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { siteUrl } from '../../src/lib/site-url';
+import { formatUkDate } from '../../src/lib/format-date';
 import { articles, getArticleBySlug, getArticleBodyBySlug } from '../../src/data/articles';
 import { articleJsonLd, articleBreadcrumbJsonLd } from '../../src/lib/article-schema';
 import Breadcrumb from '../../src/components/Breadcrumb';
@@ -54,11 +55,7 @@ export const meta: MetaFunction<typeof loader> = ({ data, location }) => {
 const ArticleSlugRoute = () => {
   const { article, related } = useLoaderData<typeof loader>();
   const Body = getArticleBodyBySlug(article.slug);
-  const dateLabel = new Date(article.publishedAt).toLocaleDateString('uk-UA', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
+  const dateLabel = formatUkDate(article.publishedAt);
   const readingMinutes = article.wordCount
     ? Math.max(1, Math.round(article.wordCount / 200))
     : null;
@@ -148,11 +145,7 @@ const ArticleSlugRoute = () => {
                     >
                       <div className="flex flex-wrap items-center gap-3 text-[11px] font-medium uppercase tracking-widest text-text-secondary mb-3">
                         <time dateTime={r.publishedAt}>
-                          {new Date(r.publishedAt).toLocaleDateString('uk-UA', {
-                            day: 'numeric',
-                            month: 'long',
-                            year: 'numeric',
-                          })}
+                          {formatUkDate(r.publishedAt)}
                         </time>
                         <span aria-hidden="true">·</span>
                         <span className="text-accent">{r.categoryLabel}</span>
