@@ -1,15 +1,18 @@
 import fs from 'node:fs';
 import path from 'node:path';
+// Canonical article slug set — single source of truth (shared/route-manifest.mjs).
+// The per-article CONTENT below (title/description/date/category) still lives
+// here because RSS is a Node script and cannot import the React .tsx metadata.
+// A runtime assertion guarantees this content covers exactly ARTICLE_SLUGS, so
+// adding an article to the manifest without RSS content fails the build loudly.
+// NOTE (follow-up): categoryLabel here drifts from .tsx metadata for 2 articles
+// — content-meta unification was deliberately out of scope for this task.
+import { ARTICLE_SLUGS } from '../shared/route-manifest.mjs';
 
 const SITE_URL = (process.env.VITE_SITE_URL ?? 'https://vyhoda.lviv.ua')
   .trim()
   .replace(/\/$/, '');
 
-// Article manifest kept in sync with `src/data/articles.ts` (3 article TSX modules).
-// When adding a new article: append entry here AND in:
-//   - src/data/articles.ts (manifest + body component import)
-//   - react-router.config.ts (ARTICLE_SLUGS array)
-//   - scripts/generate-sitemap.mjs (FILE_MAP + ROUTES)
 const ARTICLES = [
   {
     slug: 'lakeview-progress-2026-04-05',
@@ -36,6 +39,17 @@ const ARTICLES = [
     categoryLabel: 'Аналіз ринку',
   },
 ];
+
+// Drift guard: RSS content must cover exactly the canonical manifest slug set.
+{
+  const have = [...ARTICLES.map((a) => a.slug)].sort();
+  const want = [...ARTICLE_SLUGS].sort();
+  if (have.length !== want.length || have.some((s, i) => s !== want[i])) {
+    throw new Error(
+      `[generate-rss] article slugs drifted from route-manifest:\n  rss:      ${have.join(', ')}\n  manifest: ${want.join(', ')}`,
+    );
+  }
+}
 
 function escapeXml(s) {
   return s
