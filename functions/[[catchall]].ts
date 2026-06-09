@@ -46,13 +46,14 @@ const KNOWN_API_ENDPOINTS = new Set<string>(API_ENDPOINTS);
 // should 404 (not fall through to __spa-fallback.html). /404/index.html
 // is covered by KNOWN_PRERENDERED_ROUTES whitelist instead.
 //
-// `data` IS included: React Router v7 single-fetch requests `<route>.data`
-// on client-side navigation to any route with a loader (the /novyny/:slug
-// article pages). Those `.data` files are prerendered build artifacts and
-// must pass through to CF's static handler — otherwise every article link
-// 404s on click while direct page loads work (fixed 2026-06-09).
+// `data` intentionally NOT here — RR v7 `.data` single-fetch is handled by a
+// dedicated, route-scoped branch in onRequest (see below). A blanket pass-through
+// would return HTTP 200 + SPA-fallback HTML for ANY unknown `*.data` path,
+// re-introducing the duplicate-content anti-pattern this whole function guards
+// against. Scoping `.data` to known routes keeps real article payloads working
+// while 404-ing bogus ones.
 const STATIC_EXT =
-  /\.(jpg|jpeg|png|webp|avif|gif|svg|ico|woff2?|ttf|otf|eot|css|js|mjs|json|xml|txt|map|pdf|mp4|mp3|webm|data)$/i;
+  /\.(jpg|jpeg|png|webp|avif|gif|svg|ico|woff2?|ttf|otf|eot|css|js|mjs|json|xml|txt|map|pdf|mp4|mp3|webm)$/i;
 
 function normalize(pathname: string): string {
   if (pathname.length > 1 && pathname.endsWith('/')) {
@@ -82,6 +83,25 @@ export const onRequest: PagesFunction = async (context) => {
       return context.next();
     }
     return jsonNotFound();
+  }
+
+  // RR v7 single-fetch: `<route>.data` is requested on client-side navigation to
+  // a route with a loader (the /novyny/:slug articles). Pass through ONLY when the
+  // base route is known-prerendered — otherwise an unknown `*.data` would get a
+  // 200 SPA-fallback HTML body from CF's static handler. Bogus `.data` → 404.
+  if (pathname.endsWith('.data')) {
+    const base = pathname.slice(0, -'.data'.length);
+    if (KNOWN_PRERENDERED_ROUTES.has(base)) {
+      return context.next();
+    }
+    return new Response(JSON.stringify({ error: 'Not found' }), {
+      status: 404,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'X-Robots-Tag': 'noindex',
+        'Cache-Control': 'public, max-age=0, must-revalidate',
+      },
+    });
   }
 
   // Pass-through: static asset requests.
