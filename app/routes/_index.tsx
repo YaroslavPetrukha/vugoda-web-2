@@ -34,7 +34,7 @@ export const links = () =>
 export const meta: MetaFunction = ({ location }) => {
   const title = 'Забудовник ВИГОДА — системний девелопмент у Львові';
   const description =
-    'Будуємо у Львові й області з 2019. ЖК Lakeview — бізнес-клас, Франківський район, здача 2027. Монолітно-каркасна технологія. Документи відкриті.';
+    'Будуємо у Львові й області. ЖК Lakeview — бізнес-клас, Франківський район, здача 2027. Монолітно-каркасна технологія. Документи у відкритому доступі.';
   const image = siteUrl('/og/home-v2.png');
   const url = siteUrl(location.pathname);
   return [
@@ -221,9 +221,9 @@ const Home = () => {
               <dl className="mt-10 border-t border-border divide-y divide-border">
                 <div className="grid grid-cols-[120px_1fr] py-4 gap-4">
                   <dt className="text-[11px] font-mono uppercase tracking-[0.18em] text-text-secondary self-center">
-                    Засновано
+                    ЄДРПОУ
                   </dt>
-                  <dd className="text-text-primary font-medium tabular-nums">2019</dd>
+                  <dd className="text-text-primary font-medium tabular-nums">44876801</dd>
                 </div>
                 <div className="grid grid-cols-[120px_1fr] py-4 gap-4">
                   <dt className="text-[11px] font-mono uppercase tracking-[0.18em] text-text-secondary self-center">
