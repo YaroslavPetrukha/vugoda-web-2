@@ -63,8 +63,14 @@ const KNOWN_API_ENDPOINTS = new Set<string>([
 // `html` intentionally NOT included — /foo.html requests are unknown and
 // should 404 (not fall through to __spa-fallback.html). /404/index.html
 // is covered by KNOWN_PRERENDERED_ROUTES whitelist instead.
+//
+// `data` IS included: React Router v7 single-fetch requests `<route>.data`
+// on client-side navigation to any route with a loader (the /novyny/:slug
+// article pages). Those `.data` files are prerendered build artifacts and
+// must pass through to CF's static handler — otherwise every article link
+// 404s on click while direct page loads work (fixed 2026-06-09).
 const STATIC_EXT =
-  /\.(jpg|jpeg|png|webp|avif|gif|svg|ico|woff2?|ttf|otf|eot|css|js|mjs|json|xml|txt|map|pdf|mp4|mp3|webm)$/i;
+  /\.(jpg|jpeg|png|webp|avif|gif|svg|ico|woff2?|ttf|otf|eot|css|js|mjs|json|xml|txt|map|pdf|mp4|mp3|webm|data)$/i;
 
 function normalize(pathname: string): string {
   if (pathname.length > 1 && pathname.endsWith('/')) {
