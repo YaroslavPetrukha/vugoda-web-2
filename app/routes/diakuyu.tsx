@@ -110,7 +110,7 @@ const ThankYou = () => {
 
         {/* Request ID — only when valid UUID prefix is present */}
         {requestIdDisplay && (
-          <p className="text-xs text-text-secondary/50 mt-4 font-mono">
+          <p className="text-xs text-text-secondary mt-4 font-mono">
             Заявка №&nbsp;{requestIdDisplay}
           </p>
         )}

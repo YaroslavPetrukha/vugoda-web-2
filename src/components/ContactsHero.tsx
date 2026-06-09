@@ -226,7 +226,7 @@ const ContactsHero = ({
               <span className="w-1.5 h-1.5 bg-accent" aria-hidden="true" />
               {legal}
             </span>
-            <span className="text-[10px] font-mono tracking-[0.14em] text-text-secondary/60 uppercase">
+            <span className="text-[10px] font-mono tracking-[0.14em] text-text-secondary uppercase">
               // прямий канал · без посередників
             </span>
           </div>

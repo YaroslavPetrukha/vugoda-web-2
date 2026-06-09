@@ -125,7 +125,7 @@ const NavBar = () => {
             >
               Заявка
             </Button>
-            <div className="mt-8 text-xs text-text-secondary/80 leading-relaxed">
+            <div className="mt-8 text-xs text-text-secondary leading-relaxed">
               <div>vygoda.sales@gmail.com</div>
               <div className="mt-1">ПП «ДІК "Вигода +"» · ЄДРПОУ 44876801</div>
             </div>

@@ -493,7 +493,7 @@ const Home = () => {
                   Написати на email
                 </Button>
               </div>
-              <p className="text-xs text-text-secondary/80 font-mono tracking-wide mt-2">
+              <p className="text-xs text-text-secondary font-mono tracking-wide mt-2">
                 Відповідаємо у робочі години · Пн–Пт 10:00–18:00
               </p>
             </div>
