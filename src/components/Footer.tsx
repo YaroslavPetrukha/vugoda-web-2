@@ -77,7 +77,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="https://yaroslavpetrukha.github.io/Lakeview/"
+                  href="https://www.lakeview.com.ua/?utm_source=vyhoda.lviv.ua&utm_medium=referral&utm_campaign=lakeview&utm_content=footer"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-accent transition-colors"

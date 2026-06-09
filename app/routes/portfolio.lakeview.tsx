@@ -222,7 +222,8 @@ export const meta: MetaFunction = ({ location }) => {
 // JSON-LD constants are computed inside the component (see ProjectLakeview)
 // so that siteUrl() resolves at render/prerender time rather than module init.
 
-const LAKEVIEW_SITE = 'https://yaroslavpetrukha.github.io/Lakeview/';
+const LAKEVIEW_SITE =
+  'https://www.lakeview.com.ua/?utm_source=vyhoda.lviv.ua&utm_medium=referral&utm_campaign=lakeview&utm_content=portfolio_lakeview';
 const LAKEVIEW_INSTAGRAM = 'https://www.instagram.com/lakeviewlviv/';
 
 const ProjectLakeview = () => {

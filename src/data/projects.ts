@@ -14,7 +14,8 @@ export const projects: Project[] = [
     stage: 'construction',
     stageLabel: 'Будується · здача 2027',
     location: 'вул. Володимира Великого, 2А, Львів',
-    externalSite: 'https://yaroslavpetrukha.github.io/Lakeview/',
+    externalSite:
+      'https://www.lakeview.com.ua/?utm_source=vyhoda.lviv.ua&utm_medium=referral&utm_campaign=lakeview&utm_content=portfolio_lakeview',
     rendersDir: '/projects/lakeview/',
     cardImage: lakeviewCard as unknown as PictureSource,
     hasRenders: true,
