@@ -81,9 +81,8 @@ const ThankYou = () => {
           >
             Зателефонувати: 097&nbsp;990&nbsp;03&nbsp;90
           </a>
-          {/* TODO(client): confirm Telegram URL/username */}
           <a
-            href="https://t.me/vygoda_sales"
+            href="https://t.me/+380969900390"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-5 py-2.5 border border-border text-text-secondary text-sm uppercase tracking-widest font-medium hover:border-text-primary hover:text-text-primary transition-colors"

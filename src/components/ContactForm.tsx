@@ -285,7 +285,7 @@ const ContactForm = ({
             097 990 03 90
           </a>
           <a
-            href="https://t.me/vygoda_sales"
+            href="https://t.me/+380969900390"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm text-text-primary hover:text-accent transition-colors font-medium"
