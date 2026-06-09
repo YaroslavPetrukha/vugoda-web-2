@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react';
-import type { ArticleMetadata } from '../types';
+import type { ArticleMetadata, ArticleCategory } from '../types';
 
 import Article1Body, {
   metadata as article1Metadata,
@@ -31,3 +31,24 @@ export function getArticleBySlug(slug: string): ArticleMetadata | undefined {
 export function getArticleBodyBySlug(slug: string): ComponentType | null {
   return ARTICLE_BODIES[slug] ?? null;
 }
+
+// Canonical category order for the /novyny filter chips. New categories must be
+// added to ArticleCategory (types.ts) AND here so they get a stable position.
+export const ARTICLE_CATEGORY_ORDER: ArticleCategory[] = [
+  'construction-progress',
+  'guide',
+  'analysis',
+];
+
+/**
+ * Category filter chips DERIVED from the articles actually present — single
+ * source, so a chip can never show with 0 articles and a category can never
+ * lack a chip. Display label comes from the article's own categoryLabel.
+ */
+export const articleCategoryChips: { slug: ArticleCategory; label: string }[] =
+  ARTICLE_CATEGORY_ORDER.filter((cat) =>
+    articles.some((a) => a.category === cat),
+  ).map((cat) => ({
+    slug: cat,
+    label: articles.find((a) => a.category === cat)!.categoryLabel,
+  }));
