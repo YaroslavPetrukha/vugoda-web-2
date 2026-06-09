@@ -315,7 +315,7 @@ const ContactForm = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           <label className="flex flex-col gap-2">
             <span className="text-xs uppercase tracking-widest text-text-secondary">
-              <span className="text-text-secondary/50 font-mono mr-2">01.</span>
+              <span className="text-text-secondary font-mono mr-2">01.</span>
               Імʼя{' '}
               <span className="text-accent" aria-hidden="true">
                 *
@@ -341,14 +341,14 @@ const ContactForm = ({
               }}
             />
             {errors.name && (
-              <span id={`${uid}-name-err`} role="alert" className="text-xs text-red-400">
+              <span id={`${uid}-name-err`} role="alert" className="text-xs text-red-300">
                 {errors.name}
               </span>
             )}
           </label>
           <label className="flex flex-col gap-2">
             <span className="text-xs uppercase tracking-widest text-text-secondary">
-              <span className="text-text-secondary/50 font-mono mr-2">02.</span>
+              <span className="text-text-secondary font-mono mr-2">02.</span>
               Телефон{' '}
               <span className="text-accent" aria-hidden="true">
                 *
@@ -377,7 +377,7 @@ const ContactForm = ({
               }}
             />
             {errors.phone && (
-              <span id={`${uid}-phone-err`} role="alert" className="text-xs text-red-400">
+              <span id={`${uid}-phone-err`} role="alert" className="text-xs text-red-300">
                 {errors.phone}
               </span>
             )}
@@ -408,7 +408,7 @@ const ContactForm = ({
               }}
             />
             {errors.email && (
-              <span id={`${uid}-email-err`} role="alert" className="text-xs text-red-400">
+              <span id={`${uid}-email-err`} role="alert" className="text-xs text-red-300">
                 {errors.email}
               </span>
             )}
@@ -455,7 +455,7 @@ const ContactForm = ({
               </option>
             </select>
             {errors.topic && (
-              <span id={`${uid}-topic-err`} role="alert" className="text-xs text-red-400">
+              <span id={`${uid}-topic-err`} role="alert" className="text-xs text-red-300">
                 {errors.topic}
               </span>
             )}
@@ -499,7 +499,7 @@ const ContactForm = ({
               <span
                 id={`${uid}-investor-format-err`}
                 role="alert"
-                className="text-xs text-red-400"
+                className="text-xs text-red-300"
               >
                 {errors.investor_format}
               </span>
@@ -547,7 +547,7 @@ const ContactForm = ({
               </option>
             </select>
             {errors.org_type && (
-              <span id={`${uid}-org-type-err`} role="alert" className="text-xs text-red-400">
+              <span id={`${uid}-org-type-err`} role="alert" className="text-xs text-red-300">
                 {errors.org_type}
               </span>
             )}
@@ -577,7 +577,7 @@ const ContactForm = ({
               }}
             />
             {errors.goal && (
-              <span id={`${uid}-goal-err`} role="alert" className="text-xs text-red-400">
+              <span id={`${uid}-goal-err`} role="alert" className="text-xs text-red-300">
                 {errors.goal}
               </span>
             )}
@@ -607,12 +607,12 @@ const ContactForm = ({
               onBlur={(e) => validateField(e.target.name, e.target.value)}
             />
             {messageLen > 1600 && (
-              <span aria-live="polite" className="text-xs text-text-secondary/60 mt-1">
+              <span aria-live="polite" className="text-xs text-text-secondary mt-1">
                 {messageLen} / 2000
               </span>
             )}
             {errors.message && (
-              <span id={`${uid}-message-err`} role="alert" className="text-xs text-red-400">
+              <span id={`${uid}-message-err`} role="alert" className="text-xs text-red-300">
                 {errors.message}
               </span>
             )}
@@ -636,7 +636,7 @@ const ContactForm = ({
                 if (errors.consent) validateField('consent', e.target.checked);
               }}
             />
-            <span className="text-xs text-text-secondary/80 leading-relaxed">
+            <span className="text-xs text-text-secondary leading-relaxed">
               Я погоджуюсь на обробку моїх персональних даних відповідно до законодавства
               України.{' '}
               <span className="text-accent" aria-hidden="true">
@@ -645,7 +645,7 @@ const ContactForm = ({
             </span>
           </label>
           {errors.consent && (
-            <span id={`${uid}-consent-err`} role="alert" className="text-xs text-red-400 ml-7">
+            <span id={`${uid}-consent-err`} role="alert" className="text-xs text-red-300 ml-7">
               {errors.consent}
             </span>
           )}
@@ -669,13 +669,13 @@ const ContactForm = ({
             options={{ theme: 'dark', size: 'normal', language: 'uk' }}
           />
           {errors.turnstileToken && (
-            <span className="text-xs text-red-400">{errors.turnstileToken}</span>
+            <span className="text-xs text-red-300">{errors.turnstileToken}</span>
           )}
         </div>
 
         {/* Form-level error display */}
         {state.kind === 'error' && (
-          <div className="text-sm text-red-400 leading-relaxed" role="alert">
+          <div className="text-sm text-red-300 leading-relaxed" role="alert">
             {state.message}
           </div>
         )}
@@ -691,17 +691,17 @@ const ContactForm = ({
           >
             {submitButtonLabel}
           </Button>
-          <p className="text-xs text-text-secondary/80 max-w-xl leading-relaxed">
+          <p className="text-xs text-text-secondary max-w-xl leading-relaxed">
             {disclaimer}
           </p>
           {isRateLimited && (
-            <p className="text-xs text-text-secondary/80 leading-relaxed mt-2">
+            <p className="text-xs text-text-secondary leading-relaxed mt-2">
               Багато запитів — спробуйте через {secondsLeft}s або скористайтесь альтернативними
               каналами вище.
             </p>
           )}
           {formTokenFailed && !formToken && (
-            <p className="text-xs text-red-400 leading-relaxed mt-2" role="alert">
+            <p className="text-xs text-red-300 leading-relaxed mt-2" role="alert">
               Не вдалось підключитись до сервера. Скористайтесь альтернативними каналами вище.
             </p>
           )}
