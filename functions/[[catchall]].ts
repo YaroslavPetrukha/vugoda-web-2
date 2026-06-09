@@ -10,13 +10,17 @@
 //     bad for clients (clients expect JSON 404 from API).
 //
 // Strategy: explicit whitelists for:
-//   1. Prerendered HTML routes (from app/routes.ts) → context.next()
+//   1. Prerendered HTML routes (from the shared route-manifest) → context.next()
 //   2. Real API endpoints (functions/api/*.ts) → context.next()
 //   3. Static asset extensions → context.next()
 // Everything else → HTTP 404. Unknown /api/* paths get JSON 404. Unknown
 // HTML paths get the prerendered 404 page with HTTP 404 status.
 //
-// When adding a route or API endpoint: update the relevant whitelist below.
+// Route lists come from the SINGLE source of truth shared/route-manifest.mjs
+// (imported below, inlined into this Worker by esbuild at deploy). Adding a
+// route/article means editing only that file — no more catchall drift (this
+// allow-list caused 3 production 404s before unification: Phase 6, 14, 20).
+import { prerenderRoutes, API_ENDPOINTS } from '../shared/route-manifest.mjs';
 
 interface EventContext<E = Record<string, unknown>> {
   request: Request;
@@ -26,37 +30,15 @@ interface EventContext<E = Record<string, unknown>> {
 
 type PagesFunction = (context: EventContext) => Response | Promise<Response>;
 
-// Routes that have a prerendered index.html in build/client/.
-// Keep in sync with app/routes.ts. `/404/index.html` is included so the
-// fetch() call inside the 404 branch can resolve via context.next() and
-// avoid recursing back into this Worker.
+// Every prerendered path, plus `/404/index.html` so the fetch() in the 404
+// branch resolves via context.next() and avoids recursing back into this Worker.
 const KNOWN_PRERENDERED_ROUTES = new Set<string>([
-  '/',
-  '/pidkhid',
-  '/portfolio',
-  '/portfolio/lakeview',
-  '/portfolio/etno-dim',
-  '/portfolio/maetok',
-  '/portfolio/nterest',
-  '/portfolio/pipeline-04',
-  '/investoram',
-  '/partneram',
-  '/kontakty',
-  '/novyny',
-  '/novyny/lakeview-progress-2026-04-05',
-  '/novyny/chek-list-pereveryty-zabudovnyka',
-  '/novyny/frankivskyi-raion-lokatsiia-lviv',
-  '/diakuyu',
-  '/404',
+  ...prerenderRoutes,
   '/404/index.html',
 ]);
 
 // Real API endpoints — Pages Functions in functions/api/.
-// Keep in sync with functions/api/*.ts file list.
-const KNOWN_API_ENDPOINTS = new Set<string>([
-  '/api/contact',
-  '/api/form-token',
-]);
+const KNOWN_API_ENDPOINTS = new Set<string>(API_ENDPOINTS);
 
 // Static asset extensions served as-is. Functions still intercept these,
 // so we must explicitly pass them through to CF Pages' static handler.
