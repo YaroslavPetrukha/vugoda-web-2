@@ -67,18 +67,18 @@ import lakeviewLakeBridge from '../../src/assets/projects/lakeview/lake-bridge.j
 import lakeviewTerrace from '../../src/assets/projects/lakeview/terrace.jpg?preset=gallery';
 
 // Будівельні фото — ?preset=construction → AVIF/WebP srcset 400/800w, quality 70
-import decImg01 from '../../src/assets/construction/dec-01.jpg?preset=construction';
-import decImg02 from '../../src/assets/construction/dec-02.jpg?preset=construction';
-import decImg03 from '../../src/assets/construction/dec-03.jpg?preset=construction';
-import janImg01 from '../../src/assets/construction/jan-01.jpg?preset=construction';
-import janImg02 from '../../src/assets/construction/jan-02.jpg?preset=construction';
-import janImg03 from '../../src/assets/construction/jan-03.jpg?preset=construction';
-import febImg01 from '../../src/assets/construction/feb-01.jpg?preset=construction';
-import febImg02 from '../../src/assets/construction/feb-02.jpg?preset=construction';
-import febImg03 from '../../src/assets/construction/feb-03.jpg?preset=construction';
 import marImg01 from '../../src/assets/construction/mar-01.jpg?preset=construction';
 import marImg02 from '../../src/assets/construction/mar-02.jpg?preset=construction';
 import marImg03 from '../../src/assets/construction/mar-03.jpg?preset=construction';
+import aprImg01 from '../../src/assets/construction/apr-01.jpg?preset=construction';
+import aprImg02 from '../../src/assets/construction/apr-02.jpg?preset=construction';
+import aprImg03 from '../../src/assets/construction/apr-03.jpg?preset=construction';
+import mayImg01 from '../../src/assets/construction/may-01.jpg?preset=construction';
+import mayImg02 from '../../src/assets/construction/may-02.jpg?preset=construction';
+import mayImg03 from '../../src/assets/construction/may-03.jpg?preset=construction';
+import junImg01 from '../../src/assets/construction/jun-01.jpg?preset=construction';
+import junImg02 from '../../src/assets/construction/jun-02.jpg?preset=construction';
+import junImg03 from '../../src/assets/construction/jun-03.jpg?preset=construction';
 
 const PARAMETERS = [
   { label: 'Адреса', value: 'вул. Володимира Великого, 2А, Франківський район, Львів' },
@@ -111,29 +111,30 @@ const RENDERS = [
   { src: lakeviewTerrace as unknown as PictureSource, alt: 'Lakeview — терасна зона' },
 ];
 
+// Найновіший місяць — зверху (за спаданням)
 const CONSTRUCTION_GROUPS = [
   {
-    label: 'Грудень 2025',
+    label: 'Червень 2026',
     items: [
-      { src: decImg01 as unknown as PictureSource, alt: 'Грудень 2025 — кадр 1' },
-      { src: decImg02 as unknown as PictureSource, alt: 'Грудень 2025 — кадр 2' },
-      { src: decImg03 as unknown as PictureSource, alt: 'Грудень 2025 — кадр 3' },
+      { src: junImg01 as unknown as PictureSource, alt: 'Червень 2026 — кадр 1' },
+      { src: junImg02 as unknown as PictureSource, alt: 'Червень 2026 — кадр 2' },
+      { src: junImg03 as unknown as PictureSource, alt: 'Червень 2026 — кадр 3' },
     ],
   },
   {
-    label: 'Січень 2026',
+    label: 'Травень 2026',
     items: [
-      { src: janImg01 as unknown as PictureSource, alt: 'Січень 2026 — кадр 1' },
-      { src: janImg02 as unknown as PictureSource, alt: 'Січень 2026 — кадр 2' },
-      { src: janImg03 as unknown as PictureSource, alt: 'Січень 2026 — кадр 3' },
+      { src: mayImg01 as unknown as PictureSource, alt: 'Травень 2026 — кадр 1' },
+      { src: mayImg02 as unknown as PictureSource, alt: 'Травень 2026 — кадр 2' },
+      { src: mayImg03 as unknown as PictureSource, alt: 'Травень 2026 — кадр 3' },
     ],
   },
   {
-    label: 'Лютий 2026',
+    label: 'Квітень 2026',
     items: [
-      { src: febImg01 as unknown as PictureSource, alt: 'Лютий 2026 — кадр 1' },
-      { src: febImg02 as unknown as PictureSource, alt: 'Лютий 2026 — кадр 2' },
-      { src: febImg03 as unknown as PictureSource, alt: 'Лютий 2026 — кадр 3' },
+      { src: aprImg01 as unknown as PictureSource, alt: 'Квітень 2026 — кадр 1' },
+      { src: aprImg02 as unknown as PictureSource, alt: 'Квітень 2026 — кадр 2' },
+      { src: aprImg03 as unknown as PictureSource, alt: 'Квітень 2026 — кадр 3' },
     ],
   },
   {
@@ -153,7 +154,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Коли здача ЖК Lakeview?',
-    a: 'Плановий термін введення ЖК Lakeview в експлуатацію — 2027 рік. Будівництво ведеться відповідно до класу наслідків СС3 — найвищого в українській класифікації, що передбачає суворіший технічний нагляд і дотримання нормативів. Хід будівництва фіксується помісячно: фотозвіти за грудень 2025 — березень 2026 доступні на цій сторінці. Повний архів і актуальний стан — на окремому сайті проекту та в Instagram @lakeviewlviv.',
+    a: 'Плановий термін введення ЖК Lakeview в експлуатацію — 2027 рік. Будівництво ведеться відповідно до класу наслідків СС3 — найвищого в українській класифікації, що передбачає суворіший технічний нагляд і дотримання нормативів. Хід будівництва фіксується помісячно: фотозвіти за березень — червень 2026 доступні на цій сторінці. Повний архів і актуальний стан — на окремому сайті проекту та в Instagram @lakeviewlviv.',
   },
   {
     q: 'Хто забудовник ЖК Lakeview?',
@@ -436,7 +437,7 @@ const ProjectLakeview = () => {
             <SectionHeading
               eyebrow="05"
               title="Хід будівництва"
-              description="Помісячна фотофіксація. Грудень 2025 — березень 2026."
+              description="Помісячна фотофіксація. Березень — червень 2026."
             />
             <p className="mt-5 text-text-secondary max-w-3xl leading-relaxed">
               Оновлення публікуємо щомісяця. Нижче — добірка з останніх чотирьох
