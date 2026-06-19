@@ -111,21 +111,14 @@ const RENDERS = [
   { src: lakeviewTerrace as unknown as PictureSource, alt: 'Lakeview — терасна зона' },
 ];
 
+// Найновіший місяць — зверху (за спаданням)
 const CONSTRUCTION_GROUPS = [
   {
-    label: 'Березень 2026',
+    label: 'Червень 2026',
     items: [
-      { src: marImg01 as unknown as PictureSource, alt: 'Березень 2026 — кадр 1' },
-      { src: marImg02 as unknown as PictureSource, alt: 'Березень 2026 — кадр 2' },
-      { src: marImg03 as unknown as PictureSource, alt: 'Березень 2026 — кадр 3' },
-    ],
-  },
-  {
-    label: 'Квітень 2026',
-    items: [
-      { src: aprImg01 as unknown as PictureSource, alt: 'Квітень 2026 — кадр 1' },
-      { src: aprImg02 as unknown as PictureSource, alt: 'Квітень 2026 — кадр 2' },
-      { src: aprImg03 as unknown as PictureSource, alt: 'Квітень 2026 — кадр 3' },
+      { src: junImg01 as unknown as PictureSource, alt: 'Червень 2026 — кадр 1' },
+      { src: junImg02 as unknown as PictureSource, alt: 'Червень 2026 — кадр 2' },
+      { src: junImg03 as unknown as PictureSource, alt: 'Червень 2026 — кадр 3' },
     ],
   },
   {
@@ -137,11 +130,19 @@ const CONSTRUCTION_GROUPS = [
     ],
   },
   {
-    label: 'Червень 2026',
+    label: 'Квітень 2026',
     items: [
-      { src: junImg01 as unknown as PictureSource, alt: 'Червень 2026 — кадр 1' },
-      { src: junImg02 as unknown as PictureSource, alt: 'Червень 2026 — кадр 2' },
-      { src: junImg03 as unknown as PictureSource, alt: 'Червень 2026 — кадр 3' },
+      { src: aprImg01 as unknown as PictureSource, alt: 'Квітень 2026 — кадр 1' },
+      { src: aprImg02 as unknown as PictureSource, alt: 'Квітень 2026 — кадр 2' },
+      { src: aprImg03 as unknown as PictureSource, alt: 'Квітень 2026 — кадр 3' },
+    ],
+  },
+  {
+    label: 'Березень 2026',
+    items: [
+      { src: marImg01 as unknown as PictureSource, alt: 'Березень 2026 — кадр 1' },
+      { src: marImg02 as unknown as PictureSource, alt: 'Березень 2026 — кадр 2' },
+      { src: marImg03 as unknown as PictureSource, alt: 'Березень 2026 — кадр 3' },
     ],
   },
 ];
